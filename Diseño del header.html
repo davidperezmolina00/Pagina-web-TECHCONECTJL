@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConectJL | Header</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --p: #6C2BD9;
+            --pl: #9333EA;
+            --pp: #EDE9FE;
+            --dark: #111827;
+            --muted: #6B7280;
+            --border: #E5E7EB;
+            --surface: #F9FAFB;
+            --white: #ffffff;
+            --r: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            background: var(--surface);
+        }
+
+        /* --- HEADER --- */
+        .hdr {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+        }
+
+        .hdr-inner {
+            max-width: 1320px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            /* Modificado para centrar todos los elementos */
+            justify-content: center; 
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            /* Eliminado el margen negativo para centrar correctamente */
+            margin-left: 0; 
+        }
+
+        .logo img {
+            width: 250px;
+            height: auto;
+            display: block;
+        }
+
+        .searchbar {
+            flex: 1;
+            display: flex;
+            background: var(--surface);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+            max-width: 500px;
+        }
+
+        .searchbar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            padding-left: 15px;
+            width: 100%;
+        }
+
+        .searchbar button {
+            background: var(--p);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .cart-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .login-link, .contactar-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .login-link:hover, .contactar-link:hover {
+            background: var(--pp);
+            color: var(--p);
+        }
+
+        @media (max-width: 768px) {
+            .hdr-inner { flex-wrap: wrap; gap: 15px; }
+            .searchbar { order: 3; max-width: 100%; }
+            .logo img { width: 180px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <div class="hdr-inner">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="TechConectJL Logo">
+            </a>
+            
+            <div class="searchbar">
+                <input type="search" id="searchInput" placeholder="Busca tu próximo producto...">
+                <button onclick="ejecutarBusqueda()">Buscar</button>
+            </div>
+
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
+
+            <a href="#" class="login-link">Iniciar Sesión</a>
+            <a href="#" class="contactar-link">Contáctanos</a>
+        </div>
+    </header>
+
+</body>
+
+</html>
