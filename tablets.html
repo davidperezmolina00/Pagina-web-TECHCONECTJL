@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --p: #6C2BD9;
+            --pl: #9333EA;
+            --pp: #EDE9FE;
+            --dark: #111827;
+            --muted: #6B7280;
+            --border: #E5E7EB;
+            --surface: #F9FAFB;
+            --white: #ffffff;
+            --r: 16px;
+        }
+
+
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        body {
+            padding-top: 100px;
+        }
+
+        .hdr {
+            background: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 9999;
+            padding: 8px 0 0 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .hdr-inner {
+            max-width: 1320px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 170px;
+            height: auto;
+            display: block;
+        }
+
+        .searchbar {
+            flex: 1;
+            display: flex;
+            background: var(--surface);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+            max-width: 500px;
+        }
+
+        .searchbar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            padding-left: 15px;
+            width: 100%;
+        }
+
+        .searchbar button {
+            background: var(--p);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .cart-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .login-link,
+        .contactar-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .login-link:hover,
+        .contactar-link:hover {
+            background: var(--pp);
+            color: var(--p);
+        }
+
+        .nav-categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 0;
+            margin-top: 5px;
+            background: var(--white);
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-categories a:hover {
+            color: var(--p);
+        }
+
+        .nav-categories a.highlight {
+            color: #EF4444;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding-top: 150px;
+            }
+
+            .hdr-inner {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .logo {
+                order: 1;
+                flex: 1;
+            }
+
+            .logo img {
+                width: 170px;
+            }
+
+            .cart-btn {
+                order: 2;
+            }
+
+            .login-link {
+                order: 3;
+            }
+
+            .contactar-link {
+                order: 4;
+            }
+
+            .searchbar {
+                order: 5;
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-top: 8px;
+            }
+
+            .nav-categories {
+                gap: 15px;
+                padding: 10px 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo img {
+                width: 150px;
+            }
+
+            .cart-btn,
+            .login-link,
+            .contactar-link {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .nav-categories {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .nav-categories a {
+                font-size: 12px;
+            }
+        }
+
+        /* Contenedor principal para evitar que el header lo tape */
+        .breadcrumb-wrapper {
+            width: 100%;
+            margin-top: 90px;
+            position: relative;
+            z-index: 10;
+            padding-left: 140px;
+        }
+
+        .breadcrumb-container {
+            max-width: 1320px;
+            margin: auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: var(--p);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .breadcrumbs .separator {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .breadcrumbs .current {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Ajuste específico para cuando el header cambia de tamaño en móviles */
+        @media (max-width: 600px) {
+            .breadcrumb-container {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+
+            .breadcrumb-wrapper {
+                padding-left: 10px;
+            }
+        }
+
+        /* --- Estilos del Título Principal --- */
+        .page-title-section {
+            width: 100%;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--surface);
+            margin-bottom: 10px;
+        }
+
+        .page-title-section h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 32px;
+            color: var(--dark);
+            margin: 0;
+            text-transform: capitalize;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        /* --- Diseño Responsive --- */
+        @media (max-width: 768px) {
+            .page-title-section h1 {
+                font-size: 24px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .page-title-section h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* --- BARRA DE FILTROS --- */
+        .filters-bar {
+            width: 100%;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 100;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .filters-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            /* Centrado alineado con el header */
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            overflow: visible;
+        }
+
+        /* --- LÓGICA DE PERSISTENCIA (Hover fijo) --- */
+        .filter-item {
+            position: relative;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-item::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            /* El puente entre el botón y el menú */
+            display: block;
+        }
+
+        /* --- BOTONES --- */
+        .filter-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-item:hover .filter-btn {
+            background: var(--pp);
+            border-color: var(--p);
+            color: var(--p);
+        }
+
+        /* --- DESPLEGABLES GENERALES --- */
+        .filter-dropdown,
+        .price-popup {
+            display: none;
+            position: absolute;
+            top: calc(100% + 5px);
+            /* Se posiciona justo debajo del botón */
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            z-index: 110;
+            /* Importante: que no afecte al alto del padre */
+        }
+
+        .filter-item:hover .filter-dropdown {
+            display: block;
+        }
+
+
+        .filter-dropdown a {
+            display: block;
+            padding: 12px 18px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .filter-dropdown a:hover {
+            background: var(--surface);
+            color: var(--p);
+        }
+
+        /* --- POPUP DE PRECIO (Específico) --- */
+        .price-popup {
+            width: 350px;
+            padding: 24px;
+            left: 0;
+            /* Alineado a la izquierda del botón precio */
+            transform: none;
+        }
+
+        /* Redefinir animación para que no use el translateX en el de precio */
+        .filter-item:hover .price-popup {
+            animation: fadeInPrice 0.2s ease-out;
+        }
+
+
+        .price-popup h3 {
+            font-size: 18px;
+            margin: 0 0 20px 0;
+        }
+
+        /* Barras de gráfica */
+        .price-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 60px;
+            gap: 4px;
+            margin-bottom: -4px;
+        }
+
+        .price-bars .bar {
+            flex: 1;
+            background: #BFDBFE;
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* Slider y Tiradores */
+        .range-input {
+            position: relative;
+            height: 4px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        .range-input input {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            background: none;
+            pointer-events: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--dark);
+            pointer-events: auto;
+            -webkit-appearance: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Inputs numéricos */
+        .price-input {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .price-input .field {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .field span {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .field input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-weight: 700;
+            font-family: inherit;
+        }
+
+        .avg-price {
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .btn-apply-filter {
+            width: 100%;
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .filters-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 20px;
+                /* Espacio para scroll */
+            }
+
+            .filters-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .price-popup {
+                position: fixed;
+                left: 5%;
+                width: 90%;
+                top: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <div class="hdr-inner">
+            <a href="grid y grados.html" class="logo">
+                <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/logo%20empresa.png?raw=true"
+                    alt="TechConectJL Logo">
+            </a>
+
+            <div class="searchbar">
+                <input type="search" id="searchInput" placeholder="Busca tu próximo producto...">
+                <button onclick="ejecutarBusqueda()">Buscar</button>
+            </div>
+
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
+
+            <a href="#" class="login-link">Iniciar Sesión</a>
+            <a href="#" class="contactar-link">Contáctanos</a>
+        </div>
+        <nav class="nav-categories">
+            <a href="#">Móviles</a>
+            <a href="#">Portátiles</a>
+            <a href="#">Tablets</a>
+            <a href="#">Consolas</a>
+            <a href="#">Accesorios</a>
+            <a href="#" class="highlight">Ofertas</a>
+        </nav>
+    </header>
+    <div class="breadcrumb-wrapper">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <div class="breadcrumb-container">
+                <a href="grid y grados.html">Home</a>
+                <span class="separator">></span>
+                <span class="current">Tablets</span>
+            </div>
+        </nav>
+    </div>
+    <section class="page-title-section">
+        <h1>Tablets</h1>
+    </section>
+    <div class="filters-bar">
+        <div class="filters-container">
+            <div class="filter-item has-dropdown">
+                <button class="filter-btn">Precio ▾</button>
+                <div class="filter-dropdown price-popup">
+                    <div class="price-input-container">
+                        <h3>Precio</h3>
+                        <div class="price-bars">
+                            <div class="bar" style="height: 30%;"></div>
+                            <div class="bar" style="height: 45%;"></div>
+                            <div class="bar" style="height: 60%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                            <div class="bar" style="height: 50%;"></div>
+                            <div class="bar" style="height: 90%;"></div>
+                            <div class="bar" style="height: 40%;"></div>
+                            <div class="bar" style="height: 30%;"></div>
+                        </div>
+
+                        <div class="slider">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="range-min" min="0" max="1000" value="0" step="10">
+                            <input type="range" class="range-max" min="0" max="1000" value="1000" step="10">
+                        </div>
+
+                        <div class="price-input">
+                            <div class="field">
+                                <span>Mín. (EUR)</span>
+                                <input type="number" class="input-min" value="0">
+                            </div>
+                            <div class="field">
+                                <span>Máx. (EUR)</span>
+                                <input type="number" class="input-max" value="1000">
+                            </div>
+                        </div>
+                        <p class="avg-price">Precio medio: 388,00 €</p>
+                        <button class="btn-apply-filter">Ver productos</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-item">
+                <button class="filter-btn">Grado estético ▾</button>
+                <div class="filter-dropdown">
+                    <a href="#">Grado A</a>
+                    <a href="#">Grado B</a>
+                    <a href="#">Grado C</a>
+                </div>
+            </div>
+
+            <div class="filter-item">
+                <button class="filter-btn">Marca ▾</button>
+            </div>
+
+            <div class="filter-item">
+                <button class="filter-btn">Almacenamiento ▾</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
