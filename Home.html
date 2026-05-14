@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConectJL | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --p: #6C2BD9;
+            --pl: #9333EA;
+            --pp: #EDE9FE;
+            --dark: #111827;
+            --muted: #6B7280;
+            --border: #E5E7EB;
+            --surface: #F9FAFB;
+            --white: #ffffff;
+            --r: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            background: var(--surface);
+            padding-top: 110px;
+        }
+
+        .hdr {
+            background: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 9999;
+            padding: 8px 0 0 0;
+        }
+
+        .hdr-inner {
+            max-width: 1320px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 170px;
+            height: auto;
+            display: block;
+        }
+
+        .searchbar {
+            flex: 1;
+            display: flex;
+            background: var(--surface);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+            max-width: 500px;
+        }
+
+        .searchbar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            padding-left: 15px;
+            width: 100%;
+        }
+
+        .searchbar button {
+            background: var(--p);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .cart-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .login-link,
+        .contactar-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .login-link:hover,
+        .contactar-link:hover {
+            background: var(--pp);
+            color: var(--p);
+        }
+
+        .nav-categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 0;
+            margin-top: 5px;
+            background: var(--white);
+        }
+
+        .nav-categories a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-categories a:hover {
+            color: var(--p);
+        }
+
+        .nav-categories a.highlight {
+            color: #EF4444;
+            font-weight: 700;
+        }
+
+        .hero-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            background: var(--p);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 20px;
+            transition: background 0.3s;
+        }
+
+        .hero-arrow:hover {
+            background: var(--p);
+        }
+
+        .hero-arrow.left {
+            left: 20px;
+        }
+
+        .hero-arrow.right {
+            right: 20px;
+        }
+
+        /* Responsive Hero */
+        @media (max-width: 768px) {
+            .hero-container {
+                height: 350px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 14px;
+            }
+
+            .hero-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding-top: 150px;
+            }
+
+            .hdr-inner {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .logo {
+                order: 1;
+                flex: 1;
+            }
+
+            .logo img {
+                width: 170px;
+            }
+
+            .cart-btn {
+                order: 2;
+            }
+
+            .login-link {
+                order: 3;
+            }
+
+            .contactar-link {
+                order: 4;
+            }
+
+            .searchbar {
+                order: 5;
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-top: 8px;
+            }
+
+            .nav-categories {
+                gap: 15px;
+                padding: 10px 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo img {
+                width: 150px;
+            }
+
+            .cart-btn,
+            .login-link,
+            .contactar-link {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .nav-categories {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .nav-categories a {
+                font-size: 12px;
+            }
+        }
+
+        .grid-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            background-color: rgba(208, 164, 224, 0.813);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 250px;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            background-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 1200px;
+            }
+
+            .grid-item {
+                height: 170px;
+            }
+
+            .grid-item img {
+                height: 70px;
+            }
+        }
+
+        .section-title {
+            max-width: 1320px;
+            margin: 40px auto 10px;
+            padding: 0 20px;
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            color: var(--dark);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 24px;
+                text-align: center;
+                margin-top: 30px;
+            }
+        }
+
+        .info-section {
+            max-width: 1320px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--r);
+            border: 1px solid var(--border);
+        }
+
+        .info-card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--p);
+        }
+
+        .info-card p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .grade-table th {
+            text-align: left;
+            padding: 12px;
+            background: var(--surface);
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .grade-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .grade-badge {
+
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 12px;
+            background: var(--pp);
+            color: var(--p);
+        }
+
+        .check-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+        }
+
+        .check-item span {
+            font-size: 20px;
+        }
+
+        .check-item div h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .check-item div p {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        @media (max-width: 992px) {
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .grade-badge {
+                font-size: 10px;
+            }
+
+            .check-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .site-footer {
+            background: var(--dark);
+            color: var(--white);
+            margin-top: 60px;
+            padding: 50px 0 20px;
+        }
+
+        .footer-features {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feat-item {
+            text-align: center;
+        }
+
+        .feat-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feat-item h4 {
+            margin: 0 0 5px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .feat-item p {
+            margin: 0;
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #6B7280;
+        }
+        @media (max-width: 1024px) {
+            .footer-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-features {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .feat-item {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                text-align: left;
+            }
+
+            .feat-icon {
+                margin-bottom: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <header class="hdr">
+        <div class="hdr-inner">
+            <a href="#" class="logo">
+                <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/logo%20empresa.png?raw=true" alt="TechConectJL Logo">
+            </a>
+
+            <div class="searchbar">
+                <input type="search" id="searchInput" placeholder="Busca tu próximo producto...">
+                <button onclick="ejecutarBusqueda()">Buscar</button>
+            </div>
+
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
+
+            <a href="#" class="login-link">Iniciar Sesión</a>
+            <a href="#" class="contactar-link">Contáctanos</a>
+        </div>
+        <nav class="nav-categories">
+            <a href="#">Móviles</a>
+            <a href="#">Portátiles</a>
+            <a href="tablets.html">Tablets</a>
+            <a href="#">Consolas</a>
+            <a href="#">Accesorios</a>
+            <a href="#" class="highlight">Ofertas</a>
+        </nav>
+    </header>
+    <section class="hero-container">
+        <button class="hero-arrow left" onclick="scrollHero(-1)">&#10094;</button>
+
+        <div class="hero-track" id="heroTrack">
+            <div class="hero-slide"
+                style="background-image: url('https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/imagenherobanner2.png?raw=true');">
+                <div class="hero-content">
+                    <h1>Novedades TechConectJL</h1>
+                    <p>Descubre nuestros productos de última generación.</p>
+                    <a href="#" class="hero-btn">Ver ahora</a>
+                </div>
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');">
+                <div class="hero-content">
+                    <h1>Ofertas en Portátiles</h1>
+                    <p>Equípate con lo mejor para tu trabajo o estudio.</p>
+                    <a href="#" class="hero-btn">Explorar</a>
+                </div>
+            </div>
+        </div>
+
+        <button class="hero-arrow right" onclick="scrollHero(1)">&#10095;</button>
+    </section>
+
+    <h2 class="section-title">Categorías</h2>
+    <section class="grid-container">
+        <div class="grid-item" onclick="location.href='tablets.html'">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/tablet.png?raw=true" alt="Producto 1">
+            <h3>Tablets</h3>
+        </div>
+        <div class="grid-item">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/portatil.png?raw=true" alt="Producto 2">
+            <h3>Portátiles</h3>
+        </div>
+        <div class="grid-item">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/moviles.png?raw=true" alt="Producto 3">
+            <h3>Móviles</h3>
+        </div>
+        <div class="grid-item">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/accesorios.png?raw=true" alt="Producto 4">
+            <h3>Accesorios</h3>
+        </div>
+        <div class="grid-item">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/ofertas.png?raw=true" alt="Producto 5">
+            <h3>Ofertas</h3>
+        </div>
+        <div class="grid-item">
+            <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/consolas.png?raw=true" alt="Producto 6">
+            <h3>Consolas</h3>
+        </div>
+    </section>
+    <section class="info-section">
+        <div class="info-card">
+            <h2>Nuestros Grados de Calidad</h2>
+            <p>Expertos en smartphones reacondicionados. Clasificamos cada dispositivo según estándares internacionales:
+            </p>
+            <table class="grade-table">
+                <thead>
+                    <tr>
+                        <th>Grado</th>
+                        <th>Estado</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="grade-badge">Grado A</span></td>
+                        <td><strong style="color: green;">Excelente</strong></td>
+                        <td>Sin marcas visibles, como nuevo.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="grade-badge">Grado B</span></td>
+                        <td><strong style="color: blue;">Muy Bueno</strong></td>
+                        <td>Pequeñas marcas de uso, 100% funcional.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="grade-badge">Grado C</span></td>
+                        <td><strong style="color: orange">Bueno</strong></td>
+                        <td>Marcas visibles, precio muy asequible.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-card">
+            <h2>Certificación de +30 Puntos</h2>
+            <p>Sometemos cada unidad a un riguroso proceso técnico para garantizar su rendimiento:</p>
+            <div class="check-list">
+                <div class="check-item">
+                    <span>🔋</span>
+                    <div>
+                        <h4>Batería Optimizada</h4>
+                        <p>Garantizamos salud mínima del 80-85%.</p>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <span>⚙️</span>
+                    <div>
+                        <h4>Funcionalidad Total</h4>
+                        <p>Testeamos cámaras, FaceID y conectividad 5G/Wi-Fi.</p>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <span>✨</span>
+                    <div>
+                        <h4>Higienización Pro</h4>
+                        <p>Limpieza profesional de grado especializado.</p>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <span>📱</span>
+                    <div>
+                        <h4>Software al Día</h4>
+                        <p>Sistema restaurado de fábrica y listo para usar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+    <div class="footer-features">
+        <div class="feat-item">
+            <span class="feat-icon">🛡️</span>
+            <div>
+                <h4>Reacondicionado certificado</h4>
+                <p>Revisado por expertos</p>
+            </div>
+        </div>
+        <div class="feat-item">
+            <span class="feat-icon">✅</span>
+            <div>
+                <h4>Garantía de 12 meses</h4>
+                <p>En todos los productos</p>
+            </div>
+        </div>
+        <div class="feat-item">
+            <span class="feat-icon">🔄</span>
+            <div>
+                <h4>Devolución gratuita</h4>
+                <p>Durante 30 días</p>
+            </div>
+        </div>
+        <div class="feat-item">
+            <span class="feat-icon">🔒</span>
+            <div>
+                <h4>Compra segura</h4>
+                <p>Pago 100% protegido</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+</body>
+
+</html>
