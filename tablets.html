@@ -21,7 +21,7 @@
             --r: 16px;
         }
 
-
+        *,
         *::before,
         *::after {
             box-sizing: border-box;
@@ -32,10 +32,11 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden;
+
             position: relative;
             font-family: 'DM Sans', sans-serif;
         }
+
 
         body {
             padding-top: 100px;
@@ -242,11 +243,11 @@
             margin-top: 90px;
             position: relative;
             z-index: 10;
-            padding-left: 140px;
+            padding-left: 25px;
         }
 
         .breadcrumb-container {
-            max-width: 1320px;
+            max-width: 1120px;
             margin: auto;
             padding: 12px 20px;
             display: flex;
@@ -323,46 +324,27 @@
         /* --- BARRA DE FILTROS --- */
         .filters-bar {
             width: 100%;
-            background: var(--white);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
             position: relative;
             z-index: 100;
-            height: 60px;
-            display: flex;
-            align-items: center;
         }
 
         .filters-container {
-            max-width: 1320px;
-            margin: 0 auto;
             display: flex;
-            justify-content: center;
-            /* Centrado alineado con el header */
-            align-items: center;
             gap: 12px;
-            padding: 10px 20px;
-            overflow: visible;
+            align-items: center;
+            justify-content: center;
+            max-width: 1320px;
+            padding: 0 20px;
         }
 
         /* --- LÓGICA DE PERSISTENCIA (Hover fijo) --- */
         .filter-item {
             position: relative;
-            padding-bottom: 0;
+            padding-bottom: 15px;
             margin-bottom: 0;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-item::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            /* El puente entre el botón y el menú */
-            display: block;
         }
 
         /* --- BOTONES --- */
@@ -387,24 +369,26 @@
         }
 
         /* --- DESPLEGABLES GENERALES --- */
-        .filter-dropdown,
-        .price-popup {
+        .filter-dropdown {
             display: none;
             position: absolute;
-            top: calc(100% + 5px);
-            /* Se posiciona justo debajo del botón */
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: 16px;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
             z-index: 110;
-            /* Importante: que no afecte al alto del padre */
+            margin-top: -5px;
+            min-width: 180px;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease-out;
         }
 
         .filter-item:hover .filter-dropdown {
             display: block;
         }
-
 
         .filter-dropdown a {
             display: block;
@@ -422,18 +406,23 @@
 
         /* --- POPUP DE PRECIO (Específico) --- */
         .price-popup {
-            width: 350px;
-            padding: 24px;
+            position: absolute;
+            top: calc(100% - 10px);
             left: 0;
-            /* Alineado a la izquierda del botón precio */
             transform: none;
+            width: 350px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 24px;
+            margin-top: 5px;
         }
 
-        /* Redefinir animación para que no use el translateX en el de precio */
         .filter-item:hover .price-popup {
-            animation: fadeInPrice 0.2s ease-out;
+            display: block;
         }
-
 
         .price-popup h3 {
             font-size: 18px;
@@ -553,6 +542,345 @@
                 top: 20%;
             }
         }
+
+        .filter-item.full-width {
+            position: static;
+        }
+
+        .brand-mega-dropdown {
+            display: none;
+            position: absolute;
+
+            top: calc(100% - 12px);
+
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1320px;
+
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            z-index: 110;
+
+            margin-top: 2px;
+
+            padding: 20px;
+            animation: fadeIn 0.2s ease-out;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .filter-item:hover .brand-mega-dropdown,
+        .filter-item:focus-within .brand-mega-dropdown {
+            display: grid;
+        }
+
+        .brand-mega-dropdown a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .brand-mega-dropdown a:hover {
+            background: var(--pp);
+            border-color: var(--p);
+            color: var(--p);
+        }
+
+        /* --- DISEÑO RESPONSIVE MÓVIL --- */
+        @media (max-width: 850px) {
+            .filter-item.full-width {
+                position: static;
+            }
+
+            .brand-mega-dropdown {
+                grid-template-columns: repeat(2, 1fr);
+
+                top: calc(100% - 12px);
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 20px);
+
+                padding: 12px;
+                gap: 10px;
+                margin-top: 2px;
+            }
+
+            .brand-mega-dropdown a {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        .storage-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            min-width: 150px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            z-index: 110;
+            margin-top: 2px;
+            padding: 10px;
+            animation: fadeIn 0.2s ease-out;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-item:hover .storage-dropdown,
+        .filter-item:focus-within .storage-dropdown {
+            display: flex;
+        }
+
+        .storage-dropdown a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .storage-dropdown a:hover {
+            background: var(--pp);
+            border-color: var(--p);
+            color: var(--p);
+        }
+
+        @media (max-width: 850px) {
+            .filter-item:not(.full-width) {
+                padding-bottom: 15px;
+                margin-bottom: -15px;
+            }
+
+            .storage-dropdown {
+                top: calc(100% - 15px);
+                width: 100%;
+                left: 0;
+            }
+
+            .storage-dropdown a {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* GRID DE PRODUCTOS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1320px;
+            margin: 40px auto;
+            padding: 0 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 200px;
+            background: var(--surface);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .product-info {
+            flex-grow: 1;
+        }
+
+        .product-brand {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 4px 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .product-details {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .product-grade {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .grade-excelente {
+            background: #E0F2FE;
+            color: #0369A1;
+        }
+
+        .grade-muy-bueno {
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        .grade-bueno {
+            background: #FEF3C7;
+            color: #B45309;
+        }
+
+        .grade-correcto {
+            background: #FFE4E6;
+            color: #E11D48;
+        }
+
+        /* PRECIO */
+        .product-price-section {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .price-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .price-value span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            background: var(--dark);
+            color: var(--white);
+            margin-top: 60px;
+            padding: 50px 0 20px;
+        }
+
+        .footer-features {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feat-item {
+            text-align: center;
+        }
+
+        .feat-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feat-item h4 {
+            margin: 0 0 5px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .feat-item p {
+            margin: 0;
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        .footer-bottom {
+            max-width: 1320px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #6B7280;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-features {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .feat-item {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                text-align: left;
+            }
+
+            .feat-icon {
+                margin-bottom: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -560,7 +888,7 @@
 
     <header class="hdr">
         <div class="hdr-inner">
-            <a href="grid y grados.html" class="logo">
+            <a href="Home.html" class="logo">
                 <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/logo%20empresa.png?raw=true"
                     alt="TechConectJL Logo">
             </a>
@@ -577,6 +905,7 @@
             <a href="#" class="login-link">Iniciar Sesión</a>
             <a href="#" class="contactar-link">Contáctanos</a>
         </div>
+
         <nav class="nav-categories">
             <a href="#">Móviles</a>
             <a href="#">Portátiles</a>
@@ -586,20 +915,24 @@
             <a href="#" class="highlight">Ofertas</a>
         </nav>
     </header>
+
     <div class="breadcrumb-wrapper">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <div class="breadcrumb-container">
-                <a href="grid y grados.html">Home</a>
-                <span class="separator">></span>
+                <a href="Home.html">Home</a>
+                <span class="separator">&gt;</span>
                 <span class="current">Tablets</span>
             </div>
         </nav>
     </div>
+
     <section class="page-title-section">
         <h1>Tablets</h1>
     </section>
+
     <div class="filters-bar">
         <div class="filters-container">
+
             <div class="filter-item has-dropdown">
                 <button class="filter-btn">Precio ▾</button>
                 <div class="filter-dropdown price-popup">
@@ -619,6 +952,7 @@
                         <div class="slider">
                             <div class="progress"></div>
                         </div>
+
                         <div class="range-input">
                             <input type="range" class="range-min" min="0" max="1000" value="0" step="10">
                             <input type="range" class="range-max" min="0" max="1000" value="1000" step="10">
@@ -634,6 +968,7 @@
                                 <input type="number" class="input-max" value="1000">
                             </div>
                         </div>
+
                         <p class="avg-price">Precio medio: 388,00 €</p>
                         <button class="btn-apply-filter">Ver productos</button>
                     </div>
@@ -649,16 +984,236 @@
                 </div>
             </div>
 
-            <div class="filter-item">
-                <button class="filter-btn">Marca ▾</button>
+            <div class="filter-item full-width">
+                <button class="filter-btn">Marcas ▾</button>
+                <div class="brand-mega-dropdown">
+                    <a href="#">Ipad</a>
+                    <a href="#">Apple</a>
+                    <a href="#">Samsung</a>
+                    <a href="#">Xiaomi</a>
+                    <a href="#">Lenovo</a>
+                    <a href="#">OnePlus</a>
+                    <a href="#">Microsoft</a>
+                    <a href="#">Amazon Fire</a>
+                </div>
             </div>
 
             <div class="filter-item">
                 <button class="filter-btn">Almacenamiento ▾</button>
+                <div class="storage-dropdown">
+                    <a href="#">32 GB</a>
+                    <a href="#">64 GB</a>
+                    <a href="#">128 GB</a>
+                    <a href="#">256 GB</a>
+                    <a href="#">516 GB</a>
+                </div>
             </div>
+
         </div>
     </div>
+    <section class="products-grid">
+        <article class="product-card" data-precio="1059" data-grado="Grado Excelente" data-marca="Apple"
+            data-almacenamiento="128 GB">
+            <div class="product-image-container">
+                <span style="color: #ccc;">Imagen del Producto</span>
+            </div>
+            <div class="product-info">
+                <span class="product-brand">Apple</span>
+                <h3 class="product-name">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h3>
+                <div class="product-details">
+                    <span class="product-grade grade-excelente">Excelente</span>
+                </div>
+            </div>
+            <div class="product-price-section">
+                <span class="price-label">Desde</span>
+                <span class="price-value">1.059,00 <span>€</span></span>
+            </div>
+        </article>
 
+        <article class="product-card" data-precio="849" data-grado="Grado Muy Bueno" data-marca="Samsung"
+            data-almacenamiento="256 GB">
+            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
+            <div class="product-info">
+                <span class="product-brand">Samsung</span>
+                <h3 class="product-name">Samsung Galaxy Tab S9 Ultra - 256 GB - Negro</h3>
+                <div class="product-details">
+                    <span class="product-grade grade-muy-bueno">Muy Bueno</span>
+                </div>
+            </div>
+            <div class="product-price-section">
+                <span class="price-label">Desde</span>
+                <span class="price-value">849,00 <span>€</span></span>
+            </div>
+        </article>
+
+        <article class="product-card" data-precio="529" data-grado="Grado Excelente" data-marca="Apple"
+            data-almacenamiento="64 GB">
+            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
+            <div class="product-info">
+                <span class="product-brand">Apple</span>
+                <h3 class="product-name">iPad Air (2022) 5ª gen - Wi-Fi - 64 GB - Azul</h3>
+                <div class="product-details">
+                    <span class="product-grade grade-excelente">Excelente</span>
+                </div>
+            </div>
+            <div class="product-price-section">
+                <span class="price-label">Desde</span>
+                <span class="price-value">529,00 <span>€</span></span>
+            </div>
+        </article>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-features">
+            <div class="feat-item">
+                <span class="feat-icon">🛸</span>
+                <div>
+                    <h4>Envío exprés</h4>
+                    <p>Recíbelo en 24/48 horas</p>
+                </div>
+            </div>
+            <div class="feat-item">
+                <span class="feat-icon">⭐</span>
+                <div>
+                    <h4>Garantía TechConect</h4>
+                    <p>3 años de cobertura total</p>
+                </div>
+            </div>
+            <div class="feat-item">
+                <span class="feat-icon">🔄</span>
+                <div>
+                    <h4>Devolución gratuita</h4>
+                    <p>Durante 30 días</p>
+                </div>
+            </div>
+            <div class="feat-item">
+                <span class="feat-icon">🔒</span>
+                <div>
+                    <h4>Compra segura</h4>
+                    <p>Pago 100% protegido</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── ESTADO DE FILTROS ACTIVOS ──
+        const filtros = {
+            precioMin: 0,
+            precioMax: 9999,
+            grado: null,
+            marca: null,
+            almacenamiento: null
+        };
+
+        // ── LEER DATOS DE CADA TARJETA Y FILTRAR ──
+        function aplicarFiltros() {
+            const cards = document.querySelectorAll('.product-card');
+            let visibles = 0;
+
+            cards.forEach(card => {
+                const precio = parseFloat(card.dataset.precio);
+                const grado = card.dataset.grado;
+                const marca = card.dataset.marca;
+                const almacenamiento = card.dataset.almacenamiento;
+
+                const pasaPrecio = precio >= filtros.precioMin && precio <= filtros.precioMax;
+                const pasaGrado = !filtros.grado || grado === filtros.grado;
+                const pasaMarca = !filtros.marca || marca === filtros.marca;
+                const pasaAlmacenamiento = !filtros.almacenamiento || almacenamiento === filtros.almacenamiento;
+
+                if (pasaPrecio && pasaGrado && pasaMarca && pasaAlmacenamiento) {
+                    card.style.display = 'flex';
+                    visibles++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Mensaje si no hay resultados
+            let noResults = document.getElementById('no-results');
+            if (visibles === 0) {
+                if (!noResults) {
+                    noResults = document.createElement('p');
+                    noResults.id = 'no-results';
+                    noResults.style.cssText = 'text-align: center; grid-column: 1/-1; color: var(--muted); padding: 40px; font-weight: 500;';
+                    noResults.textContent = 'No se han encontrado tablets con esos criterios de filtrado.';
+                    document.querySelector('.products-grid').appendChild(noResults);
+                }
+            } else if (noResults) {
+                noResults.remove();
+            }
+        }
+
+        // ── FILTRO DE GRADO ESTÉTICO ──
+        document.querySelectorAll('.filter-dropdown a').forEach(a => {
+            if (a.textContent.trim().includes('Grado')) {
+                a.addEventListener('click', e => {
+                    e.preventDefault();
+                    const deseleccionado = marcarActivo(a, 'grado');
+                    if (!deseleccionado) filtros.grado = a.textContent.trim();
+                    aplicarFiltros();
+                });
+            }
+        });
+
+        // ── FILTRO DE ALMACENAMIENTO ──
+        document.querySelectorAll('.filter-dropdown a, .storage-dropdown a').forEach(a => {
+            if (a.textContent.trim().includes('GB') || a.textContent.trim().includes('TB')) {
+                a.addEventListener('click', e => {
+                    e.preventDefault();
+                    const deseleccionado = marcarActivo(a, 'almacenamiento');
+                    if (!deseleccionado) filtros.almacenamiento = a.textContent.trim();
+                    aplicarFiltros();
+                });
+            }
+        });
+
+        // ── FILTRO DE MARCA ──
+        document.querySelectorAll('.brand-mega-dropdown a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const deseleccionado = marcarActivo(a, 'marca');
+                if (!deseleccionado) filtros.marca = a.textContent.trim();
+                aplicarFiltros();
+            });
+        });
+
+        // ── MARCAR FILTRO COMO ACTIVO O DESACTIVAR SI YA ESTABA SELECCIONADO ──
+        function marcarActivo(el, tipo) {
+            const padre = el.closest('.filter-dropdown, .brand-mega-dropdown, .storage-dropdown');
+            const yaSeleccionado = filtros[tipo] === el.textContent.trim();
+
+            // Limpiar los activos anteriores de esta misma sección
+            padre.querySelectorAll('a').forEach(item => {
+                item.style.fontWeight = '';
+                item.style.color = '';
+                item.style.background = '';
+            });
+
+            if (yaSeleccionado) {
+                filtros[tipo] = null;
+                return true; // Ha sido deseleccionado
+            } else {
+                el.style.fontWeight = '700';
+                el.style.color = 'var(--p)';
+                el.style.background = 'var(--pp)';
+                return false;
+            }
+        }
+
+        // Lógica complementaria para el Slider de precios básico
+        const btnApplyPrice = document.querySelector('.btn-apply-filter');
+        if (btnApplyPrice) {
+            btnApplyPrice.addEventListener('click', () => {
+                const minVal = parseFloat(document.querySelector('.input-min').value) || 0;
+                const maxVal = parseFloat(document.querySelector('.input-max').value) || 1000;
+                filtros.precioMin = minVal;
+                filtros.precioMax = maxVal;
+                aplicarFiltros();
+            });
+        }
+    </script>
 </body>
 
 </html>
