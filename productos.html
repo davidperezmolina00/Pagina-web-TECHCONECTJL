@@ -582,6 +582,90 @@
 
 
 
+        /*ESPECIFICACIONES DEL PRODUCTO*/
+
+        /* --- ACORDEÓN DE ESPECIFICACIONES --- */
+        .specs-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .specs-dropdown {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* Encabezado del desplegable */
+        .specs-dropdown summary {
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        /* Creamos nuestra propia flecha estética */
+        .specs-dropdown summary::after {
+            content: '＋';
+            /* Icono de más por defecto */
+            font-size: 16px;
+            color: var(--p);
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        /* Cuando el desplegable está ABIERTO */
+        .specs-dropdown[open] {
+            border-color: var(--p);
+            /* El borde se vuelve morado */
+        }
+
+        .specs-dropdown[open] summary {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .specs-dropdown[open] summary::after {
+            content: '－';
+            /* Cambia a menos cuando se abre */
+        }
+
+        /* Contenido interno una vez abierto */
+        .specs-content {
+            padding: 16px;
+            background: var(--surface);
+            font-size: 14px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Tabla interna opcional para que queden alineadas las características */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--muted);
+            width: 40%;
+        }
+
+
         /*FOOTER*/
 
         .site-footer {
@@ -663,6 +747,380 @@
                 text-align: center;
             }
         }
+
+        /*ESTILOS PARA EL CARRITO*/
+
+        /* --- CARRITO LATERAL (CART DRAWER) --- */
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -45%;
+            width: 40%;
+            min-width: 360px;
+            height: 100%;
+            background: var(--white);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+        }
+
+
+        .cart-overlay.open .cart-drawer {
+            right: 0;
+        }
+
+
+        .cart-drawer-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-drawer-header h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .close-cart-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .close-cart-btn:hover {
+            color: var(--dark);
+        }
+
+
+        .cart-drawer-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+
+        .cart-item-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .cart-item-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .cart-item-price {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+
+        .cart-drawer-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cart-total-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--p);
+        }
+
+        .btn-view-cart {
+            width: 100%;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-view-cart:hover {
+            background: var(--p);
+        }
+
+        @media (max-width: 600px) {
+            .cart-drawer {
+                width: 85%;
+            }
+        }
+
+        .btn-remove-item {
+            background: none;
+            border: none;
+            color: #EF4444;
+            /* Color rojo de advertencia */
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn-remove-item:hover {
+            transform: scale(1.15);
+        }
+
+        /*ESTILOS PARA EL CARRITO*/
+
+/* --- CARRITO LATERAL (CART DRAWER) --- */
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+
+.cart-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -45%; 
+    width: 40%;   
+    min-width: 360px; 
+    height: 100%;
+    background: var(--white);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+}
+
+
+.cart-overlay.open .cart-drawer {
+    right: 0;
+}
+
+
+.cart-drawer-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-drawer-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.close-cart-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.close-cart-btn:hover {
+    color: var(--dark);
+}
+
+
+.cart-drawer-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.cart-item-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-item-img {
+    width: 70px;
+    height: 70px;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.cart-item-meta {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.cart-item-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+
+.cart-drawer-footer {
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.cart-total-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--p);
+}
+
+.btn-view-cart {
+    width: 100%;
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-view-cart:hover {
+    background: var(--p);
+}
+@media (max-width: 600px) {
+    .cart-drawer {
+        width: 85%;
+    }
+}
     </style>
 </head>
 
@@ -709,7 +1167,7 @@
     <main class="product-container">
 
         <section class="product-gallery">
-            
+
             <div class="thumb-list">
                 <div class="thumb-card active">
                     <img src="https://via.placeholder.com/100" alt="Vista frontal">
@@ -771,6 +1229,43 @@
                 </div>
             </div>
 
+            <div class="specs-accordion">
+
+                <details class="specs-dropdown">
+                    <summary>Especificaciones técnicas</summary>
+                    <div class="specs-content">
+                        <table class="specs-table">
+                            <tr>
+                                <td>Pantalla</td>
+                                <td>Liquid Retina XDR 12.9"</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador</td>
+                                <td>Chip M2 de Apple</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>8 GB</td>
+                            </tr>
+                            <tr>
+                                <td>Almacenamiento</td>
+                                <td>128 GB</td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details class="specs-dropdown">
+                    <summary>Detalles del reacondicionamiento</summary>
+                    <div class="specs-content">
+                        <p>Este producto ha sido completamente testado por nuestros técnicos autorizados. Se garantiza
+                            una capacidad de batería superior al 85% y un funcionamiento del 100% en todos sus
+                            componentes internos (cámaras, sensores, audio y pantalla).</p>
+                    </div>
+                </details>
+
+            </div>
+
             <div class="purchase-box">
                 <div class="price-row">
                     <div>
@@ -779,7 +1274,7 @@
                     </div>
                 </div>
 
-                <button class="btn-add-to-cart">Añadir al carrito</button>
+                <button class="btn-add-to-cart" onclick="agregarAlCarritoActual()">Añadir al carrito</button>
 
                 <div class="trust-bullets">
                     <div class="trust-item">
@@ -833,6 +1328,177 @@
         </div>
 
     </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
+        <div class="cart-drawer" onclick="event.stopPropagation()">
+
+            <div class="cart-drawer-header">
+                <h3>Tu Carrito (<span id="cartDrawerCount">1</span>)</h3>
+                <button class="close-cart-btn" onclick="toggleCart()">×</button>
+            </div>
+
+            <div class="cart-drawer-items" id="cartDrawerItems">
+            </div>
+
+            <div class="cart-drawer-footer">
+                <div class="cart-total-row">
+                    <span>Total estimado:</span>
+                    <span class="cart-total-price">1.059,00 €</span>
+                </div>
+                <a href="carrito.html" class="btn-view-cart">Ver mi carrito</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- CARRITO -->
+
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
+        <div class="cart-drawer" onclick="event.stopPropagation()">
+
+            <div class="cart-drawer-header">
+                <h3>Tu Carrito (<span id="cartDrawerCount">1</span>)</h3>
+                <button class="close-cart-btn" onclick="toggleCart()">×</button>
+            </div>
+
+            <div class="cart-drawer-items" id="cartDrawerItems">
+            </div>
+
+            <div class="cart-drawer-footer">
+                <div class="cart-total-row">
+                    <span>Total estimado:</span>
+                    <span class="cart-total-price">1.059,00 €</span>
+                </div>
+                <a href="carrito.html" class="btn-view-cart">Ver mi carrito</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        /*CARRITO*/
+
+        document.addEventListener("DOMContentLoaded", () => {
+            actualizarInterfazCarrito();
+        });
+
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            overlay.classList.toggle('open');
+        }
+
+        function closeCartFromOverlay(event) {
+            toggleCart();
+        }
+
+        function agregarAlCarritoActual() {
+            const titulo = document.querySelector('.product-title').innerText;
+            const imagen = document.querySelector('.main-image-box img').src;
+
+            const tarjetaActiva = document.querySelector('.grade-option-card.active');
+            const grado = tarjetaActiva.querySelector('.grade-name-text').innerText;
+            const precioTexto = tarjetaActiva.querySelector('.grade-price-indicator').innerText;
+
+            const precioNumero = parseFloat(precioTexto.replace('.', '').replace(',', '.').replace(' €', ''));
+
+            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+
+            const productoExistente = carrito.find(item => item.titulo === titulo && item.grado === grado);
+
+            if (productoExistente) {
+                productoExistente.cantidad += 1;
+            } else {
+                const nuevoProducto = {
+                    titulo: titulo,
+                    imagen: imagen,
+                    grado: grado,
+                    precio: precioNumero,
+                    cantidad: 1
+                };
+                carrito.push(nuevoProducto);
+            }
+
+            localStorage.setItem('carritoTech', JSON.stringify(carrito));
+            actualizarInterfazCarrito();
+
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+
+        function eliminarDelCarrito(index) {
+            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+
+            carrito.splice(index, 1);
+
+            localStorage.setItem('carritoTech', JSON.stringify(carrito));
+            actualizarInterfazCarrito();
+        }
+
+        function actualizarInterfazCarrito() {
+            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+
+            const contenedorItems = document.getElementById('cartDrawerItems');
+            const contadorHeader = document.getElementById('cartCount');
+            const contadorDrawer = document.getElementById('cartDrawerCount');
+            const totalPrecioElemento = document.querySelector('.cart-total-price');
+
+            contenedorItems.innerHTML = '';
+
+            let totalArticulos = 0;
+            let costeTotal = 0;
+
+            if (carrito.length === 0) {
+                contenedorItems.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:30px;">Tu carrito está vacío.</p>`;
+            } else {
+                carrito.forEach((item, index) => {
+                    totalArticulos += item.cantidad;
+                    costeTotal += (item.precio * item.cantidad);
+
+                    const precioFormateado = item.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+
+                    contenedorItems.innerHTML += `
+                    <div class="cart-item-row">
+                        <div class="cart-item-img">
+                            <img src="${item.imagen}" alt="${item.titulo}">
+                        </div>
+                        <div class="cart-item-info">
+                            <h4 class="cart-item-name">${item.titulo}</h4>
+                            <p class="cart-item-meta">Estado: <strong style="color: var(--p);">${item.grado}</strong></p>
+                            <p class="cart-item-meta">Cant: ${item.cantidad}</p>
+                        </div>
+                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+                            <div class="cart-item-price">${precioFormateado}</div>
+                            <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                });
+            }
+
+            contadorHeader.innerText = totalArticulos;
+            contadorDrawer.innerText = totalArticulos;
+
+            totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+        }
+
+        const tarjetasGrado = document.querySelectorAll('.grade-option-card');
+        const precioPrincipal = document.querySelector('.price-final');
+
+        tarjetasGrado.forEach(tarjeta => {
+            tarjeta.addEventListener('click', () => {
+                tarjetasGrado.forEach(t => t.classList.remove('active'));
+                tarjeta.classList.add('active');
+
+                // Captura el precio de la tarjeta seleccionada
+                const nuevoPrecio = tarjeta.querySelector('.grade-price-indicator').innerText;
+
+                // Lo inyecta en el precio grande de la ficha
+                if (precioPrincipal) {
+                    precioPrincipal.innerText = nuevoPrecio;
+                }
+            });
+        });
+    </script>
 
 </body>
 
