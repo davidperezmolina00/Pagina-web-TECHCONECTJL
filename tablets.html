@@ -550,6 +550,7 @@
         /* --- RESPONSIVE --- */
         @media (max-width: 850px) {
             .filters-container {
+
                 justify-content: flex-start;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -561,57 +562,83 @@
                 display: none;
             }
 
+            .filter-item {
+                position: static !important;
+                padding-bottom: 25px !important;
+                margin-bottom: -25px !important;
+            }
+
             .price-popup {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                top: auto;
-                width: 100%;
-                max-width: 100%;
-                transform: none;
+                position: absolute !important;
+                top: calc(100% - 25px) !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: calc(100% - 20px) !important;
+                margin-top: 2px !important;
+                bottom: auto !important;
+                max-width: none !important;
                 border-radius: 20px 20px 0 0;
                 box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
                 z-index: 10000;
-                transform: translateY(50px);
-                max-height: 50vh;
-                /* Limita la altura al 50% de la pantalla del móvil (puedes subirlo a 60vh si lo quieres más alto) */
-                overflow-y: auto;
-                /* Activa el scroll vertical solo si el contenido no cabe */
-                padding: 25px 20px 80px 20px !important;
+                max-height: 80vh !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                overscroll-behavior-y: contain !important;
+                padding: 25px 20px 40px 20px !important;
             }
 
             .grado-item .filter-dropdown {
-                position: fixed !important;
-                left: 0 !important;
-                bottom: 140px !important;
-                top: auto !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                transform: none !important;
+                position: absolute !important;
+                top: calc(100% - 25px) !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: calc(100% - 20px) !important;
+                margin-top: 2px !important;
+                bottom: auto !important;
+                max-width: none !important;
                 border-radius: 20px 20px 0 0 !important;
                 box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) !important;
                 z-index: 100000 !important;
                 text-align: center;
-
             }
 
             .almacen-item .filter-dropdown {
-                position: fixed !important;
-                left: 0 !important;
-                bottom: 100px !important;
-                top: auto !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                transform: none !important;
+                position: absolute !important;
+                top: calc(100% - 25px) !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: calc(100% - 20px) !important;
+                margin-top: 2px !important;
+                bottom: auto !important;
+                max-width: none !important;
                 border-radius: 20px 20px 0 0 !important;
                 box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) !important;
                 z-index: 100000 !important;
                 text-align: center;
             }
 
-            .filters-container.oculto-por-scroll .filter-dropdown,
-            .filters-container.oculto-por-scroll .price-popup {
+            .filters-container.oculto-por-scroll .filter-dropdown {
                 display: none !important;
+            }
+
+            .filters-container.oculto-por-scroll .price-popup:not(.active) {
+                display: none !important;
+            }
+
+            .price-popup, .grado-item .filter-dropdown,
+            .almacen-item .filter-dropdown,
+            .filter-item.full-width .brand-mega-dropdown {
+                display: none !important;
+            }
+
+            .price-popup.movil-abierto, .grado-item .filter-dropdown.movil-abierto,
+            .almacen-item .filter-dropdown.movil-abierto,
+            .filter-item.full-width .brand-mega-dropdown.movil-abierto {
+                display: block !important;
+            }
+
+            .filter-item.full-width .brand-mega-dropdown.movil-abierto {
+                display: grid !important;
             }
         }
 
@@ -1014,13 +1041,13 @@
             <div class="filter-item full-width">
                 <button class="filter-btn">Marcas ▾</button>
                 <div class="brand-mega-dropdown">
-                    <a href="#">Ipad</a>
                     <a href="#">Apple</a>
                     <a href="#">Samsung</a>
-                    <a href="#">Xiaomi</a>
+                    <a href="#">Huawei</a>
                     <a href="#">Lenovo</a>
-                    <a href="#">OnePlus</a>
-                    <a href="#">Microsoft</a>
+                    <a href="#">Amazon</a>
+                    <a href="#">TCL</a>
+                    <a href="#">Xiaomi</a>
                     <a href="#">Amazon Fire</a>
                 </div>
             </div>
@@ -1347,11 +1374,97 @@
             }
         }
 
-        // DETECTOR 1: Cuando se hace scroll vertical en la pantalla del móvil
+        // ── DETECTOR 1: CONTROL DE SCROLL GENERAL ──
         window.addEventListener('scroll', activarOcultacionPorMovimiento);
-        document.querySelectorAll('.filter-dropdown, .price-popup').forEach(dropdown => {
+
+        // Control estricto para los dropdowns normales
+        document.querySelectorAll('.filter-dropdown').forEach(dropdown => {
             dropdown.addEventListener('touchmove', activarOcultacionPorMovimiento);
         });
+
+        // 💡 LA SOLUCIÓN COMPLETA PARA MÓVIL REAL: 
+        // Buscamos el popup de precios y frenamos de raíz la propagación del dedo hacia la página principal
+        const pricePopupElement = document.querySelector('.price-popup');
+        if (pricePopupElement) {
+            pricePopupElement.addEventListener('touchmove', (e) => {
+                // Esto le dice al móvil: "El movimiento muere aquí, procesa solo mi scroll interno"
+                e.stopPropagation();
+            }, { passive: true });
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+    
+    // Función auxiliar para detectar resoluciones móviles
+    const esMovil = () => window.innerWidth <= 850;
+
+    // Configuración de los selectores de filtros y sus respectivos desplegables
+    const mapeoFiltros = [
+        { item: '.filter-item:has(.price-popup)', pop: '.price-popup' },
+        { item: '.grado-item', pop: '.filter-dropdown' },
+        { item: '.full-width', pop: '.brand-mega-dropdown' },
+        { item: '.almacen-item', pop: '.filter-dropdown' }
+    ];
+
+    mapeoFiltros.forEach(filtro => {
+        const contenedor = document.querySelector(filtro.item);
+        if (!contenedor) return;
+
+        const boton = contenedor.querySelector('.filter-btn');
+        const desplegable = contenedor.querySelector(filtro.pop);
+
+        if (boton && desplegable) {
+            
+            // ── 1. COMPORTAMIENTO DEL BOTÓN PRINCIPAL (CÍCLICO) ──
+            boton.addEventListener('click', (e) => {
+                if (esMovil()) {
+                    e.stopPropagation(); // Evita interferencias con otros clics
+
+                    // Guarda si este filtro ya estaba abierto antes del click
+                    const estabaAbierto = desplegable.classList.contains('movil-abierto');
+
+                    // 1. Cerramos todos los menús abiertos para no amontonar la pantalla
+                    mapeoFiltros.forEach(f => {
+                        const d = document.querySelector(f.item)?.querySelector(f.pop);
+                        if (d) d.classList.remove('movil-abierto');
+                    });
+
+                    // 2. Si NO estaba abierto, lo abrimos (Toggle alternativo limpio)
+                    if (!estabaAbierto) {
+                        desplegable.classList.add('movil-abierto');
+                    }
+                }
+            });
+
+            // ── 2. CIERRE AL SELECCIONAR UNA CARACTERÍSTICA O ENLACE ──
+            const opciones = desplegable.querySelectorAll('a');
+            opciones.forEach(opcion => {
+                opcion.addEventListener('click', () => {
+                    if (esMovil()) {
+                        desplegable.classList.remove('movil-abierto');
+                    }
+                });
+            });
+
+            // ── 3. CASO ESPECIAL: CIERRE AL PULSAR "APLICAR FILTRO" EN EL POPUP DE PRECIO ──
+            const btnAplicarPrecio = desplegable.querySelector('.btn-apply-filter');
+            if (btnAplicarPrecio) {
+                btnAplicarPrecio.addEventListener('click', () => {
+                    if (esMovil()) {
+                        desplegable.classList.remove('movil-abierto');
+                    }
+                });
+            }
+        }
+    });
+
+    // Resetear las clases si el usuario redimensiona o rota la pantalla a modo escritorio
+    window.addEventListener('resize', () => {
+        if (!esMovil()) {
+            document.querySelectorAll('.movil-abierto').forEach(el => {
+                el.classList.remove('movil-abierto');
+            });
+        }
+    });
+});
     </script>
 
 </body>
