@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regístrate en nuestra página</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 20px;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .btn-back:hover {
+            color: var(--primary-color);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .btn-back svg {
+            margin-right: 8px;
+        }
+
+        .main-container {
+            margin: auto;
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .main-title {
+            
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 28px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .login-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: #f8fafc;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .form-footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            .btn-back {
+                position: static;
+                margin-bottom: 24px;
+                align-self: flex-start;
+            }
+
+            .main-container {
+                padding-top: 0;
+            }
+
+            .login-card {
+                padding: 24px 20px;
+            }
+
+            .main-title {
+                font-size: 1.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="Home.html" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Volver
+    </a>
+
+    <div class="main-container">
+        <h1 class="main-title">Iniciar sesión</h1>
+        <div class="login-card">
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" id="name" required placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit">Iniciar Sesión</button>
+
+                <div class="form-footer">
+                    ¿No tienes una cuenta? <a href="login.html">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    const formLogin = document.querySelector('form');
+    if (formLogin) {
+        formLogin.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que se recargue la página sin guardar
+            
+            // 1. Capturamos el correo y la contraseña de las cajas de texto
+            const emailUsuario = document.getElementById('email').value;
+            const passwordUsuario = document.getElementById('password').value; // ¡Añadido!
+            
+            // 2. Quitamos el "@gmail.com" o lo que vaya detrás para dejarlo como nombre de usuario
+            const nombreReal = emailUsuario.split('@')[0]; 
+            
+            // 3. Guardamos los TRES datos en la memoria para que los lea el perfil
+            localStorage.setItem('usuarioNombre', nombreReal); 
+            localStorage.setItem('usuarioEmail', emailUsuario); // ¡Añadido!
+            localStorage.setItem('usuarioPassword', passwordUsuario); // ¡Añadido!
+            
+            // 4. Te redirige al Home
+            window.location.href = 'home.html'; 
+        });
+    }
+</script>
+
+</body>
+
+</html>
