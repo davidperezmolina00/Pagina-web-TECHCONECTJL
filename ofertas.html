@@ -625,13 +625,15 @@
                 display: none !important;
             }
 
-            .price-popup, .grado-item .filter-dropdown,
+            .price-popup,
+            .grado-item .filter-dropdown,
             .almacen-item .filter-dropdown,
             .filter-item.full-width .brand-mega-dropdown {
                 display: none !important;
             }
 
-            .price-popup.movil-abierto, .grado-item .filter-dropdown.movil-abierto,
+            .price-popup.movil-abierto,
+            .grado-item .filter-dropdown.movil-abierto,
             .almacen-item .filter-dropdown.movil-abierto,
             .filter-item.full-width .brand-mega-dropdown.movil-abierto {
                 display: block !important;
@@ -942,6 +944,54 @@
                 text-align: center;
             }
         }
+
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-50%) translateX(50%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: var(--purple-main);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
+            text-transform: uppercase;
+        }
+
+        .user-avatar:hover {
+
+            cursor: pointer;
+            border-color: #9333EA;
+        }
+
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            max-width: 90px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Corta el nombre con "..." si es muy largo */
+        }
     </style>
 </head>
 
@@ -964,6 +1014,14 @@
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
+            <div class="user-profile" id="userProfileBlock" style="display: none; align-items: center; gap: 15px;">
+
+                <div style="display: flex; flex-direction: row; align-items: center; gap: 8px;">
+                    <div class="user-avatar" id="avatarLetra" onclick="window.location.href='perfil.html';">U</div>
+                    <span class="user-name" id="nombreUsuarioTexto">Usuario</span>
+                </div>
+
+            </div>
         </div>
         <nav class="nav-categories">
             <a href="moviles.html">Móviles</a>
@@ -1392,79 +1450,90 @@
             }, { passive: true });
         }
         document.addEventListener("DOMContentLoaded", () => {
-    
-    // Función auxiliar para detectar resoluciones móviles
-    const esMovil = () => window.innerWidth <= 850;
 
-    // Configuración de los selectores de filtros y sus respectivos desplegables
-    const mapeoFiltros = [
-        { item: '.filter-item:has(.price-popup)', pop: '.price-popup' },
-        { item: '.grado-item', pop: '.filter-dropdown' },
-        { item: '.full-width', pop: '.brand-mega-dropdown' },
-        { item: '.almacen-item', pop: '.filter-dropdown' }
-    ];
+            // Función auxiliar para detectar resoluciones móviles
+            const esMovil = () => window.innerWidth <= 850;
 
-    mapeoFiltros.forEach(filtro => {
-        const contenedor = document.querySelector(filtro.item);
-        if (!contenedor) return;
+            // Configuración de los selectores de filtros y sus respectivos desplegables
+            const mapeoFiltros = [
+                { item: '.filter-item:has(.price-popup)', pop: '.price-popup' },
+                { item: '.grado-item', pop: '.filter-dropdown' },
+                { item: '.full-width', pop: '.brand-mega-dropdown' },
+                { item: '.almacen-item', pop: '.filter-dropdown' }
+            ];
 
-        const boton = contenedor.querySelector('.filter-btn');
-        const desplegable = contenedor.querySelector(filtro.pop);
+            mapeoFiltros.forEach(filtro => {
+                const contenedor = document.querySelector(filtro.item);
+                if (!contenedor) return;
 
-        if (boton && desplegable) {
-            
-            // ── 1. COMPORTAMIENTO DEL BOTÓN PRINCIPAL (CÍCLICO) ──
-            boton.addEventListener('click', (e) => {
-                if (esMovil()) {
-                    e.stopPropagation(); // Evita interferencias con otros clics
+                const boton = contenedor.querySelector('.filter-btn');
+                const desplegable = contenedor.querySelector(filtro.pop);
 
-                    // Guarda si este filtro ya estaba abierto antes del click
-                    const estabaAbierto = desplegable.classList.contains('movil-abierto');
+                if (boton && desplegable) {
 
-                    // 1. Cerramos todos los menús abiertos para no amontonar la pantalla
-                    mapeoFiltros.forEach(f => {
-                        const d = document.querySelector(f.item)?.querySelector(f.pop);
-                        if (d) d.classList.remove('movil-abierto');
+                    // ── 1. COMPORTAMIENTO DEL BOTÓN PRINCIPAL (CÍCLICO) ──
+                    boton.addEventListener('click', (e) => {
+                        if (esMovil()) {
+                            e.stopPropagation(); // Evita interferencias con otros clics
+
+                            // Guarda si este filtro ya estaba abierto antes del click
+                            const estabaAbierto = desplegable.classList.contains('movil-abierto');
+
+                            // 1. Cerramos todos los menús abiertos para no amontonar la pantalla
+                            mapeoFiltros.forEach(f => {
+                                const d = document.querySelector(f.item)?.querySelector(f.pop);
+                                if (d) d.classList.remove('movil-abierto');
+                            });
+
+                            // 2. Si NO estaba abierto, lo abrimos (Toggle alternativo limpio)
+                            if (!estabaAbierto) {
+                                desplegable.classList.add('movil-abierto');
+                            }
+                        }
                     });
 
-                    // 2. Si NO estaba abierto, lo abrimos (Toggle alternativo limpio)
-                    if (!estabaAbierto) {
-                        desplegable.classList.add('movil-abierto');
+                    // ── 2. CIERRE AL SELECCIONAR UNA CARACTERÍSTICA O ENLACE ──
+                    const opciones = desplegable.querySelectorAll('a');
+                    opciones.forEach(opcion => {
+                        opcion.addEventListener('click', () => {
+                            if (esMovil()) {
+                                desplegable.classList.remove('movil-abierto');
+                            }
+                        });
+                    });
+
+                    // ── 3. CASO ESPECIAL: CIERRE AL PULSAR "APLICAR FILTRO" EN EL POPUP DE PRECIO ──
+                    const btnAplicarPrecio = desplegable.querySelector('.btn-apply-filter');
+                    if (btnAplicarPrecio) {
+                        btnAplicarPrecio.addEventListener('click', () => {
+                            if (esMovil()) {
+                                desplegable.classList.remove('movil-abierto');
+                            }
+                        });
                     }
                 }
             });
 
-            // ── 2. CIERRE AL SELECCIONAR UNA CARACTERÍSTICA O ENLACE ──
-            const opciones = desplegable.querySelectorAll('a');
-            opciones.forEach(opcion => {
-                opcion.addEventListener('click', () => {
-                    if (esMovil()) {
-                        desplegable.classList.remove('movil-abierto');
-                    }
-                });
+            // Resetear las clases si el usuario redimensiona o rota la pantalla a modo escritorio
+            window.addEventListener('resize', () => {
+                if (!esMovil()) {
+                    document.querySelectorAll('.movil-abierto').forEach(el => {
+                        el.classList.remove('movil-abierto');
+                    });
+                }
             });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Leemos el nombre que esté guardado actualmente
+            const nombreGuardado = localStorage.getItem('usuarioNombre');
 
-            // ── 3. CASO ESPECIAL: CIERRE AL PULSAR "APLICAR FILTRO" EN EL POPUP DE PRECIO ──
-            const btnAplicarPrecio = desplegable.querySelector('.btn-apply-filter');
-            if (btnAplicarPrecio) {
-                btnAplicarPrecio.addEventListener('click', () => {
-                    if (esMovil()) {
-                        desplegable.classList.remove('movil-abierto');
-                    }
-                });
+            if (nombreGuardado) {
+                // Muestra el bloque del usuario
+                document.getElementById('userProfileBlock').style.display = 'flex';
+                document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+                document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
             }
-        }
-    });
-
-    // Resetear las clases si el usuario redimensiona o rota la pantalla a modo escritorio
-    window.addEventListener('resize', () => {
-        if (!esMovil()) {
-            document.querySelectorAll('.movil-abierto').forEach(el => {
-                el.classList.remove('movil-abierto');
-            });
-        }
-    });
-});
+        });
     </script>
 
 </body>
