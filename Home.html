@@ -47,6 +47,7 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
+            position: relative;
         }
 
         .logo {
@@ -672,6 +673,52 @@
                 text-align: center;
             }
         }
+
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-50%) translateX(50%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: var(--purple-main);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
+            text-transform: uppercase;
+        }
+        .user-avatar:hover{
+
+            cursor: pointer;
+            border-color: #9333EA;
+        }
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            max-width: 90px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Corta el nombre con "..." si es muy largo */
+        }
     </style>
 
 
@@ -692,11 +739,19 @@
                 <button onclick="ejecutarBusqueda()">Buscar</button>
             </div>
 
-            <a href="#" class="login-link">Iniciar Sesión</a>
+            <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
             <a href="#" class="contactar-link">Contáctanos</a>
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
+            <div class="user-profile" id="userProfileBlock" style="display: none; align-items: center; gap: 15px;">
+
+                <div style="display: flex; flex-direction: row; align-items: center; gap: 8px;">
+                    <div class="user-avatar" id="avatarLetra" onclick="window.location.href='perfil.html';">U</div>
+                    <span class="user-name" id="nombreUsuarioTexto">Usuario</span>
+                </div>
+
+            </div>
         </div>
         <nav class="nav-categories">
             <a href="moviles.html">Móviles</a>
@@ -911,6 +966,17 @@
                 behavior: 'smooth'
             });
         }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Leemos el nombre que esté guardado actualmente
+            const nombreGuardado = localStorage.getItem('usuarioNombre');
+
+            if (nombreGuardado) {
+                // Muestra el bloque del usuario
+                document.getElementById('userProfileBlock').style.display = 'flex';
+                document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+                document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
+            }
+        });
     </script>
 </body>
 
