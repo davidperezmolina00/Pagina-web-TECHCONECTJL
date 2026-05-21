@@ -942,6 +942,51 @@
                 text-align: center;
             }
         }
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-50%) translateX(50%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: var(--purple-main);
+            color: white;
+            border-radius: 50%;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
+            text-transform: uppercase;
+        }
+        .user-avatar:hover{
+
+            cursor: pointer;
+            border-color: #9333EA;
+        }
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            max-width: 90px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Corta el nombre con "..." si es muy largo */
+        }
     </style>
 </head>
 
@@ -964,6 +1009,14 @@
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
+            <div class="user-profile" id="userProfileBlock" style="display: none; align-items: center; gap: 15px;">
+
+                <div style="display: flex; flex-direction: row; align-items: center; gap: 8px;">
+                    <div class="user-avatar" id="avatarLetra" onclick="window.location.href='perfil.html';">U</div>
+                    <span class="user-name" id="nombreUsuarioTexto">Usuario</span>
+                </div>
+
+            </div>
         </div>
         <nav class="nav-categories">
             <a href="moviles.html">Móviles</a>
@@ -1055,11 +1108,11 @@
             <div class="filter-item almacen-item">
                 <button class="filter-btn">Almacenamiento ▾</button>
                 <div class="filter-dropdown">
-                    <a href="#">64 GB</a>
                     <a href="#">128 GB</a>
                     <a href="#">256 GB</a>
                     <a href="#">512 GB</a>
                     <a href="#">1 TB</a>
+                    <a href="#">2 TB</a>
                 </div>
             </div>
         </div>
@@ -1074,14 +1127,14 @@
             </div>
             <div class="product-info">
                 <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h3>
+                <h3 class="product-name">MacBook Pro 14" (2023) Apple M3 – 8 GB – SSD 512 GB – Gris espacial</h3>
                 <div class="product-details">
                     <span class="product-grade grade-excelente"> Excelente</span>
                 </div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">1.059,00 <span>€</span></span>
+                <span class="price-value">1.549,00 <span>€</span></span>
             </div>
         </article>
 
@@ -1089,13 +1142,13 @@
             data-almacenamiento="256 GB">
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
-                <span class="product-brand">Samsung</span>
-                <h3 class="product-name">Samsung Galaxy Tab S9 Ultra - 256 GB - Negro</h3>
+                <span class="product-brand">Lenovo</span>
+                <h3 class="product-name">Lenovo ThinkPad L14 Gen 2 – Core i5 2.6 GHz – SSD 256 GB – 8 GB – Teclado ES</h3>
                 <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">849,00 <span>€</span></span>
+                <span class="price-value">329,00 <span>€</span></span>
             </div>
         </article>
 
@@ -1104,39 +1157,39 @@
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
                 <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Air (2022) 5ª gen - Wi-Fi - 64 GB - Azul</h3>
+                <h3 class="product-name">MacBook Air 13" (2020) Apple M1 – 8 GB – SSD 256 GB – Plata</h3>
                 <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">529,00 <span>€</span></span>
+                <span class="price-value">679,00 <span>€</span></span>
             </div>
         </article>
 
-        <article class="product-card" data-precio="310" data-grado="Grado Correcto" data-marca="Lenovo"
+        <article class="product-card" data-precio="310" data-grado="Grado Muy Bueno" data-marca="Lenovo"
             data-almacenamiento="128 GB">
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
-                <span class="product-brand">Lenovo</span>
-                <h3 class="product-name">Lenovo Tab P11 Pro Gen 2 - 128 GB - Gris</h3>
-                <div class="product-details"><span class="product-grade grade-correcto"> Correcto</span></div>
+                <span class="product-brand">HP</span>
+                <h3 class="product-name">HP EliteBook 840 G8 – Core i5 2.4 GHz – SSD 256 GB – 16 GB – Teclado ES</h3>
+                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">310,00 <span>€</span></span>
+                <span class="price-value">385,00 <span>€</span></span>
             </div>
         </article>
         <article class="product-card" data-precio="310" data-grado="Grado Correcto" data-marca="Lenovo"
             data-almacenamiento="128 GB">
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
-                <span class="product-brand">Lenovo</span>
-                <h3 class="product-name">Lenovo Tab P11 Pro Gen 2 - 128 GB - Gris</h3>
+                <span class="product-brand">Dell</span>
+                <h3 class="product-name">Dell Latitude 5420 – Core i5 2.6 GHz – SSD 256 GB – 8 GB – Teclado ES</h3>
                 <div class="product-details"><span class="product-grade grade-correcto"> Correcto</span></div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">310,00 <span>€</span></span>
+                <span class="price-value">249,00 <span>€</span></span>
             </div>
         </article>
 
@@ -1178,30 +1231,30 @@
 
     <script>
 
-        // ── ESTADO DE FILTROS ACTIVOS ──
+        
+        // 1. ESTADO DE FILTROS ACTIVOS
         const filtros = {
             precioMin: 0,
             precioMax: 9999,
             grado: null,
-            marca: null,
+            marca: null, 
             almacenamiento: null
         };
 
-        // ── LEER DATOS DE CADA TARJETA ──
-        // Para que funcione, cada product-card necesita data-attributes (los añadimos abajo)
+        // 2. FUNCIÓN PRINCIPAL DE FILTRADO (SABER QUÉ MOSTRAR U OCULTAR)
         function aplicarFiltros() {
             const cards = document.querySelectorAll('.product-card');
             let visibles = 0;
 
             cards.forEach(card => {
-                const precio = parseFloat(card.dataset.precio);
+                const precio = parseFloat(card.dataset.precio) || 0;
                 const grado = card.dataset.grado;
-                const marca = card.dataset.marca;
+                const marca = card.dataset.marca; // Captura la marca real del portátil
                 const almacenamiento = card.dataset.almacenamiento;
 
                 const pasaPrecio = precio >= filtros.precioMin && precio <= filtros.precioMax;
                 const pasaGrado = !filtros.grado || grado === filtros.grado;
-                const pasaMarca = !filtros.marca || marca === filtros.marca;
+                const pasaMarca = !filtros.marca || marca === filtros.marca; 
                 const pasaAlmacenamiento = !filtros.almacenamiento || almacenamiento === filtros.almacenamiento;
 
                 if (pasaPrecio && pasaGrado && pasaMarca && pasaAlmacenamiento) {
@@ -1219,7 +1272,7 @@
                     noResults = document.createElement('p');
                     noResults.id = 'no-results';
                     noResults.style.cssText = 'text-align:center; color:var(--muted); padding:40px; width:100%; grid-column:1/-1;';
-                    noResults.textContent = 'No hay productos que coincidan con los filtros seleccionados.';
+                    noResults.textContent = 'No hay portátiles que coincidan con los filtros seleccionados.';
                     document.querySelector('.products-grid').appendChild(noResults);
                 }
             } else {
@@ -1227,137 +1280,130 @@
             }
         }
 
-        // ── FILTRO DE PRECIO ──
+        // 3. FILTRO DE PRECIO (SLIDERS E INPUTS)
         const rangeMin = document.querySelector('.range-min');
         const rangeMax = document.querySelector('.range-max');
         const inputMin = document.querySelector('.input-min');
         const inputMax = document.querySelector('.input-max');
 
-        rangeMin.addEventListener('input', () => {
-            let val = parseInt(rangeMin.value);
-            if (val >= parseInt(rangeMax.value)) val = parseInt(rangeMax.value) - 10;
-            rangeMin.value = val;
-            inputMin.value = val;
-            filtros.precioMin = val;
-        });
+        if (rangeMin && rangeMax && inputMin && inputMax) {
+            rangeMin.addEventListener('input', () => {
+                let val = parseInt(rangeMin.value);
+                if (val >= parseInt(rangeMax.value)) val = parseInt(rangeMax.value) - 10;
+                rangeMin.value = val;
+                inputMin.value = val;
+                filtros.precioMin = val;
+            });
 
-        rangeMax.addEventListener('input', () => {
-            let val = parseInt(rangeMax.value);
-            if (val <= parseInt(rangeMin.value)) val = parseInt(rangeMin.value) + 10;
-            rangeMax.value = val;
-            inputMax.value = val;
-            filtros.precioMax = val;
-        });
+            rangeMax.addEventListener('input', () => {
+                let val = parseInt(rangeMax.value);
+                if (val <= parseInt(rangeMin.value)) val = parseInt(rangeMin.value) + 10;
+                rangeMax.value = val;
+                inputMax.value = val;
+                filtros.precioMax = val;
+            });
 
-        inputMin.addEventListener('change', () => {
-            rangeMin.value = inputMin.value;
-            filtros.precioMin = parseInt(inputMin.value);
-        });
+            inputMin.addEventListener('change', () => {
+                rangeMin.value = inputMin.value;
+                filtros.precioMin = parseInt(inputMin.value) || 0;
+            });
 
-        inputMax.addEventListener('change', () => {
-            rangeMax.value = inputMax.value;
-            filtros.precioMax = parseInt(inputMax.value);
-        });
+            inputMax.addEventListener('change', () => {
+                rangeMax.value = inputMax.value;
+                filtros.precioMax = parseInt(inputMax.value) || 9999;
+            });
+        }
 
-        // ── CONTROL DE CIERRE AUTOMÁTICO EN EL BOTÓN "VER PRODUCTOS" ──
+        // CONTROL DE CIERRE AUTOMÁTICO EN EL BOTÓN "VER PRODUCTOS"
         const applyBtn = document.querySelector('.btn-apply-filter');
-
-        applyBtn.addEventListener('click', () => {
-            // 1. Aplica tus filtros originales
-            aplicarFiltros();
-
-            // 2. Le metemos la clase para ocultarlo inmediatamente
-            const pricePopup = document.querySelector('.price-popup');
-            if (pricePopup) {
-                pricePopup.classList.add('popup-closed');
-            }
-        });
-
-        // ── REINICIAR CUANDO SE VUELVE A PASAR EL RATÓN (ESCRITORIO) ──
-        // Buscamos el contenedor del elemento filtro que rodea al botón "Precio"
-        const priceFilterItem = document.querySelector('.price-popup').closest('.filter-item');
-
-        if (priceFilterItem) {
-            priceFilterItem.addEventListener('mouseleave', () => {
-                // Cuando el ratón se va del filtro, le quitamos el bloqueo invisible
+        if (applyBtn) {
+            applyBtn.addEventListener('click', () => {
+                aplicarFiltros();
                 const pricePopup = document.querySelector('.price-popup');
                 if (pricePopup) {
-                    pricePopup.classList.remove('popup-closed');
+                    pricePopup.classList.add('popup-closed');
                 }
             });
         }
 
-        // ── FILTRO DE GRADO ──
-        document.querySelectorAll('.filter-dropdown a').forEach(a => {
-            const texto = a.textContent.trim().toLowerCase();
-            if (texto.includes('excelente') || texto.includes('muy bueno') || texto.includes('bueno') || texto.includes('correcto')) {
-                a.addEventListener('click', e => {
-                    e.preventDefault();
-                    const deseleccionado = marcarActivo(a, 'grado');
-                    if (!deseleccionado) filtros.grado = a.textContent.trim();
-                    aplicarFiltros();
+        // REINICIAR CUANDO SE VUELVE A PASAR EL RATÓN (ESCRITORIO)
+        const pricePopupElement = document.querySelector('.price-popup');
+        if (pricePopupElement) {
+            const priceFilterItem = pricePopupElement.closest('.filter-item');
+            if (priceFilterItem) {
+                priceFilterItem.addEventListener('mouseleave', () => {
+                    pricePopupElement.classList.remove('popup-closed');
                 });
             }
+        }
+
+        // 4. DETECTORES DE CLICS CORREGIDOS Y INDEPENDIENTES
+        
+        // Filtro de Grado
+        document.querySelectorAll('.grado-item .filter-dropdown a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const deseleccionado = marcarActivo(a, 'grado');
+                filtros.grado = deseleccionado ? null : a.textContent.trim();
+                aplicarFiltros();
+            });
         });
 
-        // ── FILTRO DE ALMACENAMIENTO ──
-        document.querySelectorAll('.filter-dropdown a').forEach(a => {
-            if (a.textContent.trim().includes('GB') || a.textContent.trim().includes('TB')) {
-                a.addEventListener('click', e => {
-                    e.preventDefault();
-                    const deseleccionado = marcarActivo(a, 'almacenamiento');
-                    if (!deseleccionado) filtros.almacenamiento = a.textContent.trim();
-                    aplicarFiltros();
-                });
-            }
+        // Filtro de Almacenamiento
+        document.querySelectorAll('.almacen-item .filter-dropdown a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const deseleccionado = marcarActivo(a, 'almacenamiento');
+                filtros.almacenamiento = deseleccionado ? null : a.textContent.trim();
+                aplicarFiltros();
+            });
         });
 
-        // ── FILTRO DE MARCA (LIMPIEZA RADICAL DE FOCO) ──
+        // FILTRO DE MARCAS REFACTORIZADO Y CORREGIDO PARA PORTÁTILES (HP, LENOVO, ETC.)
         document.querySelectorAll('.brand-mega-dropdown a').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
-
-                // 1. Ejecuta tu lógica original de filtros
+                
+                // Hace la selección o deselección visual
                 const deseleccionado = marcarActivo(a, 'marca');
-                if (!deseleccionado) filtros.marca = a.textContent.trim();
+                
+                // Almacena el texto limpio de la marca (ej: "HP", "Lenovo")
+                filtros.marca = deseleccionado ? null : a.textContent.trim();
+                
+                // Ejecuta la renderización en tiempo real
                 aplicarFiltros();
 
-                // 2. LA CLAVE: Forzamos al elemento activo (el enlace) a perder el foco
+                // Limpieza de focos para evitar bloqueos en pantallas táctiles
                 a.blur();
-
-                // 3. Por si acaso el foco se ha quedado atrapado en el botón o contenedor principal,
-                // obligamos a la página entera a limpiar el foco activo del documento.
                 if (document.activeElement) {
                     document.activeElement.blur();
                 }
             });
         });
 
-        // ── MARCAR ACTIVO O DESACTIVAR SI YA ESTABA SELECCIONADO ──
+        // FUNCIÓN AUXILIAR PARA RESALTAR U OCULTAR LA SELECCIÓN VISUAL
         function marcarActivo(el, tipo) {
             const padre = el.closest('.filter-dropdown, .brand-mega-dropdown');
 
-            // Si ya estaba seleccionado, deseleccionar
             if (filtros[tipo] === el.textContent.trim()) {
                 filtros[tipo] = null;
                 padre.querySelectorAll('a').forEach(a => {
                     a.style.fontWeight = '';
                     a.style.color = '';
                 });
-                return true; // indica que se deseleccionó
+                return true; // Se deseleccionó
             }
 
-            // Si es nuevo, marcar
             padre.querySelectorAll('a').forEach(a => {
                 a.style.fontWeight = '';
                 a.style.color = '';
             });
             el.style.fontWeight = '800';
             el.style.color = 'var(--p)';
-            return false;
+            return false; // Se seleccionó uno nuevo
         }
 
-        // CONTROL DE AUTO-CIERRE REPETIBLE EN MÓVIL
+        // 5. CONTROL DE AUTO-CIERRE REPETIBLE EN MÓVIL AL HACER SCROLL
         let scrollTimeout;
         function activarOcultacionPorMovimiento() {
             if (window.innerWidth <= 850) {
@@ -1374,97 +1420,109 @@
             }
         }
 
-        // ── DETECTOR 1: CONTROL DE SCROLL GENERAL ──
         window.addEventListener('scroll', activarOcultacionPorMovimiento);
-
-        // Control estricto para los dropdowns normales
         document.querySelectorAll('.filter-dropdown').forEach(dropdown => {
             dropdown.addEventListener('touchmove', activarOcultacionPorMovimiento);
         });
 
-        // 💡 LA SOLUCIÓN COMPLETA PARA MÓVIL REAL: 
-        // Buscamos el popup de precios y frenamos de raíz la propagación del dedo hacia la página principal
-        const pricePopupElement = document.querySelector('.price-popup');
         if (pricePopupElement) {
             pricePopupElement.addEventListener('touchmove', (e) => {
-                // Esto le dice al móvil: "El movimiento muere aquí, procesa solo mi scroll interno"
                 e.stopPropagation();
             }, { passive: true });
         }
+
+        // 6. DETECTOR DE APERTURA Y CIERRE DE MENÚS EN MÓVILES (ESTRUCTURA DE PORTÁTILES)
         document.addEventListener("DOMContentLoaded", () => {
-    
-    // Función auxiliar para detectar resoluciones móviles
-    const esMovil = () => window.innerWidth <= 850;
+            const esMovil = () => window.innerWidth <= 850;
 
-    // Configuración de los selectores de filtros y sus respectivos desplegables
-    const mapeoFiltros = [
-        { item: '.filter-item:has(.price-popup)', pop: '.price-popup' },
-        { item: '.grado-item', pop: '.filter-dropdown' },
-        { item: '.full-width', pop: '.brand-mega-dropdown' },
-        { item: '.almacen-item', pop: '.filter-dropdown' }
-    ];
+            // ORDEN CORREGIDO SEGÚN LA BARRA DE PORTÁTILES: 
+            // 1. Precio | 2. Marcas (.full-width) | 3. Grados | 4. Almacenamiento
+            const mapeoFiltros = [
+                { item: '.filter-item:has(.price-popup)', pop: '.price-popup' },
+                { item: '.full-width', pop: '.brand-mega-dropdown' },
+                { item: '.grado-item', pop: '.grado-item .filter-dropdown' },
+                { item: '.almacen-item', pop: '.almacen-item .filter-dropdown' }
+            ];
 
-    mapeoFiltros.forEach(filtro => {
-        const contenedor = document.querySelector(filtro.item);
-        if (!contenedor) return;
+            mapeoFiltros.forEach(filtro => {
+                const contenedor = document.querySelector(filtro.item);
+                if (!contenedor) return;
 
-        const boton = contenedor.querySelector('.filter-btn');
-        const desplegable = contenedor.querySelector(filtro.pop);
+                const boton = contenedor.querySelector('.filter-btn');
+                const desplegable = contenedor.querySelector(filtro.pop);
 
-        if (boton && desplegable) {
-            
-            // ── 1. COMPORTAMIENTO DEL BOTÓN PRINCIPAL (CÍCLICO) ──
-            boton.addEventListener('click', (e) => {
-                if (esMovil()) {
-                    e.stopPropagation(); // Evita interferencias con otros clics
+                if (boton && desplegable) {
+                    // Abrir / Cerrar de manera independiente
+                    boton.addEventListener('click', (e) => {
+                        if (esMovil()) {
+                            e.stopPropagation();
 
-                    // Guarda si este filtro ya estaba abierto antes del click
-                    const estabaAbierto = desplegable.classList.contains('movil-abierto');
+                            const estabaAbierto = desplegable.classList.contains('movil-abierto');
 
-                    // 1. Cerramos todos los menús abiertos para no amontonar la pantalla
-                    mapeoFiltros.forEach(f => {
-                        const d = document.querySelector(f.item)?.querySelector(f.pop);
-                        if (d) d.classList.remove('movil-abierto');
+                            // Cierra todos los demás desplegables primero para evitar solapamiento
+                            mapeoFiltros.forEach(f => {
+                                const d = document.querySelector(f.item)?.querySelector(f.pop);
+                                if (d) d.classList.remove('movil-abierto');
+                            });
+
+                            // Abre el desplegable actual
+                            if (!estabaAbierto) {
+                                desplegable.classList.add('movil-abierto');
+                            }
+                        }
                     });
 
-                    // 2. Si NO estaba abierto, lo abrimos (Toggle alternativo limpio)
-                    if (!estabaAbierto) {
-                        desplegable.classList.add('movil-abierto');
+                    // Cierre automático al seleccionar una opción de adentro
+                    const opciones = desplegable.querySelectorAll('a');
+                    opciones.forEach(opcion => {
+                        opcion.addEventListener('click', () => {
+                            if (esMovil()) {
+                                desplegable.classList.remove('movil-abierto');
+                            }
+                        });
+                    });
+
+                    // Cierre al pulsar "Ver productos" en precio
+                    const btnAplicarPrecio = desplegable.querySelector('.btn-apply-filter');
+                    if (btnAplicarPrecio) {
+                        btnAplicarPrecio.addEventListener('click', () => {
+                            if (esMovil()) {
+                                desplegable.classList.remove('movil-abierto');
+                            }
+                        });
                     }
                 }
             });
 
-            // ── 2. CIERRE AL SELECCIONAR UNA CARACTERÍSTICA O ENLACE ──
-            const opciones = desplegable.querySelectorAll('a');
-            opciones.forEach(opcion => {
-                opcion.addEventListener('click', () => {
-                    if (esMovil()) {
-                        desplegable.classList.remove('movil-abierto');
-                    }
-                });
+            // Cerrar menús si el usuario pulsa en cualquier espacio vacío de la página
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.filter-item, .full-width')) {
+                    document.querySelectorAll('.filter-dropdown, .brand-mega-dropdown, .price-popup').forEach(d => {
+                        d.classList.remove('movil-abierto');
+                    });
+                }
             });
 
-            // ── 3. CASO ESPECIAL: CIERRE AL PULSAR "APLICAR FILTRO" EN EL POPUP DE PRECIO ──
-            const btnAplicarPrecio = desplegable.querySelector('.btn-apply-filter');
-            if (btnAplicarPrecio) {
-                btnAplicarPrecio.addEventListener('click', () => {
-                    if (esMovil()) {
-                        desplegable.classList.remove('movil-abierto');
-                    }
-                });
+            // Limpieza de clases responsive al ensanchar la pantalla
+            window.addEventListener('resize', () => {
+                if (!esMovil()) {
+                    document.querySelectorAll('.movil-abierto').forEach(el => {
+                        el.classList.remove('movil-abierto');
+                    });
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Leemos el nombre que esté guardado actualmente
+            const nombreGuardado = localStorage.getItem('usuarioNombre');
+
+            if (nombreGuardado) {
+                // Muestra el bloque del usuario
+                document.getElementById('userProfileBlock').style.display = 'flex';
+                document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+                document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
             }
-        }
-    });
-
-    // Resetear las clases si el usuario redimensiona o rota la pantalla a modo escritorio
-    window.addEventListener('resize', () => {
-        if (!esMovil()) {
-            document.querySelectorAll('.movil-abierto').forEach(el => {
-                el.classList.remove('movil-abierto');
-            });
-        }
-    });
-});
+        });
     </script>
 
 </body>
