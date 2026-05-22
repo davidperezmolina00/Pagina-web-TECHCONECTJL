@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - TECHCONECTJL</title>
+    <style>
+        /* Centrado absoluto en la pantalla con el fondo blanco de tu web */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Fondo blanco corporativo */
+            color: #000000;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Tarjeta contenedora con el fondo lavanda claro de tus categorías */
+        .contacto-container {
+            width: 90%;
+            max-width: 950px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background-color: #e2daf1; /* El tono lavanda/morado claro de tus tarjetas */
+            padding: 45px;
+            border-radius: 20px; /* Bordes muy redondeados idénticos a tu diseño */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra suave, no agresiva */
+            box-sizing: border-box;
+        }
+
+        /* Adaptación para pantallas móviles */
+        @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                padding: 40px 0;
+            }
+            .contacto-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px;
+            }
+        }
+
+        /* Textos informativos de la izquierda */
+        .contacto-info h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-top: 0;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .contacto-info p {
+            color: #555555;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .info-detalles {
+            margin-top: 35px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            color: #333333;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Formulario de la derecha */
+        .contacto-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #444444;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Inputs blancos con bordes limpios */
+        .form-group input, .form-group textarea {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            color: #000000;
+            padding: 14px 16px;
+            border-radius: 12px; /* Campos redondeados en armonía */
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        /* Al hacer clic en un input, se ilumina con el morado de la web */
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #712cf2; 
+            box-shadow: 0 0 0 3px rgba(113, 44, 242, 0.15);
+        }
+
+        /* Botón con el morado corporativo exacto de buscar/ver ahora */
+        .btn-enviar {
+            background-color: #712cf2; /* El morado eléctrico de tus botones */
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            border-radius: 25px; /* Súper redondeado, clavado al de "Buscar" y "Ver ahora" */
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .btn-enviar:hover {
+            background-color: #5919d9; /* Un punto más oscuro al pasar el ratón */
+        }
+
+        .btn-enviar:active {
+            transform: scale(0.98);
+        }
+        
+.btn-volver-pantalla {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    text-decoration: none;
+    color: #747474; /* Gris oscuro sutil, idéntico al de tu captura */
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+/* Efecto suave al pasar el ratón por encima */
+.btn-volver-pantalla:hover {
+    color: #a75fb9; /* Se vuelve negro puro al apuntar */
+    transform: translateX(-3px); /* Se mueve un pelín a la izquierda */
+}
+
+/* Ajuste rápido para que en pantallas móviles no quede demasiado pegada al borde */
+@media (max-width: 768px) {
+    .btn-volver-pantalla {
+        top: 15px;
+        left: 15px;
+        font-size: 14px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+
+    <a href="Home.html" class="btn-volver-pantalla">← Volver</a>
+
+    <div class="contacto-container">
+        
+        <div class="contacto-info">
+            <h2>Contáctanos</h2>
+            <p>¿Tienes alguna duda sobre nuestros productos reacondicionados o necesitas soporte con tu pedido? El equipo de TechConectJL está aquí para ayudarte.</p>
+            
+            <div class="info-detalles">
+                <div class="info-item">📍 A rellenar </div>
+                <div class="info-item">📞 A rellenar</div>
+                <div class="info-item">✉️ Arellenar@techconectjl.com</div>
+                <div class="info-item">⏰ A rellenar</div>
+            </div>
+        </div>
+
+        <form class="contacto-form" action="#" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Introduce tu nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" name="asunto" placeholder="¿En qué te podemos ayudar?" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu consulta aquí..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar consulta</button>
+        </form>
+
+    </div>
+
+    <script src="BarraBusqueda.js"></script>
+</body>
+</html>

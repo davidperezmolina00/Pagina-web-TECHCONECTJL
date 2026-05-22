@@ -1142,8 +1142,8 @@
                 <button onclick="ejecutarBusqueda()">Buscar</button>
             </div>
 
-            <a href="#" class="login-link">Iniciar Sesión</a>
-            <a href="#" class="contactar-link">Contáctanos</a>
+            <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
+            <a href="contactanos.html" class="contactar-link">Contáctanos</a>
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
@@ -1366,14 +1366,12 @@
         </div>
 
     </footer>
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
-        <div class="cart-drawer" onclick="event.stopPropagation()">
 
     <!-- CARRITO -->
 
-  <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
+   <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
         <div class="cart-drawer" onclick="event.stopPropagation()">
-            
+
             <div class="cart-drawer-header">
                 <h3>Tu Carrito (<span id="cartDrawerCount">0</span>)</h3>
                 <button class="close-cart-btn" onclick="toggleCart()">×</button>
@@ -1572,7 +1570,8 @@
             return false;
         }
 
-        /*CARRITO*/
+
+/*CARRITO*/
 
         document.addEventListener("DOMContentLoaded", () => {
             actualizarInterfazCarrito();
@@ -1684,6 +1683,7 @@
             });
         });
     </script>
+    <script src="BarraBusqueda.js"></script>
 
 </body>
 
