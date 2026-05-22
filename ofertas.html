@@ -50,10 +50,10 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             z-index: 9999;
-            border-bottom: 1px solid var(--border);
-            padding-top: 8px;
+            padding: 8px 0 0 0;
         }
 
 
@@ -65,8 +65,12 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
+<<<<<<< HEAD
             background-color: #fafafa;
 
+=======
+            position: relative;
+>>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
         }
 
         .logo {
@@ -955,7 +959,7 @@
             right: 20px;
             /* Lo pega a la derecha del todo */
             top: 50%;
-            transform: translateY(-50%) translateX(50%);
+            transform: translateY(-50%) translateX(70%);
             /* Lo centra perfectamente en vertical */
             display: none;
             /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
@@ -966,7 +970,7 @@
         .user-avatar {
             width: 42px;
             height: 42px;
-            background-color: var(--purple-main);
+            background: linear-gradient(to right, purple, rgb(239, 125, 239));
             color: white;
             border-radius: 50%;
             border: 1px solid;
@@ -995,6 +999,37 @@
             overflow: hidden;
             text-overflow: ellipsis;
             /* Corta el nombre con "..." si es muy largo */
+        }
+         @media screen and (max-width: 600px) {
+
+            /* 1. Modificamos la clase de tu botón del carrito */
+            .cart-btn {
+                position: absolute;
+                right: 115px;
+                /* Lo empujamos a la izquierda para dejarle sitio al logo de Juan */
+
+            }
+
+            /* 2. El logo de Juan se queda pegado a la derecha */
+            .user-profile {
+                position: absolute;
+                right: 15px;
+                /* Pegado al borde derecho de la pantalla */
+
+                transform: translateY(-303%);
+                /* Sin el translateX(70%) antiguo */
+                display: none;
+                /* Tu JS lo pasa a flex si hay sesión activa */
+                align-items: center;
+                gap: 12px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
         }
         .cart-overlay {
             position: fixed;
@@ -1189,7 +1224,11 @@
             </div>
 
             <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
+<<<<<<< HEAD
             <a href="contactanos.html" class="contactar-link">Contáctanos</a>
+=======
+            <a href="#" class="contactar-link">Contáctanos</a>
+>>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
@@ -1483,7 +1522,7 @@
             }
         }
 
-        // ── FILTRO DE PRECIO ──
+        // ── FILTRO DE PRECIO (CORREGIDO PARA EVITAR NEGATIVOS) ──
         const rangeMin = document.querySelector('.range-min');
         const rangeMax = document.querySelector('.range-max');
         const inputMin = document.querySelector('.input-min');
@@ -1505,16 +1544,25 @@
             filtros.precioMax = val;
         });
 
-        inputMin.addEventListener('change', () => {
+        // Control directo sobre la caja de entrada mínima
+        inputMin.addEventListener('input', () => {
+            // Si el valor baja de cero o está vacío, se fuerza a 0 inmediatamente
+            if (parseInt(inputMin.value) < 0 || inputMin.value === "") {
+                inputMin.value = 0;
+            }
             rangeMin.value = inputMin.value;
             filtros.precioMin = parseInt(inputMin.value);
         });
 
-        inputMax.addEventListener('change', () => {
+        // Control directo sobre la caja de entrada máxima
+        inputMax.addEventListener('input', () => {
+            // Evita también que el precio máximo sea negativo
+            if (parseInt(inputMax.value) < 0 || inputMax.value === "") {
+                inputMax.value = 0;
+            }
             rangeMax.value = inputMax.value;
             filtros.precioMax = parseInt(inputMax.value);
         });
-
         // ── CONTROL DE CIERRE AUTOMÁTICO EN EL BOTÓN "VER PRODUCTOS" ──
         const applyBtn = document.querySelector('.btn-apply-filter');
 

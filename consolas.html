@@ -50,10 +50,10 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             z-index: 9999;
-            border-bottom: 1px solid var(--border);
-            padding-top: 8px;
+            padding: 8px 0 0 0;
         }
 
 
@@ -66,6 +66,7 @@
             gap: 25px;
             padding: 0 20px;
             background-color: #fafafa;
+            position: relative;
         }
 
         .logo {
@@ -963,6 +964,98 @@
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-50%) translateX(70%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(to right, purple, rgb(239, 125, 239));
+            color: white;
+            border-radius: 50%;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
+            text-transform: uppercase;
+        }
+
+        .user-avatar:hover {
+
+            cursor: pointer;
+            border-color: #9333EA;
+        }
+
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            max-width: 90px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Corta el nombre con "..." si es muy largo */
+        }
+
+        @media screen and (max-width: 600px) {
+
+            /* 1. Modificamos la clase de tu botón del carrito */
+            .cart-btn {
+                position: absolute;
+                right: 115px;
+                /* Lo empujamos a la izquierda para dejarle sitio al logo de Juan */
+
+            }
+
+            /* 2. El logo de Juan se queda pegado a la derecha */
+            .user-profile {
+                position: absolute;
+                right: 15px;
+                /* Pegado al borde derecho de la pantalla */
+
+                transform: translateY(-303%);
+                /* Sin el translateX(70%) antiguo */
+                display: none;
+                /* Tu JS lo pasa a flex si hay sesión activa */
+                align-items: center;
+                gap: 12px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
 
 
 .cart-overlay.open {
@@ -1258,44 +1351,71 @@
 
     <section class="products-grid">
 
-        <article class="product-card" data-precio="1059" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="128 GB">
+        <article class="product-card" data-precio="389" data-grado="Grado Excelente" data-marca="PS5"
+            data-almacenamiento="1 TB">
             <div class="product-image-container">
                 <span style="color: #ccc;">Imagen del Producto</span>
             </div>
             <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h3>
+                <span class="product-brand">Sony</span>
+                <h3 class="product-name">PlayStation 5 Slim – 1 TB – Chasis D – Digital – Blanco</h3>
                 <div class="product-details">
                     <span class="product-grade grade-excelente"> Excelente</span>
                 </div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">1.059,00 <span>€</span></span>
+                <span class="price-value">389,00 <span>€</span></span>
             </div>
         </article>
 
-        <article class="product-card" data-precio="849" data-grado="Grado Muy Bueno" data-marca="Samsung"
-            data-almacenamiento="256 GB">
+        <article class="product-card" data-precio="245" data-grado="Grado Muy Bueno"
+            data-marca="Nintendo Switch Estándar" data-almacenamiento="64 GB">
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
-                <span class="product-brand">Samsung</span>
-                <h3 class="product-name">Samsung Galaxy Tab S9 Ultra - 256 GB - Negro</h3>
+                <span class="product-brand">Nintendo</span>
+                <h3 class="product-name">Nintendo Switch (Modelo OLED) – 64 GB – Con Joy-Con Blanco</h3>
                 <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
             </div>
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
-                <span class="price-value">849,00 <span>€</span></span>
+                <span class="price-value">245,00 <span>€</span></span>
             </div>
         </article>
 
-        <article class="product-card" data-precio="529" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="64 GB">
+        <article class="product-card" data-precio="310" data-grado="Grado Correcto" data-marca="Xbox Series"
+            data-almacenamiento="1 TB">
             <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
             <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Air (2022) 5ª gen - Wi-Fi - 64 GB - Azul</h3>
+                <span class="product-brand">Microsoft</span>
+                <h3 class="product-name">Xbox Series X – 1 TB – Negro</h3>
+                <div class="product-details"><span class="product-grade grade-correcto"> Correcto</span></div>
+            </div>
+            <div class="product-price-section">
+                <span class="price-label">Desde</span>
+                <span class="price-value">310,00 <span>€</span></span>
+            </div>
+        </article>
+
+        <article class="product-card" data-precio="159" data-grado="Grado Muy Bueno" data-marca="PS4"
+            data-almacenamiento="1 TB">
+            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
+            <div class="product-info">
+                <span class="product-brand">Sony</span>
+                <h3 class="product-name">PlayStation 4 Pro – 1 TB – Negro</h3>
+                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
+            </div>
+            <div class="product-price-section">
+                <span class="price-label">Desde</span>
+                <span class="price-value">159,00 <span>€</span></span>
+            </div>
+        </article>
+        <article class="product-card" data-precio="135" data-grado="Grado Excelente" data-marca="Nintendo Switch Lite"
+            data-almacenamiento="32 GB">
+            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
+            <div class="product-info">
+                <span class="product-brand">Nintendo</span>
+                <h3 class="product-name">Nintendo Switch Lite – 32 GB – Azul turquesa</h3>
                 <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
             </div>
             <div class="product-price-section">
@@ -1328,6 +1448,7 @@
             <div class="product-price-section">
                 <span class="price-label">Desde</span>
                 <span class="price-value">310,00 <span>€</span></span>
+                <span class="price-value">135,00 <span>€</span></span>
             </div>
         </article>
 
@@ -1440,7 +1561,7 @@
             }
         }
 
-        // ── FILTRO DE PRECIO ──
+        // ── FILTRO DE PRECIO (CORREGIDO PARA EVITAR NEGATIVOS) ──
         const rangeMin = document.querySelector('.range-min');
         const rangeMax = document.querySelector('.range-max');
         const inputMin = document.querySelector('.input-min');
@@ -1462,12 +1583,22 @@
             filtros.precioMax = val;
         });
 
-        inputMin.addEventListener('change', () => {
+        // Control directo sobre la caja de entrada mínima
+        inputMin.addEventListener('input', () => {
+            // Si el valor baja de cero o está vacío, se fuerza a 0 inmediatamente
+            if (parseInt(inputMin.value) < 0 || inputMin.value === "") {
+                inputMin.value = 0;
+            }
             rangeMin.value = inputMin.value;
             filtros.precioMin = parseInt(inputMin.value);
         });
 
-        inputMax.addEventListener('change', () => {
+        // Control directo sobre la caja de entrada máxima
+        inputMax.addEventListener('input', () => {
+            // Evita también que el precio máximo sea negativo
+            if (parseInt(inputMax.value) < 0 || inputMax.value === "") {
+                inputMax.value = 0;
+            }
             rangeMax.value = inputMax.value;
             filtros.precioMax = parseInt(inputMax.value);
         });
