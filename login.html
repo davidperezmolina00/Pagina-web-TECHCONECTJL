@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* --- Variables de Diseño --- */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        /* --- Estilos Generales --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* --- Botón Volver (Esquina Superior Izquierda) --- */
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .btn-back:hover {
+            color: var(--primary-color);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+
+        .btn-back svg {
+            margin-right: 8px;
+        }
+
+        /* --- Contenedor Principal Centrado --- */
+        .main-container {
+            margin: auto;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px; /* Espacio para que no choque con el botón volver en móviles */
+        }
+
+        /* --- Título --- */
+        .main-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        /* --- Tarjeta de Login/Registro --- */
+        .login-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* --- Formulario --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        /* --- Botón de Acción --- */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- Enlace de pie de formulario --- */
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Ajustes Responsive para Pantallas Pequeñas --- */
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+            
+            .btn-back {
+                position: static; /* Cambia a flujo normal para que no se pise con el título en pantallas muy chicas */
+                margin-bottom: 20px;
+                align-self: flex-start;
+            }
+
+            .main-container {
+                padding-top: 0;
+            }
+
+            .login-card {
+                padding: 24px 16px;
+            }
+
+            .main-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="Home.html" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Volver
+    </a>
+
+    <div class="main-container">
+        
+        <h1 class="main-title">Regístrate en nuestra página</h1>
+
+        <div class="login-card">
+            <form action="#" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" id="name" name="name" placeholder="Nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Crear cuenta</button>
+
+                <div class="form-footer">
+                    ¿Ya tienes una cuenta? <a href="inciar_sesion.html">Inicia sesión</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    <script>
+    const formLogin = document.querySelector('form');
+    if (formLogin) {
+        formLogin.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página se recargue antes de tiempo
+            
+            // 1. Capturamos los valores de las casillas de Correo y Contraseña
+            const emailUsuario = document.getElementById('email').value;
+            const passwordUsuario = document.getElementById('password').value;
+            
+            if (emailUsuario && passwordUsuario) {
+                // 2. Extraemos el nombre limpiando el "@gmail.com" (ej: de "carlos@gmail.com" saca "carlos")
+                const nombreSimulado = emailUsuario.split('@')[0]; 
+                
+                // 3. Guardamos los TRES datos en la memoria para la página de perfil
+                localStorage.setItem('usuarioNombre', nombreSimulado);
+                localStorage.setItem('usuarioEmail', emailUsuario);
+                localStorage.setItem('usuarioPassword', passwordUsuario);
+                
+                // 4. Te redirige al Home con la sesión iniciada correctamente
+                window.location.href = 'home.html';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

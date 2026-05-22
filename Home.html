@@ -874,11 +874,19 @@
                 <button onclick="ejecutarBusqueda()">Buscar</button>
             </div>
 
-            <a href="#" class="login-link">Iniciar Sesión</a>
+            <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
             <a href="#" class="contactar-link">Contáctanos</a>
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
+            <div class="user-profile" id="userProfileBlock" style="display: none; align-items: center; gap: 15px;">
+
+                <div style="display: flex; flex-direction: row; align-items: center; gap: 8px;">
+                    <div class="user-avatar" id="avatarLetra" onclick="window.location.href='perfil.html';">U</div>
+                    <span class="user-name" id="nombreUsuarioTexto">Usuario</span>
+                </div>
+
+            </div>
         </div>
         <nav class="nav-categories">
             <a href="moviles.html">Móviles</a>
@@ -1053,7 +1061,6 @@
                 </div>
             </div>
         </div>
-
     </footer>
 
 
@@ -1079,7 +1086,10 @@
 
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     <script>
         function scrollHero(direction) {
             const track = document.getElementById('heroTrack');
