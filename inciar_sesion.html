@@ -74,7 +74,7 @@
         }
 
         .main-title {
-            
+
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -1px;
@@ -219,28 +219,33 @@
         </div>
     </div>
     <script>
-    const formLogin = document.querySelector('form');
-    if (formLogin) {
-        formLogin.addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que se recargue la página sin guardar
-            
-            // 1. Capturamos el correo y la contraseña de las cajas de texto
-            const emailUsuario = document.getElementById('email').value;
-            const passwordUsuario = document.getElementById('password').value; // ¡Añadido!
-            
-            // 2. Quitamos el "@gmail.com" o lo que vaya detrás para dejarlo como nombre de usuario
-            const nombreReal = emailUsuario.split('@')[0]; 
-            
-            // 3. Guardamos los TRES datos en la memoria para que los lea el perfil
-            localStorage.setItem('usuarioNombre', nombreReal); 
-            localStorage.setItem('usuarioEmail', emailUsuario); // ¡Añadido!
-            localStorage.setItem('usuarioPassword', passwordUsuario); // ¡Añadido!
-            
-            // 4. Te redirige al Home
-            window.location.href = 'home.html'; 
-        });
-    }
-</script>
+        const formLogin = document.querySelector('form');
+        if (formLogin) {
+            formLogin.addEventListener('submit', function (e) {
+                e.preventDefault(); // Evita que se recargue la página sin guardar
+
+                // 1. Capturamos el correo y la contraseña de las cajas de texto
+                const emailUsuario = document.getElementById('email').value;
+                const passwordUsuario = document.getElementById('password').value; // ¡Añadido!
+                const inputNombre = document.getElementById('name');
+                let nombreReal = '';
+                if (inputNombre) {
+                    nombreReal = inputNombre.value.trim();
+                    if (nombreReal.includes(' ')) {
+                        nombreReal = nombreReal.split(' ')[0];
+                    }
+                }
+
+                // 3. Guardamos los TRES datos en la memoria para que los lea el perfil
+                localStorage.setItem('usuarioNombre', nombreReal);
+                localStorage.setItem('usuarioEmail', emailUsuario); // ¡Añadido!
+                localStorage.setItem('usuarioPassword', passwordUsuario); // ¡Añadido!
+
+                // 4. Te redirige al Home
+                window.location.href = 'home.html';
+            });
+        }
+    </script>
 
 </body>
 
