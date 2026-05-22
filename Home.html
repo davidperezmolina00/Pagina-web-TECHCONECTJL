@@ -691,7 +691,7 @@
         .user-avatar {
             width: 42px;
             height: 42px;
-            background-color: var(--purple-main);
+            background: linear-gradient(to right, purple, rgb(239, 125, 239));
             color: white;
             border-radius: 50%;
             border: 1px solid;
@@ -704,11 +704,13 @@
             box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
             text-transform: uppercase;
         }
-        .user-avatar:hover{
+
+        .user-avatar:hover {
 
             cursor: pointer;
             border-color: #9333EA;
         }
+
         .user-name {
             font-size: 0.8rem;
             font-weight: 600;
@@ -719,6 +721,39 @@
             text-overflow: ellipsis;
             /* Corta el nombre con "..." si es muy largo */
         }
+
+        @media screen and (max-width: 600px) {
+
+            /* 1. Modificamos la clase de tu botón del carrito */
+            .cart-btn {
+                position: absolute;
+                right: 115px;
+                /* Lo empujamos a la izquierda para dejarle sitio al logo de Juan */
+
+            }
+
+            /* 2. El logo de Juan se queda pegado a la derecha */
+            .user-profile {
+                position: absolute;
+                right: 15px;
+                /* Pegado al borde derecho de la pantalla */
+
+                transform: translateY(-292%);
+                /* Sin el translateX(70%) antiguo */
+                display: none;
+                /* Tu JS lo pasa a flex si hay sesión activa */
+                align-items: center;
+                gap: 12px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+        }
+
         .cart-overlay {
             position: fixed;
             top: 0;
