@@ -1,10 +1,18 @@
+// =====================================================================
+// 0. CARGAR DOTENV AL PRINCIPIO DEL ARCHIVO
+// =====================================================================
+require('dotenv').config(); 
+
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
-const PORT = 3001;
+
+// Cambiado: Ahora prioriza el puerto que le asigne Render/Railway, si no, usa el 3001
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -15,20 +23,23 @@ console.log("📂 Sirviendo archivos desde:", directorioFrontend);
 app.use(express.static(directorioFrontend));
 
 console.log("📁 Archivos estáticos desde:", directorioFrontend);
-const fs = require('fs');
 console.log("¿Existe moviles.html?", fs.existsSync(path.join(directorioFrontend, 'moviles.html')));
 
-// 1. Conexión MySQL
+// =====================================================================
+// 1. CONEXIÓN MYSQL (Adaptada con variables de entorno para la nube)
+// =====================================================================
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'techconectjl'
+    host: process.env.DB_HOST || '127.0.0.1',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : '',
+    database: process.env.DB_NAME || 'techconectjl',
+    // Los servicios en la nube suelen exigir especificar el puerto de MySQL (por defecto 3306)
+    port: process.env.DB_PORT || 3306 
 });
 
 db.connect((err) => {
     if (err) { console.error('❌ Error:', err.message); return; }
-    console.log('✅ Conectado a MySQL.');
+    console.log('✅ Conectado a MySQL con éxito.');
 });
 
 // =====================================================================
@@ -71,9 +82,10 @@ app.get('/api/productos/:id', (req, res) => {
         res.json(results[0]);
     });
 });
+
 // =====================================================================
-// 4. ARRANQUE DEL SERVIDOR (¡No te olvides de escuchar el puerto!)
+// 4. ARRANQUE DEL SERVIDOR (Puerto dinámico)
 // =====================================================================
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor backend unificado corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Servidor backend unificado corriendo en el puerto ${PORT}`);
 });
