@@ -31,34 +31,49 @@ db.connect((err) => {
     console.log('✅ Conectado a MySQL.');
 });
 
-// 2. API endpoints
+// =====================================================================
+// 2. ENDPOINT GENERAL: Obtener TODOS los productos (Para catálogos)
+// =====================================================================
 app.get('/api/productos', (req, res) => {
-    db.query('SELECT * FROM productos', (err, results) => {
-        if (err) return res.status(500).json({ error: 'Error en BD' });
+    console.log("📦 Catálogo pidiendo todos los productos...");
+    const query = 'SELECT * FROM productos';
+    
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('❌ Error al obtener todos los productos:', err);
+            return res.status(500).json({ error: 'Error en el servidor de base de datos' });
+        }
         res.json(results);
     });
 });
 
+// =====================================================================
+// 3. ENDPOINT INDIVIDUAL: Obtener UN solo producto por ID (Para productos.html)
+// =====================================================================
 app.get('/api/productos/:id', (req, res) => {
     const idProducto = req.params.id;
-    const query = 'SELECT * FROM productos WHERE id = ? OR id_producto = ?';
-    db.query(query, [idProducto, idProducto], (err, results) => {
-        if (err) return res.status(500).json({ error: 'Error en BD' });
-        if (results.length === 0) return res.status(404).json({ error: 'No encontrado' });
+    console.log(`\n🔍 Frontend pidiendo producto individual. ID recibida: "${idProducto}"`);
+
+    const query = 'SELECT * FROM productos WHERE id = ?';
+
+    db.query(query, [idProducto], (err, results) => {
+        if (err) {
+            console.error('❌ Error crítico en la consulta MySQL:', err);
+            return res.status(500).json({ error: 'Error interno del servidor en MySQL' });
+        }
+
+        if (results.length === 0) {
+            console.warn(`⚠️ El producto con ID ${idProducto} NO existe en la base de datos.`);
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        console.log('✅ ¡Producto encontrado con éxito! Enviando:', results[0].modelo);
         res.json(results[0]);
     });
 });
-
-// 3. Catch-all para HTML — SIEMPRE AL FINAL
-// 3. Catch-all para HTML — SIEMPRE AL FINAL
-app.get('/{*path}', (req, res) => {
-    const filePath = path.join(directorioFrontend, req.path);
-    console.log('Buscando archivo en:', filePath);
-    res.sendFile(filePath, err => {
-        if (err) console.log('Error:', err.message);
-    });
-});
-
+// =====================================================================
+// 4. ARRANQUE DEL SERVIDOR (¡No te olvides de escuchar el puerto!)
+// =====================================================================
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Servidor backend unificado corriendo en http://localhost:${PORT}`);
 });
