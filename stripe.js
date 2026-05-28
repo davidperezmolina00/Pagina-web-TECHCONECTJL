@@ -28,8 +28,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
             line_items: line_items,
             mode: 'payment',
             // Direcciones a las que volverá el cliente tras pagar o cancelar
-            success_url: 'https://tu-backend-en-render.onrender.com/exito.html',
-            cancel_url: 'https://tu-backend-en-render.onrender.com/carrito.html',
+            success_url: 'https://pagina-web-techconectjl.onrender.com/exito.html',
+            cancel_url: 'https://pagina-web-techconectjl.onrender.com/carrito.html',
         });
 
         // Devolvemos la URL generada por Stripe al frontend
