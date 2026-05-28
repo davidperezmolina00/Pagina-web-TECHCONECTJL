@@ -1267,7 +1267,7 @@
 
                 const idLimpia = idUrl.split(':')[0].trim();
 
-                fetch(`http://localhost:3001/api/productos/${idLimpia}`)
+                fetch(`https://pagina-web-techconectjl.onrender.com/api/productos/${idLimpia}`)
                     .then(response => {
                         if (!response.ok) throw new Error(`Error del servidor: ${response.status}`);
                         return response.json();

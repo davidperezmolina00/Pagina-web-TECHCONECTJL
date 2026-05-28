@@ -5,7 +5,7 @@ let todosLosProductos = [];
 async function cargarProductos() {
     try {
         // Hacemos la petición a tu servidor local de Express
-        const response = await fetch('http://localhost:3001/api/productos');
+        const response = await fetch('https://tu-backend-en-render.onrender.com/api/productos');
         
         if (!response.ok) {
             throw new Error(`Error en la petición: ${response.status}`);
