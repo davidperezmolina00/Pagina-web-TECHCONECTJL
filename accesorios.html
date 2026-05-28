@@ -46,7 +46,8 @@
         }
 
         .hdr {
-            background-color: #fafafa;;
+            background-color: #fafafa;
+            ;
             position: fixed;
             top: 0;
             left: 0;
@@ -65,11 +66,9 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
-<<<<<<< HEAD
-            background-color: #fafafa;;
-=======
+            background-color: #fafafa;
+            ;
             position: relative;
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
         }
 
         .logo {
@@ -184,7 +183,8 @@
                 justify-content: space-between;
                 gap: 8px;
                 position: relative;
-                background-color: #fafafa;;
+                background-color: #fafafa;
+                ;
             }
 
             .logo {
@@ -951,24 +951,23 @@
             }
         }
 
-<<<<<<< HEAD
         /*ESTILOS PARA EL CARRITO*/
 
-/* --- CARRITO LATERAL (CART DRAWER) --- */
+        /* --- CARRITO LATERAL (CART DRAWER) --- */
 
-.cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 10000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-=======
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
         .user-profile {
             position: absolute;
             /* Hace que flote libremente */
@@ -1016,7 +1015,8 @@
             text-overflow: ellipsis;
             /* Corta el nombre con "..." si es muy largo */
         }
-         @media screen and (max-width: 600px) {
+
+        @media screen and (max-width: 600px) {
 
             /* 1. Modificamos la clase de tu botón del carrito */
             .cart-btn {
@@ -1047,6 +1047,7 @@
             }
 
         }
+
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -1059,169 +1060,169 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
 
 
-.cart-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
 
-.cart-drawer {
-    position: fixed;
-    top: 0;
-    right: -45%; 
-    width: 40%;   
-    min-width: 360px; 
-    height: 100%;
-    background: var(--white);
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
-    z-index: 10001;
-    display: flex;
-    flex-direction: column;
-    transition: right 0.3s ease;
-}
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -45%;
+            width: 40%;
+            min-width: 360px;
+            height: 100%;
+            background: var(--white);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+        }
 
 
-.cart-overlay.open .cart-drawer {
-    right: 0;
-}
+        .cart-overlay.open .cart-drawer {
+            right: 0;
+        }
 
 
-.cart-drawer-header {
-    padding: 24px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .cart-drawer-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.cart-drawer-header h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-}
+        .cart-drawer-header h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+        }
 
-.close-cart-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--muted);
-    transition: color 0.2s;
-}
+        .close-cart-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
 
-.close-cart-btn:hover {
-    color: var(--dark);
-}
-
-
-.cart-drawer-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+        .close-cart-btn:hover {
+            color: var(--dark);
+        }
 
 
-.cart-item-row {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-}
-
-.cart-item-img {
-    width: 70px;
-    height: 70px;
-    background: var(--surface);
-    border-radius: 8px;
-    padding: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cart-item-img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.cart-item-info {
-    flex: 1;
-}
-
-.cart-item-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--dark);
-    margin-bottom: 4px;
-    line-height: 1.3;
-}
-
-.cart-item-meta {
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.cart-item-price {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--dark);
-}
+        .cart-drawer-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
 
 
-.cart-drawer-footer {
-    padding: 24px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+        .cart-item-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
 
-.cart-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 700;
-}
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.cart-total-price {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--p);
-}
+        .cart-item-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
 
-.btn-view-cart {
-    width: 100%;
-    background: var(--dark);
-    color: var(--white);
-    border: none;
-    padding: 14px;
-    font-size: 15px;
-    font-weight: 700;
-    border-radius: 50px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: background 0.2s;
-}
+        .cart-item-info {
+            flex: 1;
+        }
 
-.btn-view-cart:hover {
-    background: var(--p);
-}
-@media (max-width: 600px) {
-    .cart-drawer {
-        width: 85%;
-    }
-}
+        .cart-item-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .cart-item-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .cart-item-price {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+
+        .cart-drawer-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cart-total-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--p);
+        }
+
+        .btn-view-cart {
+            width: 100%;
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-view-cart:hover {
+            background: var(--p);
+        }
+
+        @media (max-width: 600px) {
+            .cart-drawer {
+                width: 85%;
+            }
+        }
     </style>
 </head>
 
@@ -1240,11 +1241,7 @@
             </div>
 
             <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
-<<<<<<< HEAD
             <a href="contactanos.html" class="contactar-link">Contáctanos</a>
-=======
-            <a href="#" class="contactar-link">Contáctanos</a>
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
@@ -1323,105 +1320,29 @@
             <div class="filter-item grado-item">
                 <button class="filter-btn">Grado estético ▾</button>
                 <div class="filter-dropdown">
-                    <a href="#">Grado Excelente</a>
-                    <a href="#">Grado Muy Bueno</a>
-                    <a href="#">Grado Bueno</a>
-                    <a href="#">Grado Correcto</a>
+                    <a href="#">Grade NUEVO</a>
+                    <a href="#">Grade NUEVO ABIERTO</a>
+                    <a href="#">Grade A</a>
+                    <a href="#">Grade B</a>
+                    <a href="#">Grade B+</a>
+                    <a href="#">Grade B/C</a>
                 </div>
             </div>
 
             <div class="filter-item full-width">
                 <button class="filter-btn">Marcas ▾</button>
                 <div class="brand-mega-dropdown">
-                    <a href="#">PS5</a>
-                    <a href="#">PS4</a>
-                    <a href="#">Xbox one</a>
-                    <a href="#">Nintendo Switch Estándar</a>
-                    <a href="#">Xbox Series</a>
-                    <a href="#">Nintendo Switch Lite</a>
-                    <a href="#">Xbox 360</a>
-                    <a href="#">Nintendo DS</a>
+                    <a href="#">Apple</a>
+                    <a href="#">Xiaomi</a>
+                    <a href="#">Lenovo</a>
+                    <a href="#">Samsung</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <section class="products-grid">
-
-        <article class="product-card" data-precio="1059" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="128 GB">
-            <div class="product-image-container">
-                <span style="color: #ccc;">Imagen del Producto</span>
-            </div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h3>
-                <div class="product-details">
-                    <span class="product-grade grade-excelente"> Excelente</span>
-                </div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">1.059,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="849" data-grado="Grado Muy Bueno" data-marca="Samsung"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Samsung</span>
-                <h3 class="product-name">Samsung Galaxy Tab S9 Ultra - 256 GB - Negro</h3>
-                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">849,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="529" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="64 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Air (2022) 5ª gen - Wi-Fi - 64 GB - Azul</h3>
-                <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">529,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="310" data-grado="Grado Bueno" data-marca="Lenovo"
-            data-almacenamiento="128 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Lenovo</span>
-                <h3 class="product-name">Lenovo Tab P11 Pro Gen 2 - 128 GB - Gris</h3>
-                <div class="product-details"><span class="product-grade grade-bueno"> Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">310,00 <span>€</span></span>
-            </div>
-        </article>
-        <article class="product-card" data-precio="310" data-grado="Grado Bueno" data-marca="Lenovo"
-            data-almacenamiento="128 GB">>
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Lenovo</span>
-                <h3 class="product-name">Lenovo Tab P11 Pro Gen 2 - 128 GB - Gris</h3>
-                <div class="product-details"><span class="product-grade grade-bueno"> Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">310,00 <span>€</span></span>
-            </div>
-        </article>
-
-    </section>
+    <div id="contenedor-productos" class="products-grid">
+    </div>
 
     <footer class="site-footer">
         <div class="footer-features">
@@ -1480,9 +1401,9 @@
 
     <!-- CARRITO -->
 
-   <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
         <div class="cart-drawer" onclick="event.stopPropagation()">
-            
+
             <div class="cart-drawer-header">
                 <h3>Tu Carrito (<span id="cartDrawerCount">0</span>)</h3>
                 <button class="close-cart-btn" onclick="toggleCart()">×</button>
@@ -1504,309 +1425,309 @@
     <script>
 
         // ── ESTADO DE FILTROS ACTIVOS ──
-        const filtros = {
-            precioMin: 0,
-            precioMax: 9999,
-            grado: null,
-            marca: null,
-            almacenamiento: null
-        };
+        // ── ESTADO DE FILTROS ACTIVOS ──
+const filtros = {
+    precioMin: 0,
+    precioMax: 9999,
+    grado: null,
+    marca: null,
+    almacenamiento: null
+};
 
-        // ── LEER DATOS DE CADA TARJETA ──
-        // Para que funcione, cada product-card necesita data-attributes (los añadimos abajo)
-        function aplicarFiltros() {
-            const cards = document.querySelectorAll('.product-card');
-            let visibles = 0;
+// ── LEER DATOS DE CADA TARJETA Y FILTRAR ──
+function aplicarFiltros() {
+    const cards = document.querySelectorAll('.product-card');
+    let visibles = 0;
 
-            cards.forEach(card => {
-                const precio = parseFloat(card.dataset.precio);
-                const grado = card.dataset.grado;
-                const marca = card.dataset.marca;
-                const almacenamiento = card.dataset.almacenamiento;
+    cards.forEach(card => {
+        const precio = parseFloat(card.dataset.precio);
+        const marca = card.dataset.marca;
+        const almacenamiento = card.dataset.almacenamiento;
 
-                const pasaPrecio = precio >= filtros.precioMin && precio <= filtros.precioMax;
-                const pasaGrado = !filtros.grado || grado === filtros.grado;
-                const pasaMarca = !filtros.marca || marca === filtros.marca;
-                const pasaAlmacenamiento = !filtros.almacenamiento || almacenamiento === filtros.almacenamiento;
+        // --- LOGICA DE GRADO CORREGIDA Y FLEXIBLE ---
+        const gradoTarjeta = card.dataset.grado ? card.dataset.grado.toLowerCase().replace(/grade\s+|grado\s+/g, '').trim() : '';
+        const gradoFiltro = filtros.grado ? filtros.grado.toLowerCase().replace(/grade\s+|grado\s+/g, '').trim() : '';
 
-                if (pasaPrecio && pasaGrado && pasaMarca && pasaAlmacenamiento) {
-                    card.style.display = 'flex';
-                    visibles++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+        const pasaPrecio = precio >= filtros.precioMin && precio <= filtros.precioMax;
+        const pasaMarca = !filtros.marca || marca === filtros.marca;
+        const pasaAlmacenamiento = !filtros.almacenamiento || almacenamiento === filtros.almacenamiento;
 
-            // Mensaje si no hay resultados
-            let noResults = document.getElementById('no-results');
-            if (visibles === 0) {
-                if (!noResults) {
-                    noResults = document.createElement('p');
-                    noResults.id = 'no-results';
-                    noResults.style.cssText = 'text-align:center; color:var(--muted); padding:40px; width:100%; grid-column:1/-1;';
-                    noResults.textContent = 'No hay productos que coincidan con los filtros seleccionados.';
-                    document.querySelector('.products-grid').appendChild(noResults);
-                }
-            } else {
-                if (noResults) noResults.remove();
-            }
+        // Comparamos los grados normalizados (ej: "a" === "a")
+        const pasaGrado = !filtros.grado || gradoTarjeta === gradoFiltro;
+
+        if (pasaPrecio && pasaGrado && pasaMarca && pasaAlmacenamiento) {
+            card.style.display = 'flex';
+            visibles++;
+        } else {
+            card.style.display = 'none';
         }
+    });
 
-        // ── FILTRO DE PRECIO (CORREGIDO PARA EVITAR NEGATIVOS) ──
-        const rangeMin = document.querySelector('.range-min');
-        const rangeMax = document.querySelector('.range-max');
-        const inputMin = document.querySelector('.input-min');
-        const inputMax = document.querySelector('.input-max');
+    // 🌟 CORRECCIÓN: El control de 'no-results' DEBE estar dentro de la función para conocer el valor de 'visibles'
+    let noResults = document.getElementById('no-results');
+    if (visibles === 0) {
+        if (!noResults) {
+            noResults = document.createElement('p');
+            noResults.id = 'no-results';
+            noResults.style.cssText = 'text-align:center; color:var(--muted); padding:40px; width:100%; grid-column:1/-1;';
+            noResults.textContent = 'No hay productos que coincidan con los filtros seleccionados.';
+            document.querySelector('.products-grid').appendChild(noResults);
+        }
+    } else {
+        if (noResults) noResults.remove();
+    }
+}
 
-        rangeMin.addEventListener('input', () => {
-            let val = parseInt(rangeMin.value);
-            if (val >= parseInt(rangeMax.value)) val = parseInt(rangeMax.value) - 10;
-            rangeMin.value = val;
-            inputMin.value = val;
-            filtros.precioMin = val;
-        });
+// ── FILTRO DE PRECIO (CORREGIDO PARA EVITAR NEGATIVOS) ──
+const rangeMin = document.querySelector('.range-min');
+const rangeMax = document.querySelector('.range-max');
+const inputMin = document.querySelector('.input-min');
+const inputMax = document.querySelector('.input-max');
 
-        rangeMax.addEventListener('input', () => {
-            let val = parseInt(rangeMax.value);
-            if (val <= parseInt(rangeMin.value)) val = parseInt(rangeMin.value) + 10;
-            rangeMax.value = val;
-            inputMax.value = val;
-            filtros.precioMax = val;
-        });
+if(rangeMin && rangeMax && inputMin && inputMax) {
+    rangeMin.addEventListener('input', () => {
+        let val = parseInt(rangeMin.value);
+        if (val >= parseInt(rangeMax.value)) val = parseInt(rangeMax.value) - 10;
+        rangeMin.value = val;
+        inputMin.value = val;
+        filtros.precioMin = val;
+    });
 
-        // Control directo sobre la caja de entrada mínima
-        inputMin.addEventListener('input', () => {
-            // Si el valor baja de cero o está vacío, se fuerza a 0 inmediatamente
-            if (parseInt(inputMin.value) < 0 || inputMin.value === "") {
-                inputMin.value = 0;
+    rangeMax.addEventListener('input', () => {
+        let val = parseInt(rangeMax.value);
+        if (val <= parseInt(rangeMin.value)) val = parseInt(rangeMin.value) + 10;
+        rangeMax.value = val;
+        inputMax.value = val;
+        filtros.precioMax = val;
+    });
+
+    inputMin.addEventListener('input', () => {
+        if (parseInt(inputMin.value) < 0 || inputMin.value === "") {
+            inputMin.value = 0;
+        }
+        rangeMin.value = inputMin.value;
+        filtros.precioMin = parseInt(inputMin.value);
+    });
+
+    inputMax.addEventListener('input', () => {
+        if (parseInt(inputMax.value) < 0 || inputMax.value === "") {
+            inputMax.value = 0;
+        }
+        rangeMax.value = inputMax.value;
+        filtros.precioMax = parseInt(inputMax.value);
+    });
+}
+
+// ── CONTROL DE CIERRE AUTOMÁTICO EN EL BOTÓN "VER PRODUCTOS" ──
+const applyBtn = document.querySelector('.btn-apply-filter');
+if (applyBtn) {
+    applyBtn.addEventListener('click', () => {
+        aplicarFiltros();
+        const pricePopup = document.querySelector('.price-popup');
+        if (pricePopup) {
+            pricePopup.classList.add('popup-closed');
+        }
+    });
+}
+
+// ── REINICIAR CUANDO SE VUELVE A PASAR EL RATÓN ──
+const pricePopupEl = document.querySelector('.price-popup');
+if (pricePopupEl) {
+    const priceFilterItem = pricePopupEl.closest('.filter-item');
+    if (priceFilterItem) {
+        priceFilterItem.addEventListener('mouseleave', () => {
+            if (pricePopupEl) {
+                pricePopupEl.classList.remove('popup-closed');
             }
-            rangeMin.value = inputMin.value;
-            filtros.precioMin = parseInt(inputMin.value);
         });
+    }
+}
 
-        // Control directo sobre la caja de entrada máxima
-        inputMax.addEventListener('input', () => {
-            // Evita también que el precio máximo sea negativo
-            if (parseInt(inputMax.value) < 0 || inputMax.value === "") {
-                inputMax.value = 0;
-            }
-            rangeMax.value = inputMax.value;
-            filtros.precioMax = parseInt(inputMax.value);
-        });
+// ── FILTRO DE GRADO OMNIPRESENTE ──
+document.querySelectorAll('.grado-item .filter-dropdown a').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        
+        const deseleccionado = marcarActivo(a, 'grado');
+        
+        if (!deseleccionado) {
+            filtros.grado = a.textContent.trim();
+        } else {
+            filtros.grado = null;
+        }
+        
+        aplicarFiltros();
+        
+        a.blur();
+        if (document.activeElement) {
+            document.activeElement.blur();
+        }
+    });
+});
 
-        // ── CONTROL DE CIERRE AUTOMÁTICO EN EL BOTÓN "VER PRODUCTOS" ──
-        const applyBtn = document.querySelector('.btn-apply-filter');
-
-        applyBtn.addEventListener('click', () => {
-            // 1. Aplica tus filtros originales
+// ── FILTRO DE ALMACENAMIENTO ──
+document.querySelectorAll('.filter-dropdown a').forEach(a => {
+    if (a.textContent.trim().includes('GB') || a.textContent.trim().includes('TB')) {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const deseleccionado = marcarActivo(a, 'almacenamiento');
+            if (!deseleccionado) filtros.almacenamiento = a.textContent.trim();
             aplicarFiltros();
-
-            // 2. Le metemos la clase para ocultarlo inmediatamente
-            const pricePopup = document.querySelector('.price-popup');
-            if (pricePopup) {
-                pricePopup.classList.add('popup-closed');
-            }
         });
+    }
+});
 
-        // ── REINICIAR CUANDO SE VUELVE A PASAR EL RATÓN (ESCRITORIO) ──
-        // Buscamos el contenedor del elemento filtro que rodea al botón "Precio"
-        const priceFilterItem = document.querySelector('.price-popup').closest('.filter-item');
-
-        if (priceFilterItem) {
-            priceFilterItem.addEventListener('mouseleave', () => {
-                // Cuando el ratón se va del filtro, le quitamos el bloqueo invisible
-                const pricePopup = document.querySelector('.price-popup');
-                if (pricePopup) {
-                    pricePopup.classList.remove('popup-closed');
-                }
-            });
+// ── FILTRO DE MARCA (LIMPIEZA RADICAL DE FOCO) ──
+document.querySelectorAll('.brand-mega-dropdown a').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const deseleccionado = marcarActivo(a, 'marca');
+        if (!deseleccionado) filtros.marca = a.textContent.trim();
+        aplicarFiltros();
+        a.blur();
+        if (document.activeElement) {
+            document.activeElement.blur();
         }
+    });
+});
 
-        // ── FILTRO DE GRADO ──
-        document.querySelectorAll('.filter-dropdown a').forEach(a => {
-            const texto = a.textContent.trim().toLowerCase();
-            if (texto.includes('excelente') || texto.includes('muy bueno') || texto.includes('bueno') || texto.includes('correcto')) {
-                a.addEventListener('click', e => {
-                    e.preventDefault();
-                    const deseleccionado = marcarActivo(a, 'grado');
-                    if (!deseleccionado) filtros.grado = a.textContent.trim();
-                    aplicarFiltros();
-                });
-            }
+// ── MARCAR ACTIVO O DESACTIVAR SI YA ESTABA SELECCIONADO ──
+function marcarActivo(el, tipo) {
+    const padre = el.closest('.filter-dropdown, .brand-mega-dropdown');
+    if (filtros[tipo] === el.textContent.trim()) {
+        filtros[tipo] = null;
+        padre.querySelectorAll('a').forEach(a => {
+            a.style.fontWeight = '';
+            a.style.color = '';
         });
+        return true;
+    }
 
-        // ── FILTRO DE ALMACENAMIENTO ──
-        document.querySelectorAll('.filter-dropdown a').forEach(a => {
-            if (a.textContent.trim().includes('GB') || a.textContent.trim().includes('TB')) {
-                a.addEventListener('click', e => {
-                    e.preventDefault();
-                    const deseleccionado = marcarActivo(a, 'almacenamiento');
-                    if (!deseleccionado) filtros.almacenamiento = a.textContent.trim();
-                    aplicarFiltros();
-                });
-            }
-        });
+    padre.querySelectorAll('a').forEach(a => {
+        a.style.fontWeight = '';
+        a.style.color = '';
+    });
+    el.style.fontWeight = '800';
+    el.style.color = 'var(--p)';
+    return false;
+}
 
-        // ── FILTRO DE MARCA (LIMPIEZA RADICAL DE FOCO) ──
-        document.querySelectorAll('.brand-mega-dropdown a').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
+/* QUE SE VEA LA SESION INICIADA */
+document.addEventListener("DOMContentLoaded", function () {
+    const nombreGuardado = localStorage.getItem('usuarioNombre');
+    if (nombreGuardado) {
+        document.getElementById('userProfileBlock').style.display = 'flex';
+        document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+        document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
+    }
+});
 
-                // 1. Ejecuta tu lógica original de filtros
-                const deseleccionado = marcarActivo(a, 'marca');
-                if (!deseleccionado) filtros.marca = a.textContent.trim();
-                aplicarFiltros();
+/* CARRITO */
+document.addEventListener("DOMContentLoaded", () => {
+    actualizarInterfazCarrito();
+});
 
-                // 2. LA CLAVE: Forzamos al elemento activo (el enlace) a perder el foco
-                a.blur();
+function toggleCart() {
+    const overlay = document.getElementById('cartOverlay');
+    if(overlay) overlay.classList.toggle('open');
+}
 
-                // 3. Por si acaso el foco se ha quedado atrapado en el botón o contenedor principal,
-                // obligamos a la página entera a limpiar el foco activo del documento.
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
-            });
-        });
+function closeCartFromOverlay(event) {
+    toggleCart();
+}
 
-        // ── MARCAR ACTIVO O DESACTIVAR SI YA ESTABA SELECCIONADO ──
-        function marcarActivo(el, tipo) {
-            const padre = el.closest('.filter-dropdown, .brand-mega-dropdown');
+function agregarAlCarritoActual() {
+    const titulo = document.querySelector('.product-title').innerText;
+    const imagen = document.querySelector('.main-image-box img').src;
+    const tarjetaActiva = document.querySelector('.grade-option-card.active');
+    const grado = tarjetaActiva.querySelector('.grade-name-text').innerText;
+    const precioTexto = tarjetaActiva.querySelector('.grade-price-indicator').innerText;
+    const precioNumero = parseFloat(precioTexto.replace('.', '').replace(',', '.').replace(' €', ''));
 
-            // Si ya estaba seleccionado, deseleccionar
-            if (filtros[tipo] === el.textContent.trim()) {
-                filtros[tipo] = null;
-                padre.querySelectorAll('a').forEach(a => {
-                    a.style.fontWeight = '';
-                    a.style.color = '';
-                });
-                return true; // indica que se deseleccionó
-            }
+    let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+    const productoExistente = carrito.find(item => item.titulo === titulo && item.grado === grado);
 
-            // Si es nuevo, marcar
-            padre.querySelectorAll('a').forEach(a => {
-                a.style.fontWeight = '';
-                a.style.color = '';
-            });
-            el.style.fontWeight = '800';
-            el.style.color = 'var(--p)';
-            return false;
-        }
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+    } else {
+        const nuevoProducto = {
+            titulo: titulo,
+            imagen: imagen,
+            grado: grado,
+            precio: precioNumero,
+            cantidad: 1
+        };
+        carrito.push(nuevoProducto);
+    }
 
+    localStorage.setItem('carritoTech', JSON.stringify(carrito));
+    actualizarInterfazCarrito();
+    document.getElementById('cartOverlay').classList.add('open');
+}
 
-/*CARRITO*/
+function eliminarDelCarrito(index) {
+    let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+    carrito.splice(index, 1);
+    localStorage.setItem('carritoTech', JSON.stringify(carrito));
+    actualizarInterfazCarrito();
+}
 
-        document.addEventListener("DOMContentLoaded", () => {
-            actualizarInterfazCarrito();
-        });
+function actualizarInterfazCarrito() {
+    let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
+    const contenedorItems = document.getElementById('cartDrawerItems');
+    const contadorHeader = document.getElementById('cartCount');
+    const contadorDrawer = document.getElementById('cartDrawerCount');
+    const totalPrecioElemento = document.querySelector('.cart-total-price');
 
-        function toggleCart() {
-            const overlay = document.getElementById('cartOverlay');
-            overlay.classList.toggle('open');
-        }
+    if (!contenedorItems) return;
+    contenedorItems.innerHTML = '';
 
-        function closeCartFromOverlay(event) {
-            toggleCart();
-        }
+    let totalArticulos = 0;
+    let costeTotal = 0;
 
-        function agregarAlCarritoActual() {
-            const titulo = document.querySelector('.product-title').innerText;
-            const imagen = document.querySelector('.main-image-box img').src;
+    if (carrito.length === 0) {
+        contenedorItems.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:30px;">Tu carrito está vacío.</p>`;
+    } else {
+        carrito.forEach((item, index) => {
+            totalArticulos += item.cantidad;
+            costeTotal += (item.precio * item.cantidad);
+            const precioFormateado = item.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
 
-            const tarjetaActiva = document.querySelector('.grade-option-card.active');
-            const grado = tarjetaActiva.querySelector('.grade-name-text').innerText;
-            const precioTexto = tarjetaActiva.querySelector('.grade-price-indicator').innerText;
-
-            const precioNumero = parseFloat(precioTexto.replace('.', '').replace(',', '.').replace(' €', ''));
-
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            const productoExistente = carrito.find(item => item.titulo === titulo && item.grado === grado);
-
-            if (productoExistente) {
-                productoExistente.cantidad += 1;
-            } else {
-                const nuevoProducto = {
-                    titulo: titulo,
-                    imagen: imagen,
-                    grado: grado,
-                    precio: precioNumero,
-                    cantidad: 1
-                };
-                carrito.push(nuevoProducto);
-            }
-
-            localStorage.setItem('carritoTech', JSON.stringify(carrito));
-            actualizarInterfazCarrito();
-
-            document.getElementById('cartOverlay').classList.add('open');
-        }
-
-        function eliminarDelCarrito(index) {
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            carrito.splice(index, 1);
-
-            localStorage.setItem('carritoTech', JSON.stringify(carrito));
-            actualizarInterfazCarrito();
-        }
-
-        function actualizarInterfazCarrito() {
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            const contenedorItems = document.getElementById('cartDrawerItems');
-            const contadorHeader = document.getElementById('cartCount');
-            const contadorDrawer = document.getElementById('cartDrawerCount');
-            const totalPrecioElemento = document.querySelector('.cart-total-price');
-
-            contenedorItems.innerHTML = '';
-
-            let totalArticulos = 0;
-            let costeTotal = 0;
-
-            if (carrito.length === 0) {
-                contenedorItems.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:30px;">Tu carrito está vacío.</p>`;
-            } else {
-                carrito.forEach((item, index) => {
-                    totalArticulos += item.cantidad;
-                    costeTotal += (item.precio * item.cantidad);
-
-                    const precioFormateado = item.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
-
-                    contenedorItems.innerHTML += `
-                    <div class="cart-item-row">
-                        <div class="cart-item-img">
-                            <img src="${item.imagen}" alt="${item.titulo}">
-                        </div>
-                        <div class="cart-item-info">
-                            <h4 class="cart-item-name">${item.titulo}</h4>
-                            <p class="cart-item-meta">Estado: <strong style="color: var(--p);">${item.grado}</strong></p>
-                            <p class="cart-item-meta">Cant: ${item.cantidad}</p>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
-                            <div class="cart-item-price">${precioFormateado}</div>
-                            <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})">🗑️</button>
-                        </div>
+            contenedorItems.innerHTML += `
+                <div class="cart-item-row">
+                    <div class="cart-item-img">
+                        <img src="${item.imagen}" alt="${item.titulo}">
                     </div>
-                `;
-                });
-            }
-
-            contadorHeader.innerText = totalArticulos;
-            contadorDrawer.innerText = totalArticulos;
-
-            totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
-        }
-
-        const tarjetasGrado = document.querySelectorAll('.grade-option-card');
-        tarjetasGrado.forEach(tarjeta => {
-            tarjeta.addEventListener('click', () => {
-                tarjetasGrado.forEach(t => t.classList.remove('active'));
-                tarjeta.classList.add('active');
-            });
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-name">${item.titulo}</h4>
+                        <p class="cart-item-meta">Estado: <strong style="color: var(--p);">${item.grado}</strong></p>
+                        <p class="cart-item-meta">Cant: ${item.cantidad}</p>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+                        <div class="cart-item-price">${precioFormateado}</div>
+                        <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})">🗑️</button>
+                    </div>
+                </div>
+            `;
         });
+    }
+
+    if(contadorHeader) contadorHeader.innerText = totalArticulos;
+    if(contadorDrawer) contadorDrawer.innerText = totalArticulos;
+    if(totalPrecioElemento) totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+}
+
+const tarjetasGrado = document.querySelectorAll('.grade-option-card');
+tarjetasGrado.forEach(tarjeta => {
+    tarjeta.addEventListener('click', () => {
+        tarjetasGrado.forEach(t => t.classList.remove('active'));
+        tarjeta.classList.add('active');
+    });
+});
 
     </script>
     <script src="BarraBusqueda.js"></script>
+    <script src="filtros.js"></script>
 </body>
 
 </html>

@@ -66,12 +66,9 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
-<<<<<<< HEAD
             background-color: #fafafa;
 
-=======
             position: relative;
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
         }
 
         .logo {
@@ -951,25 +948,6 @@
                 text-align: center;
             }
         }
-<<<<<<< HEAD
-
-        /*ESTILOS PARA EL CARRITO*/
-
-/* --- CARRITO LATERAL (CART DRAWER) --- */
-
-.cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 10000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-=======
         .user-profile {
             position: absolute;
             /* Hace que flote libremente */
@@ -1058,7 +1036,6 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
 
 
 .cart-overlay.open {
@@ -1239,11 +1216,7 @@
             </div>
 
             <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
-<<<<<<< HEAD
             <a href="contactanos.html" class="contactar-link">Contáctanos</a>
-=======
-            <a href="#" class="contactar-link">Contáctanos</a>
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
@@ -1356,82 +1329,8 @@
         </div>
     </div>
 
-    <section class="products-grid">
-
-        <article class="product-card" data-precio="1549" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="512 GB">
-            <div class="product-image-container">
-                <span style="color: #ccc;">Imagen del Producto</span>
-            </div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">MacBook Pro 14" (2023) Apple M3 – 8 GB – SSD 512 GB – Gris espacial</h3>
-                <div class="product-details">
-                    <span class="product-grade grade-excelente"> Excelente</span>
-                </div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">1.549,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="329" data-grado="Grado Muy Bueno" data-marca="Lenovo"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Lenovo</span>
-                <h3 class="product-name">Lenovo ThinkPad L14 Gen 2 – Core i5 2.6 GHz – SSD 256 GB – 8 GB – Teclado ES</h3>
-                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">329,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="679" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">MacBook Air 13" (2020) Apple M1 – 8 GB – SSD 256 GB – Plata</h3>
-                <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">679,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="385" data-grado="Grado Muy Bueno" data-marca="HP"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">HP</span>
-                <h3 class="product-name">HP EliteBook 840 G8 – Core i5 2.4 GHz – SSD 256 GB – 16 GB – Teclado ES</h3>
-                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">385,00 <span>€</span></span>
-            </div>
-        </article>
-        <article class="product-card" data-precio="249" data-grado="Grado Correcto" data-marca="Dell"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Dell</span>
-                <h3 class="product-name">Dell Latitude 5420 – Core i5 2.6 GHz – SSD 256 GB – 8 GB – Teclado ES</h3>
-                <div class="product-details"><span class="product-grade grade-correcto"> Correcto</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">249,00 <span>€</span></span>
-            </div>
-        </article>
-
-    </section>
+     <div id="contenedor-productos" class="products-grid">
+    </div>
 
     <footer class="site-footer">
         <div class="footer-features">
@@ -1901,7 +1800,7 @@
         });
     </script>
     <script src="BarraBusqueda.js"></script>
-
+<script src="filtros.js"></script>
 </body>
 
 </html>

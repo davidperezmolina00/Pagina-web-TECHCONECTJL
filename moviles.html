@@ -54,7 +54,7 @@
             width: 100%;
             z-index: 9999;
             padding: 8px 0 0 0;
-            
+
         }
 
 
@@ -66,11 +66,8 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
-<<<<<<< HEAD
             background-color: #fafafa;
-=======
             position: relative;
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
         }
 
         .logo {
@@ -262,7 +259,7 @@
             }
         }
 
-/*BREADCUMB*/
+        /*BREADCUMB*/
 
         .breadcrumb-wrapper {
             width: 100%;
@@ -1001,7 +998,8 @@
             text-overflow: ellipsis;
             /* Corta el nombre con "..." si es muy largo */
         }
-         @media screen and (max-width: 600px) {
+
+        @media screen and (max-width: 600px) {
 
             /* 1. Modificamos la clase de tu botón del carrito */
             .cart-btn {
@@ -1032,6 +1030,7 @@
             }
 
         }
+
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -1225,11 +1224,7 @@
             </div>
 
             <a href="inciar_sesion.html" class="login-link">Iniciar Sesión</a>
-<<<<<<< HEAD
             <a href="contactanos.html" class="contactar-link">Contáctanos</a>
-=======
-            <a href="#" class="contactar-link">Contáctanos</a>
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span id="cartCount">0</span>
             </button>
@@ -1342,108 +1337,10 @@
         </div>
     </div>
 
-    <section class="products-grid">
+    <div id="contenedor-productos" class="products-grid">
+    </div>
 
-        <article class="product-card" data-precio="643" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="256 GB">
-            <div class="product-image-container">
-                <span style="color: #ccc;">Imagen del Producto</span>
-            </div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPhone 15 Pro Max – 5G – 256 GB – Titanio azul</h3>
-                <div class="product-details">
-                    <span class="product-grade grade-excelente"> Excelente</span>
-                </div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">643,68 <span>€</span></span>
-            </div>
-        </article>
 
-<<<<<<< HEAD
-        
-
-        <article class="product-card" data-precio="1059" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="128 GB">
-            <div class="product-image-container">
-                <span style="color: #ccc;">Imagen del Producto</span>
-            </div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h3>
-                <div class="product-details">
-                    <span class="product-grade grade-excelente"> Excelente</span>
-                </div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">1.059,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="849" data-grado="Grado Muy Bueno" data-marca="Samsung"
-=======
-        <article class="product-card" data-precio="567" data-grado="Grado Muy Bueno" data-marca="Samsung"
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
-            data-almacenamiento="256 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Samsung</span>
-                <h3 class="product-name">Samsung Galaxy S24 Ultra – 5G – 256 GB – Negro</h3>
-                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy Bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">567,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="482" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="128 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPhone 14 Pro Max – 5G – 128 GB – Negro espacial</h3>
-                <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">482,00 <span>€</span></span>
-            </div>
-        </article>
-
-        <article class="product-card" data-precio="401" data-grado="Grado Muy Bueno" data-marca="Samsung"
-            data-almacenamiento="512 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Samsung</span>
-                <h3 class="product-name">Samsung Galaxy S23 Ultra – 5G – 512 GB – Verde</h3>
-                <div class="product-details"><span class="product-grade grade-muy-bueno"> Muy bueno</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">401,00 <span>€</span></span>
-            </div>
-        </article>
-        <article class="product-card" data-precio="390" data-grado="Grado Excelente" data-marca="Apple"
-            data-almacenamiento="128 GB">
-            <div class="product-image-container"><span style="color: #ccc;">Imagen</span></div>
-            <div class="product-info">
-                <span class="product-brand">Apple</span>
-                <h3 class="product-name">iPhone 15 – 5G – 128 GB – Azul</h3>
-                <div class="product-details"><span class="product-grade grade-excelente"> Excelente</span></div>
-            </div>
-            <div class="product-price-section">
-                <span class="price-label">Desde</span>
-                <span class="price-value">390,00 <span>€</span></span>
-            </div>
-        </article>
-
-    </section>
-
-    
 
     <footer class="site-footer">
         <div class="footer-features">
@@ -1689,8 +1586,21 @@
             return false;
         }
 
+        /*QUE SE VEA LA SESION INICIADA*/
 
-/*CARRITO*/
+document.addEventListener("DOMContentLoaded", function () {
+            // Leemos el nombre que esté guardado actualmente
+            const nombreGuardado = localStorage.getItem('usuarioNombre');
+
+            if (nombreGuardado) {
+                // Muestra el bloque del usuario
+                document.getElementById('userProfileBlock').style.display = 'flex';
+                document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+                document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
+            }
+        });
+
+        /*CARRITO*/
 
         document.addEventListener("DOMContentLoaded", () => {
             actualizarInterfazCarrito();
@@ -1803,7 +1713,7 @@
         });
     </script>
     <script src="BarraBusqueda.js"></script>
-
+    <script src="filtros.js"></script>
 </body>
 
 </html>

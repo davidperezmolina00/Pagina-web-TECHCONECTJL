@@ -46,7 +46,7 @@
         }
 
         .hdr {
-                        background-color: #fafafa;
+            background-color: #fafafa;
 
             position: fixed;
             top: 0;
@@ -181,7 +181,7 @@
                 flex-wrap: wrap;
                 justify-content: space-between;
                 gap: 10px;
-            background-color: #fafafa;
+                background-color: #fafafa;
 
             }
 
@@ -484,6 +484,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            padding-right: 15px;
         }
 
         .grade-name-text {
@@ -501,6 +502,10 @@
             font-size: 18px;
             font-weight: 800;
             color: var(--dark);
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+            min-width: max-content;
+            text-align: right;
         }
 
         /* CAJA DE PRECIO FINAL Y ACCIÓN */
@@ -757,6 +762,86 @@
 
         /* --- CARRITO LATERAL (CART DRAWER) --- */
 
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-50%) translateX(70%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(to right, purple, rgb(239, 125, 239));
+            color: white;
+            border-radius: 50%;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(99, 36, 233, 0.25);
+            text-transform: uppercase;
+        }
+
+        .user-avatar:hover {
+
+            cursor: pointer;
+            border-color: #9333EA;
+        }
+
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            max-width: 90px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Corta el nombre con "..." si es muy largo */
+        }
+
+        @media screen and (max-width: 600px) {
+
+            /* 1. Modificamos la clase de tu botón del carrito */
+            .cart-btn {
+                position: absolute;
+                right: 115px;
+                /* Lo empujamos a la izquierda para dejarle sitio al logo de Juan */
+
+            }
+
+            /* 2. El logo de Juan se queda pegado a la derecha */
+            .user-profile {
+                position: absolute;
+                right: 15px;
+                /* Pegado al borde derecho de la pantalla */
+
+                transform: translateY(-292%);
+                /* Sin el translateX(70%) antiguo */
+                display: none;
+                /* Tu JS lo pasa a flex si hay sesión activa */
+                align-items: center;
+                gap: 12px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+        }
+
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -970,7 +1055,7 @@
             <div class="breadcrumb-container">
                 <a href="home.html">Home</a>
                 <span class="separator">></span>
-                <span class="current">Producto</span>
+                <span class="current" id="breadcrumb-title">Producto</span>
             </div>
         </nav>
     </div>
@@ -978,7 +1063,6 @@
     <main class="product-container">
 
         <section class="product-gallery">
-
             <div class="thumb-list">
                 <div class="thumb-card active">
                     <img src="https://via.placeholder.com/100" alt="Vista frontal">
@@ -995,72 +1079,61 @@
             </div>
 
             <div class="main-image-box">
-                <img src="https://via.placeholder.com/400x400" alt="iPad Pro Principal">
+                <img id="main-product-img" src="https://via.placeholder.com/400x400" alt="Imagen del Producto">
             </div>
-
         </section>
 
         <section class="product-shop-options">
             <div>
-                <span class="brand-badge">Apple</span>
-                <h1 class="product-title">iPad Pro 12.9" (2022) 6ª gen - Wi-Fi - 128 GB - Gris espacial</h1>
+                <span class="brand-badge" id="product-brand">Cargando...</span>
+                <h1 class="product-title" id="product-title">Cargando producto...</h1>
             </div>
 
             <div>
                 <h3 class="section-selector-title">Selecciona el estado estético:</h3>
                 <div class="grades-selector-group">
-
-                    <div class="grade-option-card active">
+                    <div class="grade-option-card active" id="grade-excelente">
                         <div class="grade-option-left">
                             <span class="grade-name-text">Excelente</span>
-                            <span class="grade-desc-text">Pantalla impecable. Carcasa con micro rasguños invisibles a
-                                20cm.</span>
+                            <span class="grade-desc-text" id="desc-excelente">Cargando estado...</span>
                         </div>
-                        <span class="grade-price-indicator">1.059,00 €</span>
+                        <span class="grade-price-indicator" id="price-excelente">0,00 €</span>
                     </div>
 
-                    <div class="grade-option-card">
+                    <div class="grade-option-card" id="grade-muy-bueno">
                         <div class="grade-option-left">
                             <span class="grade-name-text">Muy bueno</span>
-                            <span class="grade-desc-text">Pantalla perfecta. Rasguños leves en la carcasa apenas
-                                visibles.</span>
+                            <span class="grade-desc-text" id="desc-muy-bueno">Cargando estado...</span>
                         </div>
-                        <span class="grade-price-indicator">980,00 €</span>
+                        <span class="grade-price-indicator" id="price-muy-bueno">0,00 €</span>
                     </div>
 
-                    <div class="grade-option-card">
+                    <div class="grade-option-card" id="grade-correcto">
                         <div class="grade-option-left">
                             <span class="grade-name-text">Correcto</span>
-                            <span class="grade-desc-text">Marcas de uso y arañazos visibles. 100% funcional y más
-                                barato.</span>
+                            <span class="grade-desc-text" id="desc-correcto">Cargando estado...</span>
                         </div>
-                        <span class="grade-price-indicator">890,00 €</span>
+                        <span class="grade-price-indicator" id="price-correcto">0,00 €</span>
                     </div>
-
                 </div>
             </div>
 
             <div class="specs-accordion">
-
-                <details class="specs-dropdown">
+                <details class="specs-dropdown" open>
                     <summary>Especificaciones técnicas</summary>
                     <div class="specs-content">
                         <table class="specs-table">
                             <tr>
-                                <td>Pantalla</td>
-                                <td>Liquid Retina XDR 12.9"</td>
+                                <td>Categoría</td>
+                                <td id="spec-category">-</td>
                             </tr>
                             <tr>
-                                <td>Procesador</td>
-                                <td>Chip M2 de Apple</td>
+                                <td>Especificaciones básicas</td>
+                                <td id="spec-details">-</td>
                             </tr>
                             <tr>
-                                <td>Memoria RAM</td>
-                                <td>8 GB</td>
-                            </tr>
-                            <tr>
-                                <td>Almacenamiento</td>
-                                <td>128 GB</td>
+                                <td>Color de fábrica</td>
+                                <td id="spec-color">-</td>
                             </tr>
                         </table>
                     </div>
@@ -1069,18 +1142,18 @@
                 <details class="specs-dropdown">
                     <summary>Detalles del reacondicionamiento</summary>
                     <div class="specs-content">
-                        <p>Este producto ha sido completamente testado por nuestros técnicos autorizados. Se garantiza
-                            una capacidad de batería superior al 85% y un funcionamiento del 100% en todos sus
-                            componentes internos (cámaras, sensores, audio y pantalla).</p>
+                        <p id="reacondicionado-desc">Cargando detalles del reacondicionamiento...</p>
+                        <del style="display:none;">Este producto ha sido completamente testado por nuestros técnicos
+                            autorizados. Se garantiza una capacidad de batería superior al 85% y un funcionamiento del
+                            100% en todos sus componentes internos (cámaras, sensores, audio y pantalla).</del>
                     </div>
                 </details>
-
             </div>
 
             <div class="purchase-box">
                 <div class="price-row">
                     <div>
-                        <span class="price-final">1.059,00 €</span>
+                        <span class="price-final" id="product-price">0,00 €</span>
                         <span class="vat-included">IVA incluido • Envío gratis</span>
                     </div>
                 </div>
@@ -1159,16 +1232,125 @@
 
         </div>
     </div>
+
+
     <script>
-        /*CARRITO*/
+        (() => {
+            let precioBase = 0;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            actualizarInterfazCarrito();
-        });
+            // 🌟 1. DICCIONARIO DE DESCRIPCIONES SEGÚN LA CATEGORÍA (CORREGIDO)
+            function obtenerTextoReacondicionado(categoria) {
+                if (!categoria) return 'Este producto ha sido completamente testado por nuestros técnicos autorizados. Se garantiza una capacidad de batería superior al 85% y un funcionamiento del 100% en todos sus componentes internos.';
 
+                // Esto convierte "Móviles" o "Móviles " en "moviles" (quita espacios, tildes y mayúsculas)
+                const catLimpia = categoria
+                    .toLowerCase()
+                    .trim()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+
+                const descripciones = {
+                    'moviles': 'Este smartphone reacondicionado ha sido revisado meticulosamente por nuestros técnicos autorizados. Se garantiza una capacidad de batería superior al 85% y un funcionamiento del 100% en todos sus componentes internos (cámaras, sensores, audio y pantalla OLED/LCD).',
+                    'tablets': 'Disfruta de una experiencia multimedia total. Esta tablet ha superado más de 30 puntos de control estético y functional. Ideal para la productividad, estudios o el ocio, con un rendimiento de batería óptimo y pantalla calibrada.',
+                    'accesorios': 'Accesorios originales o certificados totalmente higienizados, testados y listos para usar. Garantizan la máxima compatibilidad y una vida útil equivalente a la de un producto completamente nuevo.',
+                    'consolas': 'Consola testada al 100% en rendimiento gráfico, estabilidad del sistema, refrigeración, lectores de disco y conectividad de red. Incluye cables de alimentación y mandos revisados.',
+                    'portatiles': 'Ordenador portátil completamente formateado, con sistema operativo limpio y testeo exhaustivo de teclado, trackpad, puertos de conexión y salud de la batería. Listo para encender y trabajar.',
+                    'ofertas': '¡Un chollo garantizado! Este producto en oferta especial cuenta con el mismo sello de revisión técnica exhaustiva y los 12 meses de garantía total de nuestra tienda.'
+                };
+
+                return descripciones[catLimpia] || 'Este producto ha sido completamente testado por nuestros técnicos autorizados. Se garantiza una capacidad de batería superior al 85% y un funcionamiento del 100% en todos sus componentes internos.';
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const params = new URLSearchParams(window.location.search);
+                let idUrl = params.get("id") || "1";
+
+                const idLimpia = idUrl.split(':')[0].trim();
+
+                fetch(`http://localhost:3001/api/productos/${idLimpia}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error(`Error del servidor: ${response.status}`);
+                        return response.json();
+                    })
+                    .then(producto => {
+                        window.productoActual = producto;
+                        precioBase = Number(producto.precio_euro) || 0;
+
+                        const especificacion = producto.especificaciones ? ` - ${producto.especificaciones}` : '';
+                        const colorTexto = producto.color ? ` - ${producto.color}` : '';
+
+                        document.getElementById("product-title").innerText = `${producto.modelo || 'Producto'}${especificacion}${colorTexto}`;
+                        document.getElementById("product-brand").innerText = producto.marca || "Apple";
+                        document.getElementById("breadcrumb-title").innerText = producto.modelo || "Detalles";
+
+                        if (producto.imagen_url) {
+                            document.getElementById("main-product-img").src = producto.imagen_url;
+                        }
+
+                        document.getElementById("spec-category").innerText = producto.categoria || "Accesorios";
+                        document.getElementById("spec-details").innerText = producto.especificaciones || "-";
+                        document.getElementById("spec-color").innerText = producto.color || "-";
+
+                        // Actualizar el acordeón inferior
+                        const pDescripcion = document.getElementById("reacondicionado-desc");
+                        if (pDescripcion) {
+                            pDescripcion.innerText = obtenerTextoReacondicionado(producto.categoria);
+                        }
+
+                        // Textos para las tarjetas de estado superiores
+                        const catLimpia = producto.categoria ? producto.categoria.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
+
+                        let textosTarjetas = {
+                            excelente: 'Pantalla impecable. Carcasa con micro rasguños invisibles a 20cm.',
+                            muyBueno: 'Pantalla perfecta. Rasguños leves en la carcasa apenas visibles.',
+                            correcto: 'Marcas de uso y arañazos visibles. 100% funcional y más barato.'
+                        };
+
+                        if (catLimpia === 'accesorios') {
+                            textosTarjetas.excelente = 'Estética impecable, sin marcas de uso. Almohadillas/superficies como nuevas.';
+                            textosTarjetas.muyBueno = 'Signos mínimos de uso superficial. Totalmente higienizado.';
+                            textosTarjetas.correcto = 'Marcas estéticas visibles por uso previo. Funciona al 100% a precio mínimo.';
+                        }
+
+                        document.getElementById("desc-excelente").innerText = textosTarjetas.excelente;
+                        document.getElementById("desc-muy-bueno").innerText = textosTarjetas.muyBueno;
+                        document.getElementById("desc-correcto").innerText = textosTarjetas.correcto;
+
+                        // Precios iniciales de las tarjetas
+                        document.getElementById("price-excelente").innerText = `${precioBase.toFixed(2).replace('.', ',')} €`;
+                        document.getElementById("price-muy-bueno").innerText = `${(precioBase * 0.92).toFixed(2).replace('.', ',')} €`;
+                        document.getElementById("price-correcto").innerText = `${(precioBase * 0.83).toFixed(2).replace('.', ',')} €`;
+
+                        document.getElementById("product-price").innerText = `${precioBase.toFixed(2).replace('.', ',')} €`;
+
+                        // 🌟 AQUÍ SE INYECTA LA LOGICA DE INTERACTIVIDAD TRAS CARGAR LOS PRECIOS
+                        const tarjetas = document.querySelectorAll('.grade-option-card');
+                        const precioPrincipal = document.getElementById('product-price');
+
+                        tarjetas.forEach(tarjeta => {
+                            tarjeta.addEventListener('click', () => {
+                                document.querySelector('.grade-option-card.active')?.classList.remove('active');
+                                tarjeta.classList.add('active');
+
+                                const precioTarjeta = tarjeta.querySelector('.grade-price-indicator').innerText;
+                                if (precioPrincipal) {
+                                    precioPrincipal.innerText = precioTarjeta;
+                                }
+                            });
+                        });
+
+                    })
+                    .catch(error => {
+                        console.error("❌ Error en el fetch:", error);
+                        document.getElementById("product-title").innerText = "Error al conectar con la base de datos.";
+                    });
+            });
+        })();
+
+        /* ==================== LÓGICA DEL CARRITO (LOCALSTORAGE) ==================== */
         function toggleCart() {
             const overlay = document.getElementById('cartOverlay');
-            overlay.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
         }
 
         function closeCartFromOverlay(event) {
@@ -1176,9 +1358,10 @@
         }
 
         function agregarAlCarritoActual() {
-            const titulo = document.querySelector('.product-title').innerText;
-            const imagen = document.querySelector('.main-image-box img').src;
+            if (!productoActual) return;
 
+            const titulo = document.getElementById('product-title').innerText;
+            const imagen = document.getElementById('main-product-img').src;
             const tarjetaActiva = document.querySelector('.grade-option-card.active');
             const grado = tarjetaActiva.querySelector('.grade-name-text').innerText;
             const precioTexto = tarjetaActiva.querySelector('.grade-price-indicator').innerText;
@@ -1205,175 +1388,13 @@
             localStorage.setItem('carritoTech', JSON.stringify(carrito));
             actualizarInterfazCarrito();
 
-            document.getElementById('cartOverlay').classList.add('open');
-        }
-
-        function eliminarDelCarrito(index) {
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            carrito.splice(index, 1);
-
-            localStorage.setItem('carritoTech', JSON.stringify(carrito));
-            actualizarInterfazCarrito();
-        }
-
-        function actualizarInterfazCarrito() {
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            const contenedorItems = document.getElementById('cartDrawerItems');
-            const contadorHeader = document.getElementById('cartCount');
-            const contadorDrawer = document.getElementById('cartDrawerCount');
-            const totalPrecioElemento = document.querySelector('.cart-total-price');
-
-            contenedorItems.innerHTML = '';
-
-            let totalArticulos = 0;
-            let costeTotal = 0;
-
-            if (carrito.length === 0) {
-                contenedorItems.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:30px;">Tu carrito está vacío.</p>`;
-            } else {
-                carrito.forEach((item, index) => {
-                    totalArticulos += item.cantidad;
-                    costeTotal += (item.precio * item.cantidad);
-
-                    const precioFormateado = item.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
-
-                    contenedorItems.innerHTML += `
-                    <div class="cart-item-row">
-                        <div class="cart-item-img">
-                            <img src="${item.imagen}" alt="${item.titulo}">
-                        </div>
-                        <div class="cart-item-info">
-                            <h4 class="cart-item-name">${item.titulo}</h4>
-                            <p class="cart-item-meta">Estado: <strong style="color: var(--p);">${item.grado}</strong></p>
-                            <p class="cart-item-meta">Cant: ${item.cantidad}</p>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
-                            <div class="cart-item-price">${precioFormateado}</div>
-                            <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})">🗑️</button>
-                        </div>
-                    </div>
-                `;
-                });
-            }
-
-            contadorHeader.innerText = totalArticulos;
-            contadorDrawer.innerText = totalArticulos;
-
-            totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
-        }
-
-        const tarjetasGrado = document.querySelectorAll('.grade-option-card');
-        tarjetasGrado.forEach(tarjeta => {
-            tarjeta.addEventListener('click', () => {
-                tarjetasGrado.forEach(t => t.classList.remove('active'));
-                tarjeta.classList.add('active');
-            });
-        });
-    </script>
-
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
-        <div class="cart-drawer" onclick="event.stopPropagation()">
-
-            <div class="cart-drawer-header">
-                <h3>Tu Carrito (<span id="cartDrawerCount">1</span>)</h3>
-                <button class="close-cart-btn" onclick="toggleCart()">×</button>
-            </div>
-
-            <div class="cart-drawer-items" id="cartDrawerItems">
-            </div>
-
-            <div class="cart-drawer-footer">
-                <div class="cart-total-row">
-                    <span>Total estimado:</span>
-                    <span class="cart-total-price">1.059,00 €</span>
-                </div>
-                <a href="carrito.html" class="btn-view-cart">Ver mi carrito</a>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- CARRITO -->
-
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCartFromOverlay(event)">
-        <div class="cart-drawer" onclick="event.stopPropagation()">
-
-            <div class="cart-drawer-header">
-                <h3>Tu Carrito (<span id="cartDrawerCount">1</span>)</h3>
-                <button class="close-cart-btn" onclick="toggleCart()">×</button>
-            </div>
-
-            <div class="cart-drawer-items" id="cartDrawerItems">
-            </div>
-
-            <div class="cart-drawer-footer">
-                <div class="cart-total-row">
-                    <span>Total estimado:</span>
-                    <span class="cart-total-price">1.059,00 €</span>
-                </div>
-                <a href="carrito.html" class="btn-view-cart">Ver mi carrito</a>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        /*CARRITO*/
-
-        document.addEventListener("DOMContentLoaded", () => {
-            actualizarInterfazCarrito();
-        });
-
-        function toggleCart() {
             const overlay = document.getElementById('cartOverlay');
-            overlay.classList.toggle('open');
-        }
-
-        function closeCartFromOverlay(event) {
-            toggleCart();
-        }
-
-        function agregarAlCarritoActual() {
-            const titulo = document.querySelector('.product-title').innerText;
-            const imagen = document.querySelector('.main-image-box img').src;
-
-            const tarjetaActiva = document.querySelector('.grade-option-card.active');
-            const grado = tarjetaActiva.querySelector('.grade-name-text').innerText;
-            const precioTexto = tarjetaActiva.querySelector('.grade-price-indicator').innerText;
-
-            const precioNumero = parseFloat(precioTexto.replace('.', '').replace(',', '.').replace(' €', ''));
-
-            let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
-            const productoExistente = carrito.find(item => item.titulo === titulo && item.grado === grado);
-
-            if (productoExistente) {
-                productoExistente.cantidad += 1;
-            } else {
-                const nuevoProducto = {
-                    titulo: titulo,
-                    imagen: imagen,
-                    grado: grado,
-                    precio: precioNumero,
-                    cantidad: 1
-                };
-                carrito.push(nuevoProducto);
-            }
-
-            localStorage.setItem('carritoTech', JSON.stringify(carrito));
-            actualizarInterfazCarrito();
-
-            document.getElementById('cartOverlay').classList.add('open');
+            if (overlay) overlay.classList.add('open');
         }
 
         function eliminarDelCarrito(index) {
             let carrito = JSON.parse(localStorage.getItem('carritoTech')) || [];
-
             carrito.splice(index, 1);
-
             localStorage.setItem('carritoTech', JSON.stringify(carrito));
             actualizarInterfazCarrito();
         }
@@ -1386,13 +1407,14 @@
             const contadorDrawer = document.getElementById('cartDrawerCount');
             const totalPrecioElemento = document.querySelector('.cart-total-price');
 
+            if (!contenedorItems) return;
             contenedorItems.innerHTML = '';
 
             let totalArticulos = 0;
             let costeTotal = 0;
 
             if (carrito.length === 0) {
-                contenedorItems.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:30px;">Tu carrito está vacío.</p>`;
+                contenedorItems.innerHTML = `<p style="text-align:center; color:#888; margin-top:30px;">Tu carrito está vacío.</p>`;
             } else {
                 carrito.forEach((item, index) => {
                     totalArticulos += item.cantidad;
@@ -1401,50 +1423,31 @@
                     const precioFormateado = item.precio.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
 
                     contenedorItems.innerHTML += `
-                    <div class="cart-item-row">
-                        <div class="cart-item-img">
-                            <img src="${item.imagen}" alt="${item.titulo}">
-                        </div>
-                        <div class="cart-item-info">
-                            <h4 class="cart-item-name">${item.titulo}</h4>
-                            <p class="cart-item-meta">Estado: <strong style="color: var(--p);">${item.grado}</strong></p>
-                            <p class="cart-item-meta">Cant: ${item.cantidad}</p>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
-                            <div class="cart-item-price">${precioFormateado}</div>
-                            <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})">🗑️</button>
-                        </div>
+                <div class="cart-item-row">
+                    <div class="cart-item-img">
+                        <img src="${item.imagen}" alt="${item.titulo}">
                     </div>
-                `;
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-name">${item.titulo}</h4>
+                        <p class="cart-item-meta">Estado: <strong style="color: #0071e3;">${item.grado}</strong></p>
+                        <p class="cart-item-meta">Cant: ${item.cantidad}</p>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+                        <div class="cart-item-price">${precioFormateado}</div>
+                        <button class="btn-remove-item" onclick="eliminarDelCarrito(${index})" style="background:none; border:none; cursor:pointer;">🗑️</button>
+                    </div>
+                </div>
+            `;
                 });
             }
 
-            contadorHeader.innerText = totalArticulos;
-            contadorDrawer.innerText = totalArticulos;
-
-            totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
+            if (contadorHeader) contadorHeader.innerText = totalArticulos;
+            if (contadorDrawer) contadorDrawer.innerText = totalArticulos;
+            if (totalPrecioElemento) totalPrecioElemento.innerText = costeTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' €';
         }
-
-         tarjetasGrado = document.querySelectorAll('.grade-option-card');
-        const precioPrincipal = document.querySelector('.price-final');
-
-        tarjetasGrado.forEach(tarjeta => {
-            tarjeta.addEventListener('click', () => {
-                tarjetasGrado.forEach(t => t.classList.remove('active'));
-                tarjeta.classList.add('active');
-
-                // Captura el precio de la tarjeta seleccionada
-                const nuevoPrecio = tarjeta.querySelector('.grade-price-indicator').innerText;
-
-                // Lo inyecta en el precio grande de la ficha
-                if (precioPrincipal) {
-                    precioPrincipal.innerText = nuevoPrecio;
-                }
-            });
-        });
     </script>
+
     <script src="BarraBusqueda.js"></script>
-
 </body>
 
 </html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceder al Pago</title>
+    <style>
+        :root {
+            --color-bg: #f5f6f9;
+            --color-card: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-muted: #626262;
+            --color-border: #e2e8f0;
+            --color-primary: #000000;
+            --color-success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            background: var(--surface);
+            padding-top: 110px;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--color-border);
+        }
+
+        h2,
+        h3 {
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: #7c3aed;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-align: left;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .phone-input-group {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 8px;
+        }
+
+        .input-help {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 6px;
+        }
+
+        .btn-submit {
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        /* Métodos de Envío */
+        .shipping-block {
+            margin-bottom: 24px;
+        }
+
+        .shipping-option {
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .shipping-option:hover {
+            background-color: #fafafa;
+        }
+
+        /* Clase para destacar la opción seleccionada nativamente */
+        .shipping-option.active {
+            border-color: var(--color-primary);
+            background-color: #fafafa;
+        }
+
+        .shipping-option-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .shipping-details p {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .shipping-details span {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .shipping-price {
+            font-weight: 600;
+        }
+
+        .shipping-price.free {
+            color: var(--color-success);
+        }
+
+        /* --- COLUMNA LATERAL: RESUMEN --- */
+        .sidebar-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .empty-cart-message {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 30px 0;
+            line-height: 1.5;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--color-border);
+            margin: 16px 0;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .totals-row.total-final {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 16px;
+        }
+
+        .guarantee-text {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+            margin-top: 16px;
+        }
+
+        .payment-methods {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .payment-icons span {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-weight: bold;
+            background: #fcfcfc;
+        }
+
+        .secure-lock {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 768px) {
+            .form-row.two-cols {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .checkout-container {
+                grid-template-columns: 7fr 4fr;
+                align-items: start;
+            }
+
+            .sidebar-content {
+                position: sticky;
+                top: 20px;
+            }
+
+            .btn-submit {
+                width: auto;
+                float: right;
+            }
+        }
+
+        .hdr {
+            background: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 9999;
+
+        }
+
+        .hdr-inner {
+            max-width: 1520px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 25px;
+            padding: 0 10px;
+            position: relative;
+            background-color: #fafafa;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 140px;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hdr">
+        <div class="hdr-inner">
+            <a href="Home.html" class="logo">
+                <img src="https://github.com/gdelosreyes-droid/Pagina-web-TECHCONECTJL/blob/main/logo%20empresa.png?raw=true"
+                    alt="TechConectJL Logo">
+            </a>
+        </div>
+    </header>
+    <div class="checkout-container">
+
+        <main class="main-content">
+
+            <section class="card">
+                <h2>Dirección de envío</h2>
+                <form onsubmit="event.preventDefault();">
+                    <div class="form-row two-cols">
+                        <div class="form-group">
+                            <label for="nombre">Nombre *</label>
+                            <input type="text" id="nombre" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos *</label>
+                            <input type="text" id="apellidos" placeholder="Apellidos" required>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-link">+ Empresa</button>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pais">País *</label>
+                            <select id="pais" required>
+                                <option value="es" selected>España</option>
+                                <option value="mx">México</option>
+                                <option value="Fr">Francia</option>
+                                <option value="Al">Alemania</option>
+                                <option value="Ing">Inglaterra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="direccion1">Dirección (calle y número) *</label>
+                            <input type="text" id="direccion1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="direccion2">Dirección 2 (portal, piso, escalera, etc.) (opcional)</label>
+                            <input type="text" id="direccion2">
+                        </div>
+                    </div>
+
+                    <div class="form-row two-cols">
+                        <div class="form-group">
+                            <label for="cp">Código postal *</label>
+                            <input type="text" id="cp" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="municipio">Municipio *</label>
+                            <input type="text" id="municipio" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefono">Número de teléfono *</label>
+                            <div class="phone-input-group">
+                                <select id="prefijo">
+                                    <option value="+34">+34</option>
+                                </select>
+                                <input type="tel" id="telefono" required>
+                            </div>
+                            <span class="input-help">Es solo por si hace falta localizarte durante la entrega.</span>
+                        </div>
+                    </div>
+
+                    <div style="overflow: hidden; margin-top: 10px;">
+                        <button type="submit" class="btn-submit">Confirmar dirección</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="misma-direccion" checked>
+                <label for="misma-direccion"><strong>Misma dirección de envío y facturación</strong></label>
+            </div>
+
+            <section class="card">
+                <h2>Elige el método de envío</h2>
+
+                <div class="shipping-block">
+                    <div class="shipping-option" onclick="toggleRadio(this, '0')">
+                        <div class="shipping-option-left">
+                            <input type="radio" name="envio-grupo-1">
+                            <div class="shipping-details">
+                                <p>Entrega: 1 - 2 jun</p>
+                                <span>🚚 Envío estándar</span>
+                            </div>
+                        </div>
+                        <span class="shipping-price free">Gratis</span>
+                    </div>
+
+                    <div class="shipping-option" onclick="toggleRadio(this, '5.00')">
+                        <div class="shipping-option-left">
+                            <input type="radio" name="envio-grupo-1">
+                            <div class="shipping-details">
+                                <p>Entrega: 29 may - 1 jun</p>
+                                <span>⚡ Envío exprés</span>
+                            </div>
+                        </div>
+                        <span class="shipping-price">5,00 €</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <aside class="sidebar-content">
+            <section class="card">
+                <h3>Tu pedido</h3>
+
+                <div id="cart-items-container">
+                    <div class="checkout-product-card"
+                        style="display: flex; gap: 16px; align-items: center; padding: 8px 0;">
+                        <img id="checkout-img" src="" alt="Cargando..." class="checkout-product-img"
+                            style="width: 70px; height: 70px; object-fit: contain; border: 1px solid var(--color-border); border-radius: 8px; background: #fff;">
+                        <div class="checkout-product-info">
+                            <h4 id="checkout-title" style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">
+                                Cargando producto...</h4>
+                            <p id="checkout-state" style="font-size: 0.85rem; color: var(--color-text-muted);">Estado: -
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="totals-row">
+                    <span>Subtotal</span>
+                    <span id="summary-subtotal">0,00 €</span>
+                </div>
+                <div class="totals-row">
+                    <span style="text-decoration: underline; cursor:pointer;">Sello de calidad</span>
+                    <span id="summary-sello">2,99 €</span>
+                </div>
+                <div class="totals-row">
+                    <span>Gastos de envío</span>
+                    <span id="summary-envio">0,00 €</span>
+                </div>
+
+                <div class="totals-row total-final">
+                    <span>Total</span>
+                    <span id="summary-total">0,00 €</span>
+                </div>
+
+                <p class="guarantee-text">
+                    Garantía de satisfacción: si no quedas conforme, te devolvemos el dinero en 30 días. Realizando esta
+                    compra, aceptas las Condiciones generales de uso...
+                </p>
+
+                <div class="payment-methods">
+                    <div class="payment-icons">
+                        <span>VISA</span><span>MC</span><span>AMEX</span><span>PayPal</span>
+                    </div>
+                    <div class="secure-lock">🔒 Pago seguro</div>
+                </div>
+            </section>
+        </aside>
+
+    </div>
+
+   <script>
+    let productosCarrito = [];
+    let costeEnvioActual = 0;
+    const costeSelloCalidad = 2.99; // Sello fijo
+
+    // Maneja la interacción de los métodos de envío y recalcula
+    function toggleRadio(element, cost) {
+        const parent = element.closest('.shipping-block');
+        parent.querySelectorAll('.shipping-option').forEach(opt => opt.classList.remove('active'));
+
+        element.classList.add('active');
+        element.querySelector('input[type="radio"]').checked = true;
+
+        costeEnvioActual = Number(cost);
+        actualizarDesglosePrecios();
+    }
+
+    // Realiza los cálculos matemáticos del carrito acumulando todos los items
+    function actualizarDesglosePrecios() {
+        let subtotal = 0;
+
+        // Calcular el subtotal sumando el precio de cada producto por su cantidad
+        productosCarrito.forEach(item => {
+            subtotal += (Number(item.precio) || 0) * (Number(item.cantidad) || 1);
+        });
+
+        const total = subtotal + costeSelloCalidad + costeEnvioActual;
+
+        document.getElementById("summary-subtotal").innerText = subtotal.toFixed(2).replace('.', ',') + " €";
+        document.getElementById("summary-envio").innerText = costeEnvioActual === 0 ? "Gratis" : costeEnvioActual.toFixed(2).replace('.', ',') + " €";
+        document.getElementById("summary-total").innerText = total.toFixed(2).replace('.', ',') + " €";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. LEER LOS PRODUCTOS DEL LOCALSTORAGE
+        productosCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        const contenedorItems = document.getElementById("cart-items-container");
+
+        // Si el carrito está vacío, mostramos un aviso
+        if (productosCarrito.length === 0) {
+            contenedorItems.innerHTML = `
+                <div class="empty-cart-message" style="color: var(--color-text-muted); text-align: center; padding: 20px 0;">
+                    Tu cesta está vacía. No hay productos para procesar el pago.
+                </div>`;
+            actualizarDesglosePrecios();
+            return;
+        }
+
+        // Limpiar el contenedor antes de pintar los elementos reales del carrito
+        contenedorItems.innerHTML = "";
+
+        // 2. GENERAR EL HTML DE CADA PRODUCTO DINÁMICAMENTE
+        productosCarrito.forEach(producto => {
+            const tituloProducto = producto.titulo || producto.modelo || 'Producto';
+            const imagenProducto = producto.imagen || producto.imagen_url || '';
+            const estadoTexto = producto.grado || producto.estado || 'Excelente';
+            const cantidadTexto = producto.cantidad > 1 ? ` x${producto.cantidad}` : '';
+            const precioCalculado = ((producto.precio || 0) * (producto.cantidad || 1)).toFixed(2).replace('.', ',');
+
+            const productoHTML = `
+                <div class="checkout-product-card" style="display: flex; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px dashed #e2e8f0;">
+                    <img src="${imagenProducto}" alt="${tituloProducto}" class="checkout-product-img" style="width: 60px; height: 60px; object-fit: contain; border: 1px solid var(--color-border); border-radius: 8px; background: #fff;">
+                    <div class="checkout-product-info" style="flex-grow: 1;">
+                        <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 2px;">${tituloProducto}${cantidadTexto}</h4>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0;">Estado: ${estadoTexto}</p>
+                    </div>
+                    <span style="font-weight: 600; font-size: 0.95rem; white-space: nowrap; text-align: right; min-width: 75px;">${precioCalculado} €</span>
+                </div>
+            `;
+            contenedorItems.insertAdjacentHTML("beforeend", productoHTML);
+        });
+
+        // Forzar el primer cálculo con la suma de todo lo recuperado
+        actualizarDesglosePrecios();
+    });
+</script>
+</body>
+
+</html>

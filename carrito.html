@@ -60,7 +60,7 @@
         }
 
         .logo img {
-            width: 220px;
+            width: 170px;
             height: auto;
             display: block;
         }
@@ -439,6 +439,7 @@
             border: none;
             cursor: pointer;
             margin-top: 20px;
+            margin-left: -12px;
         }
 
         /*FOOTER*/
@@ -819,7 +820,7 @@
                 <span id="totalPrice">0,00 €</span>
             </div>
 
-            <button class="btn-checkout" onclick="procesarPedido()">Proceder al pago</button>
+            <a href="proceder_pago.html" class="btn-checkout" onclick="procederAlPago()">Proceder al pago</a>
         </div>
 
     </div>
@@ -986,25 +987,22 @@
                 return;
             }
 
-            /* EXPLICACIÓN PARA EL FUTURO:
-               Cuando tengas base de datos, aquí harás un envío POST al servidor enviando el 'carritoActual'
-               
-               ejemplo:
-               fetch('/api/orders', {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify(carritoActual)
-               })
-               .then(res => res.json())
-               .then(data => alert("Pedido procesado en BD"))
-            */
-
-            alert("¡Simulación de Compra! En el futuro, este botón enviará los productos directos a tu Base de Datos.");
-
             // Limpiamos carrito tras comprar (Simulado)
             localStorage.removeItem('carritoTech');
             cargarCarrito();
         }
+
+
+        function procederAlPago() {
+    // 1. Extraemos los productos reales usando la clave correcta de tu script
+    const productosReales = obtenerProductosCarrito(); 
+    
+    // 2. Los guardamos en la clave "carrito" que es la que espera la página de pago
+    localStorage.setItem("carrito", JSON.stringify(productosReales)); 
+    
+    // 3. Redirigimos a tu página de pago (asegúrate de que el href del enlace no interfiera)
+    window.location.href = "proceder_pago.html";
+}
     </script>
     <script src="BarraBusqueda.js"></script>
 

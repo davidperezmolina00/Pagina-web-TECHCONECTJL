@@ -29,7 +29,7 @@
         }
 
         .hdr {
-            background-color: #fafafa;
+            background: #fafafa;
             position: fixed;
             top: 0;
             left: 0;
@@ -47,7 +47,7 @@
             justify-content: center;
             gap: 25px;
             padding: 0 20px;
-            background-color: #fafafa;
+            background: #fafafa;
         }
 
         .logo {
@@ -677,10 +677,20 @@
 
         /*ESTILOS PARA EL CARRITO*/
 
-<<<<<<< HEAD
-        /* --- CARRITO LATERAL (CART DRAWER) --- */
+        .user-profile {
+            position: absolute;
+            /* Hace que flote libremente */
+            right: 20px;
+            /* Lo pega a la derecha del todo */
+            top: 50%;
+            transform: translateY(-80%) translateX(-200%);
+            /* Lo centra perfectamente en vertical */
+            display: none;
+            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+            align-items: center;
+            gap: 12px;
+        }
 
-=======
         .user-avatar {
             width: 42px;
             height: 42px;
@@ -747,7 +757,6 @@
 
         }
 
->>>>>>> Arreglo-responsive-de-usuario-y-funciones-de-filtros
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -1155,10 +1164,6 @@
 
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
     <script>
         function scrollHero(direction) {
             const track = document.getElementById('heroTrack');
@@ -1199,11 +1204,22 @@
                 behavior: 'smooth'
             });
         }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Leemos el nombre que esté guardado actualmente
+            const nombreGuardado = localStorage.getItem('usuarioNombre');
+
+            if (nombreGuardado) {
+                // Muestra el bloque del usuario
+                document.getElementById('userProfileBlock').style.display = 'flex';
+                document.getElementById('nombreUsuarioTexto').textContent = nombreGuardado;
+                document.getElementById('avatarLetra').textContent = nombreGuardado.trim().charAt(0);
+            }
+        });
 
 
-        /*CARRITO*/
+            /*CARRITO*/
 
-        document.addEventListener("DOMContentLoaded", () => {
+            document.addEventListener("DOMContentLoaded", () => {
             actualizarInterfazCarrito();
         });
 
