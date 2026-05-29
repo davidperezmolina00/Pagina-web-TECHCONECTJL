@@ -28,13 +28,22 @@ console.log("¿Existe moviles.html?", fs.existsSync(path.join(directorioFrontend
 // =====================================================================
 // 1. CONEXIÓN MYSQL (Adaptada con variables de entorno para la nube)
 // =====================================================================
-const db = mysql.createConnection({
-    host: process.env.DB_HOST || '127.0.0.1',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : '',
-    database: process.env.DB_NAME || 'techconectjl',
-    // Los servicios en la nube suelen exigir especificar el puerto de MySQL (por defecto 3306)
-    port: process.env.DB_PORT || 3306 
+const mysql = require('mysql2');
+
+// Configuración recomendada para conexiones remotas y estables
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    // Añade estas dos líneas para solucionar el error de conexión SSL:
+    ssl: { 
+        rejectUnauthorized: false 
+    },
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 db.connect((err) => {
