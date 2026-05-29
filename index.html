@@ -948,7 +948,7 @@
             </a>
 
             <div class="searchbar">
-                <input type="search" id="searchInput" placeholder="Busca tu próximo producto...">
+                <input type="search" id="searchInput" placeholder="Busca tu próximo producto..." onkeypress="if(event.key === 'Enter') ejecutarBusqueda()">
                 <button onclick="ejecutarBusqueda()">Buscar</button>
             </div>
 
