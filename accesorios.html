@@ -36,7 +36,7 @@
         }
 
         body {
-            /* Este espacio es vital: deja hueco exacto para el header y el menú de categorías */
+           
             padding-top: 165px;
         }
 
@@ -297,7 +297,7 @@
             font-size: 14px;
         }
 
-        /* Ajuste específico para cuando el header cambia de tamaño en móviles */
+        
         @media (max-width: 600px) {
             .breadcrumb-container {
                 padding: 10px 15px;
@@ -310,7 +310,7 @@
             }
         }
 
-        /* --- Estilos del Título Principal --- */
+   
         .page-title-section {
             width: 100%;
             display: flex;
@@ -362,11 +362,11 @@
             padding: 0 20px;
         }
 
-        /* --- LÓGICA DE PERSISTENCIA (Hover fijo) --- */
+     
         .filter-item {
             position: relative;
             padding-bottom: 15px;
-            /* Espacio invisible para que el ratón no pierda el foco */
+            
             margin-bottom: -15px;
         }
 
@@ -442,7 +442,7 @@
             padding: 24px;
         }
 
-        /* Redefinir animación para que no use el translateX en el de precio */
+     
         .filter-item:hover .price-popup {
             display: block;
         }
@@ -456,7 +456,6 @@
             margin: 0 0 20px 0;
         }
 
-        /* Barras de gráfica */
         .price-bars {
             display: flex;
             align-items: flex-end;
@@ -472,7 +471,7 @@
             border-radius: 2px 2px 0 0;
         }
 
-        /* Slider y Tiradores */
+     
         .range-input {
             position: relative;
             height: 4px;
@@ -502,7 +501,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Inputs numéricos */
+    
         .price-input {
             display: flex;
             gap: 12px;
@@ -548,7 +547,7 @@
             cursor: pointer;
         }
 
-        /* Rompe el bug del hover congelado tras hacer clic */
+      
         .filter-item.clic-bloqueo .brand-mega-dropdown {
             display: none !important;
         }
@@ -765,7 +764,7 @@
             border-color: var(--p);
         }
 
-        /* IMAGEN */
+       
         .product-image-container {
             width: 100%;
             aspect-ratio: 1/1;
@@ -785,7 +784,7 @@
             object-fit: contain;
         }
 
-        /* INFORMACIÓN */
+   
         .product-info {
             display: flex;
             flex-direction: column;
@@ -805,7 +804,7 @@
             color: var(--dark);
             line-height: 1.4;
             height: 44px;
-            /* Asegura que todos los títulos midan lo mismo */
+          
             overflow: hidden;
         }
 
@@ -953,8 +952,6 @@
 
         /*ESTILOS PARA EL CARRITO*/
 
-        /* --- CARRITO LATERAL (CART DRAWER) --- */
-
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -970,14 +967,13 @@
 
         .user-profile {
             position: absolute;
-            /* Hace que flote libremente */
             right: 20px;
-            /* Lo pega a la derecha del todo */
+          
             top: 50%;
             transform: translateY(-50%) translateX(70%);
-            /* Lo centra perfectamente en vertical */
+         
             display: none;
-            /* El JavaScript se encargará de cambiarlo a flex si hay usuario */
+        
             align-items: center;
             gap: 12px;
         }
@@ -1013,29 +1009,29 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            /* Corta el nombre con "..." si es muy largo */
+      
         }
 
         @media screen and (max-width: 600px) {
 
-            /* 1. Modificamos la clase de tu botón del carrito */
+       
             .cart-btn {
                 position: absolute;
                 right: 115px;
-                /* Lo empujamos a la izquierda para dejarle sitio al logo de Juan */
+            
 
             }
 
-            /* 2. El logo de Juan se queda pegado a la derecha */
+      
             .user-profile {
                 position: absolute;
                 right: 15px;
-                /* Pegado al borde derecho de la pantalla */
+         
 
                 transform: translateY(-303%);
-                /* Sin el translateX(70%) antiguo */
+             
                 display: none;
-                /* Tu JS lo pasa a flex si hay sesión activa */
+            
                 align-items: center;
                 gap: 12px;
             }
@@ -1236,7 +1232,7 @@
             </a>
 
             <div class="searchbar">
-                <input type="search" id="searchInput" placeholder="Busca tu próximo producto...">
+                <input type="search" id="searchInput" placeholder="Busca tu próximo producto..." onkeypress="if(event.key === 'Enter') ejecutarBusqueda()">
                 <button onclick="ejecutarBusqueda()">Buscar</button>
             </div>
 
@@ -1425,7 +1421,6 @@
     <script>
 
         // ── ESTADO DE FILTROS ACTIVOS ──
-        // ── ESTADO DE FILTROS ACTIVOS ──
         const filtros = {
             precioMin: 0,
             precioMax: 9999,
@@ -1612,7 +1607,6 @@
             return false;
         }
 
-        /* QUE SE VEA LA SESION INICIADA */
         document.addEventListener("DOMContentLoaded", function () {
             const nombreGuardado = localStorage.getItem('usuarioNombre');
             if (nombreGuardado) {

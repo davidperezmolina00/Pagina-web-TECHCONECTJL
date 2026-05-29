@@ -9,14 +9,38 @@ const productosBD = [
 
 // FUNCIÓN QUE SE EJECUTA AL BUSCAR
 function ejecutarBusqueda() {
-    // 1. Capturamos lo que el usuario ha escrito en el input y lo pasamos a minúsculas
-    const textoUsuario = document.getElementById("searchInput").value.toLowerCase().trim();
-    
-    // Si el usuario le da a buscar con la barra vacía, no hacemos nada
-    if (textoUsuario === "") {
+    const input = document.getElementById('searchInput');
+    const consulta = input.value.trim().toLowerCase();
+
+    if (consulta === "") {
         alert("Por favor, escribe algo para buscar.");
         return;
     }
+
+    // OPCIÓN A: Si tienes una página de resultados (ej. resultados.html?q=tu-busqueda)
+    // window.location.href = `resultados.html?q=${encodeURIComponent(consulta)}`;
+
+    // OPCIÓN B: Si quieres filtrar en la misma página (ej. moviles.html)
+    // Aquí puedes añadir la lógica que recorra tus productos y oculte los que no coincidan
+    console.log("Buscando producto:", consulta);
+    
+    // Ejemplo de filtrado genérico si estás en la página de listado:
+    filtrarProductos(consulta);
+}
+
+function filtrarProductos(consulta) {
+    // Esto es un ejemplo de cómo buscar en cualquier tarjeta de producto de tu web
+    const productos = document.querySelectorAll('.product-card'); // Asumiendo que tus tarjetas tienen esta clase
+    
+    productos.forEach(card => {
+        const textoProducto = card.innerText.toLowerCase();
+        if (textoProducto.includes(consulta)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
 
     // 2. Filtramos el array buscando coincidencias en el nombre o la categoría
     const resultados = productosBD.filter(producto => {
@@ -34,4 +58,3 @@ function ejecutarBusqueda() {
         // Si no encuentra nada
         alert("No se encontraron productos que coincidan con tu búsqueda.");
     }
-}

@@ -109,6 +109,8 @@
             margin-top: 6px;
         }
 
+
+
         .btn-submit {
             background: var(--color-primary);
             color: #fff;
@@ -119,7 +121,29 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            margin-top: 16px;
+            margin-top: 60px;
+            margin-left: -30px;
+            display: block;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        #tu-boton-pago-seguro {
+            width: 100%;
+            margin-top: 20px !important;
+            /* Espacio superior claro */
+            margin-bottom: 20px !important;
+            /* Espacio inferior claro para separar del texto */
+            display: block;
+            margin-left: 10px;
+        }
+
+        /* Corrige la tarjeta para que el contenido fluya verticalmente */
+        .card {
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            /* Elimina cualquier propiedad 'height' o 'max-height' fija que tengas aquí */
         }
 
         .checkbox-group {
@@ -396,7 +420,7 @@
                     </div>
 
                     <div style="overflow: hidden; margin-top: 10px;">
-                        <button type="submit" class="btn-submit">Confirmar dirección</button>
+                        <button type="submit" class="btn-submit tu-boton-pago-seguro card">Confirmar dirección</button>
                     </div>
                 </form>
             </section>
@@ -474,10 +498,15 @@
                     <span id="summary-total">0,00 €</span>
                 </div>
 
-                <p class="guarantee-text">
-                    Garantía de satisfacción: si no quedas conforme, te devolvemos el dinero en 30 días. Realizando esta
-                    compra, aceptas las Condiciones generales de uso...
-                </p>
+                <button id="tu-boton-pago-seguro" class="btn-submit">Proceder al Pago Seguro</button>
+
+                <div>
+                    <p class="guarantee-text">
+                        Garantía de satisfacción: si no quedas conforme, te devolvemos el dinero en 30 días. Realizando
+                        esta compra, aceptas las Condiciones generales de uso...
+                    </p>
+
+                </div>
 
                 <div class="payment-methods">
                     <div class="payment-icons">
@@ -569,34 +598,32 @@
         const botonPago = document.getElementById('tu-boton-pago-seguro');
 
         botonPago.addEventListener('click', async () => {
-            // Ejemplo de los datos del carrito que tienes acumulados
-            const carrito = [
-                { nombre: 'Producto de prueba 1', precio: 25.00, cantidad: 1 },
-                { nombre: 'Producto de prueba 2', precio: 10.50, cantidad: 2 }
-            ];
+    // IMPORTANTE: Ahora solo enviamos IDs y cantidades. 
+    // Ya no enviamos nombres ni precios para evitar manipulación.
+    const carritoParaStripe = productosCarrito.map(item => ({
+        id: item.id, // Asegúrate de que este 'id' coincida con el de tu BD
+        cantidad: item.cantidad
+    }));
 
-            try {
-                // Enviamos el carrito a nuestro backend de Node.js
-                const respuesta = await fetch('/api/create-checkout-session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ productos: carrito })
-                });
-
-                const datos = await respuesta.json();
-
-                if (datos.url) {
-                    // ¡Aquí ocurre la magia! Redirecciona al usuario a Stripe
-                    window.location.href = datos.url;
-                } else {
-                    alert('Hubo un problema al procesar el pago.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+    try {
+        const respuesta = await fetch('/api/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ productos: carritoParaStripe }) // Enviamos el array simplificado
         });
+
+        const datos = await respuesta.json();
+
+        if (datos.url) {
+            window.location.href = datos.url; // Redirección a la pasarela de Stripe
+        } else {
+            alert('Error: ' + (datos.error || 'No se pudo conectar con el servidor'));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al procesar el pago.');
+    }
+});
     </script>
 </body>
 

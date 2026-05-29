@@ -11,7 +11,6 @@ const fs = require('fs');
 
 const app = express();
 
-// Cambiado: Ahora prioriza el puerto que le asigne Render/Railway, si no, usa el 3001
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
@@ -81,6 +80,53 @@ app.get('/api/productos/:id', (req, res) => {
         console.log('✅ ¡Producto encontrado con éxito! Enviando:', results[0].modelo);
         res.json(results[0]);
     });
+});
+
+// =====================================================================
+// NUEVO: ENDPOINT PARA STIPE (Checkout Session)
+// =====================================================================
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Asegúrate de tener esta variable en tu .env
+
+app.post('/api/create-checkout-session', async (req, res) => {
+    try {
+        // El frontend solo nos envía un array de objetos con {id, cantidad}
+        const { productos } = req.body; 
+
+        const line_items = [];
+
+        for (const item of productos) {
+            // Buscamos el precio real en la base de datos para cada ID
+            // Esto evita que un usuario malintencionado cambie el precio en su navegador
+            const [rows] = await db.promise().query('SELECT modelo, precio_euro FROM productos WHERE id = ?', [item.id]);
+            
+            if (rows.length > 0) {
+                const productoBD = rows[0];
+                line_items.push({
+                    price_data: {
+                        currency: 'eur',
+                        product_data: {
+                            name: productoBD.modelo, 
+                        },
+                        unit_amount: Math.round(productoBD.precio_euro * 100), // Stripe requiere centavos (ej: 500€ = 50000)
+                    },
+                    quantity: item.cantidad,
+                });
+            }
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: line_items,
+            mode: 'payment',
+            success_url: 'https://pagina-web-techconectjl.onrender.com/exito.html',
+            cancel_url: 'https://pagina-web-techconectjl.onrender.com/carrito.html',
+        });
+
+        res.json({ url: session.url });
+    } catch (error) {
+        console.error("Error en Stripe:", error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 // =====================================================================
