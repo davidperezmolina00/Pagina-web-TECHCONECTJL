@@ -12,16 +12,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..')));
 
 const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: process.env.DB_HOST ? process.env.DB_HOST.trim() : '',
+    user: process.env.DB_USER ? process.env.DB_USER.trim() : '',
+    password: process.env.DB_PASSWORD ? process.env.DB_PASSWORD.trim() : '',
+    database: process.env.DB_NAME ? process.env.DB_NAME.trim() : 'defaultdb',
     port: parseInt(process.env.DB_PORT) || 14857,
     ssl: { rejectUnauthorized: false },
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
+
+// LOG DE DEPURACIÓN TÉCNICA
+const rawHost = process.env.DB_HOST || '';
+console.log(`DEBUG: Host original: '${rawHost}' | Longitud: ${rawHost.length}`);
 
 app.get('/api/productos', (req, res) => {
     // Verificamos antes de ejecutar
